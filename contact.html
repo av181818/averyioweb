@@ -62,7 +62,6 @@
       height: 60px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
     }
 
     .nav-logo {
@@ -73,19 +72,6 @@
       letter-spacing: -0.02em;
     }
     .nav-logo span { color: var(--red); }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 400;
-      transition: color 0.2s;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 4px;
-    }
-    .nav-links a:hover { color: var(--text); }
 
     .page-header {
       position: relative;
@@ -128,28 +114,39 @@
       line-height: 1.6;
     }
 
-    .form-wrapper {
+    .x-wrapper {
       position: relative;
       z-index: 1;
-      flex: 1;
-      width: 100%;
-      max-width: 760px;
       padding: 0 clamp(20px, 5%, 60px) clamp(48px, 8vw, 80px);
     }
 
-    .form-container {
+    .x-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.6rem;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .x-card:hover {
+      background: var(--red-dim);
+      border-color: var(--red-border);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(224,28,46,0.12);
     }
 
-    iframe {
-      display: block;
-      width: 100%;
-      height: 680px;
-      border: none;
-      background: transparent;
+    .x-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      fill: var(--text);
     }
 
     footer {
@@ -179,7 +176,6 @@
     footer a:hover { color: var(--text); }
 
     @media (max-width: 480px) {
-      iframe { height: 780px; }
       footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     }
   </style>
@@ -193,17 +189,16 @@
   <div class="page-header">
     <span class="page-eyebrow">Get in touch</span>
     <h1>Contact Us</h1>
-    <p class="page-sub">Have a question or want to work together? Fill out the form below.</p>
+    <p class="page-sub">Have a question or want to work together? Message me via X direct message.</p>
   </div>
 
-  <div class="form-wrapper">
-    <div class="form-container">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSf8jFAIHIhVLeZNsEOfEaqQvDqpbRgMmTtErEy-m4z49d-76g/viewform?embedded=true"
-        title="Contact form"
-        loading="lazy"
-      >Loading…</iframe>
-    </div>
+  <div class="x-wrapper">
+    <a href="https://x.com/averyio18" target="_blank" rel="noopener" class="x-card">
+      <svg class="x-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+      @averyio18
+    </a>
   </div>
 
   <footer>
