@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tap Dot Tap Privacy — averyio.net</title>
+  <meta name="description" content="Privacy Policy for the Tap Dot Tap app by AveryIO." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C4152B'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='white'%3Ea%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #C4152B;
+      --red-light:  rgba(196,21,43,0.07);
+      --red-border: rgba(196,21,43,0.20);
+      --bg:         #F7F7F5;
+      --surface:    #FFFFFF;
+      --border:     #E5E4E2;
+      --text:       #111111;
+      --muted:      #6B7280;
+      --body-text:  #374151;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 50% at 50% -8%, rgba(196,21,43,0.045) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(0,0,0,0.045) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      padding: 0 clamp(20px, 5%, 64px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(247,247,245,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.03em;
+    }
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+
+    /* ── Header ── */
+    .header {
+      position: relative;
+      z-index: 1;
+      padding: clamp(48px, 9vw, 88px) clamp(20px, 5%, 64px) clamp(32px, 6vw, 56px);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.05;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: clamp(0.8rem, 2.5vw, 0.875rem);
+      font-weight: 400;
+    }
+
+    /* ── Content ── */
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      padding: clamp(40px, 7vw, 64px) clamp(20px, 5%, 40px) clamp(64px, 12vw, 104px);
+    }
+
+    h2 {
+      font-size: clamp(0.9rem, 2.8vw, 1rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 80px;
+      letter-spacing: -0.01em;
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+    p {
+      font-size: clamp(0.875rem, 2.5vw, 0.925rem);
+      color: var(--body-text);
+      margin-bottom: 0.85rem;
+    }
+
+    ul {
+      padding-left: 1.4rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    li {
+      font-size: clamp(0.875rem, 2.5vw, 0.925rem);
+      color: var(--body-text);
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--red); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+      padding: 1.5rem clamp(20px, 5%, 64px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+      padding: 4px 8px;
+      border-radius: 6px;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+    }
+    footer a:hover { color: var(--text); text-decoration: none; }
+
+    .footer-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) {
+      .nav-links a { padding: 8px 8px; font-size: 0.82rem; }
+      footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">averyio<span>.net</span></a>
+    <div class="nav-links">
+      <a href="privacy.html">← Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <h1>Tap Dot Tap</h1>
+    <p>Privacy Policy &mdash; Effective June 9, 2026</p>
+  </div>
+
+  <div class="content">
+
+    <h2>1. Introduction</h2>
+    <p>
+      Tap Dot Tap is a game developed by Avery IO. We built Tap Dot Tap to be a local-first,
+      private app — your high score, progress and unlocked content belong to you, and we
+      deliberately do not collect, store or share your personal information. This policy explains
+      exactly what happens with your data.
+    </p>
+
+    <h2>2. Information Collection and Use</h2>
+    <p>
+      Tap Dot Tap does not collect, store, or share any personal information. There is no app-level
+      account, no sign-up, no login. Your best score, selected dot skin, unlocked content and game
+      settings are stored locally on your device.
+    </p>
+    <p>
+      If you choose to enable the Game Center leaderboard (see section 6), your best score is
+      submitted through Apple's Game Center so you can compete with other players. This is entirely
+      optional, turned off by default, and never transmitted to a server operated by Avery IO.
+    </p>
+
+    <h2>3. In-App Purchases</h2>
+    <p>
+      Tap Dot Tap offers a single one-time, non-consumable in-app purchase called
+      <strong>Unlock Everything</strong>, which unlocks extra lives and all cosmetic dot skins.
+      All purchases are processed exclusively by Apple through the App Store. Avery IO does not
+      see, receive, or store your payment credentials at any point. Apple confirms only the
+      entitlement (whether you have purchased Unlock Everything) so that the app can unlock the
+      corresponding features on your device.
+    </p>
+
+    <h2>4. Analytics and Usage Data</h2>
+    <p>
+      Tap Dot Tap does not include any third-party analytics SDK, telemetry library, or in-app
+      tracking. The App Store privacy nutrition label declares "Data Not Collected", and that is
+      literally the case.
+    </p>
+    <p>
+      Apple may, separately and only with your consent, provide developers with anonymous,
+      aggregated metrics through App Store Connect — such as download counts, crash reports, and
+      session counts. These reports contain no personally identifiable information and cannot be
+      linked back to an individual user. You can opt out of sharing this data with developers at
+      any time in <em>iOS Settings &gt; Privacy &amp; Security &gt; Analytics &amp; Improvements</em>.
+    </p>
+
+    <h2>5. Third-Party Services and Advertising</h2>
+    <p>
+      Tap Dot Tap does not display advertisements, does not use ad networks, and does not embed
+      third-party tracking or marketing tools. The only external services Tap Dot Tap relies on are
+      Apple's Game Center for the optional leaderboard, and Apple's StoreKit for processing the
+      in-app purchase — both of which are governed by
+      <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's own privacy policy</a>.
+    </p>
+
+    <h2>6. Game Center Leaderboard</h2>
+    <p>
+      The global leaderboard is an optional feature that is turned off by default. The app does not
+      contact Game Center at all until you explicitly opt in by tapping "Enable Leaderboard" on the
+      leaderboard screen.
+    </p>
+    <p>When enabled, the leaderboard is, by design:</p>
+    <ul>
+      <li><strong>Operated entirely by Apple</strong> — your Game Center nickname and best score are submitted through Apple's Game Center and are visible to other players on the leaderboard.</li>
+      <li><strong>Inaccessible to Avery IO</strong> — we cannot view, query, or recover any personal data, and we operate no server of our own.</li>
+      <li><strong>Pseudonymous</strong> — any player identifiers are managed by Apple and cannot be used to identify you across other developers' apps.</li>
+      <li><strong>Free of any app-level account</strong> — it uses your Apple ID's Game Center profile directly.</li>
+    </ul>
+    <p>
+      You can decline at any time and still play the full game; if you decline, nothing is ever
+      sent. You may choose to enable it later, and your existing best score will be submitted at
+      that point. Game Center itself is governed by Apple's privacy policy, and you can manage or
+      turn off Game Center at any time in <em>iOS Settings &gt; Game Center</em>.
+    </p>
+
+    <h2>7. Children's Privacy</h2>
+    <p>
+      Tap Dot Tap is rated 4+ and is suitable for all ages. Because the app does not collect any
+      personal information from any user, it does not knowingly collect personal information from
+      children under 13. The optional Game Center leaderboard is provided by Apple and subject to
+      Apple's own protections and parental controls. If you believe a child has somehow provided
+      personal information through the app, please contact us so we can address it.
+    </p>
+
+    <h2>8. Changes to This Privacy Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time to reflect changes to the app or to
+      clarify our practices. When we do, we will update the "Effective" date at the top of this
+      page. We encourage you to review this page periodically.
+    </p>
+
+    <h2>9. Contact Us</h2>
+    <p>
+      If you have any questions about this Privacy Policy or about how Tap Dot Tap handles your
+      data, please visit our <a href="contact.html">Contact Us</a> page.
+    </p>
+
+  </div>
+
+  <footer>
+    <span>&copy; 2026 AveryIO</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </footer>
+
+</body>
+</html>
