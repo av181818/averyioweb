@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy — averyio.net</title>
-  <meta name="description" content="App privacy policies for AveryIO apps." />
+  <title>Privacy — averyio</title>
+  <meta name="description" content="Privacy policies for averyio apps. Our apps work without accounts, logins, or third-party trackers — collecting your data isn't part of how we operate." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C4152B'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='white'%3Ea%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,13 +14,15 @@
 
     :root {
       --red:        #C4152B;
-      --red-light:  rgba(196,21,43,0.07);
-      --red-border: rgba(196,21,43,0.20);
-      --bg:         #F7F7F5;
+      --red-border: rgba(196,21,43,0.22);
+      --ink:        #0E0E10;
+      --bg:         #F6F5F2;
       --surface:    #FFFFFF;
-      --border:     #E5E4E2;
-      --text:       #111111;
-      --muted:      #6B7280;
+      --border:     #E6E4DF;
+      --text:       #111113;
+      --muted:      #6B6B70;
+      --faint:      #9A9A9E;
+      --mono:       ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -41,7 +43,9 @@
       content: '';
       position: fixed;
       inset: 0;
-      background: radial-gradient(ellipse 75% 50% at 50% -8%, rgba(196,21,43,0.055) 0%, transparent 65%);
+      background:
+        radial-gradient(ellipse 70% 48% at 78% -6%, rgba(196,21,43,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 12% 4%, rgba(196,21,43,0.035) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -50,11 +54,15 @@
       content: '';
       position: fixed;
       inset: 0;
-      background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
-      background-size: 24px 24px;
+      background-image: radial-gradient(rgba(0,0,0,0.045) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
       pointer-events: none;
       z-index: 0;
     }
+
+    .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
 
     /* ── Nav ── */
     nav {
@@ -62,85 +70,85 @@
       top: 0;
       z-index: 100;
       width: 100%;
-      padding: 0 clamp(20px, 5%, 64px);
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(247,247,245,0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(246,245,242,0.78);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--border);
     }
+    .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
 
-    .nav-logo {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.03em;
-    }
+    .nav-logo { font-size: 0.98rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.04em; }
     .nav-logo span { color: var(--red); }
 
-    .nav-links {
-      display: flex;
-      gap: 0.2rem;
-      align-items: center;
-    }
-
+    .nav-links { display: flex; gap: 0.15rem; align-items: center; }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
       font-size: 0.875rem;
       font-weight: 500;
-      padding: 8px 12px;
-      border-radius: 8px;
+      padding: 8px 13px;
+      border-radius: 9px;
       transition: color 0.15s, background 0.15s;
       white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+    .nav-links a:hover { color: var(--text); background: rgba(0,0,0,0.045); }
 
     /* ── Main ── */
     main {
       position: relative;
       z-index: 1;
       flex: 1;
-      padding: clamp(64px, 12vw, 120px) clamp(20px, 5%, 64px) clamp(64px, 12vw, 112px);
-      max-width: 600px;
-      width: 100%;
+      padding: clamp(72px, 12vw, 124px) 0 clamp(64px, 12vw, 112px);
+      max-width: 560px;
     }
 
-    .page-eyebrow {
+    .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
+      font-family: var(--mono);
       font-size: 0.72rem;
-      font-weight: 600;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.13em;
+      letter-spacing: 0.16em;
       color: var(--red);
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.5rem;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards 0.1s;
     }
-    .page-eyebrow::before {
-      content: '';
-      display: block;
-      width: 18px;
-      height: 1.5px;
-      background: var(--red);
-      flex-shrink: 0;
-    }
+    .eyebrow::before { content: ''; width: 22px; height: 1.5px; background: var(--red); flex-shrink: 0; }
 
     h1 {
-      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
       font-weight: 900;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-bottom: 2.5rem;
-      line-height: 1.05;
+      letter-spacing: -0.045em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      line-height: 1.02;
       opacity: 0;
       animation: fadeUp 0.55s ease forwards 0.2s;
+    }
+
+    .intro {
+      font-size: clamp(0.98rem, 2.2vw, 1.08rem);
+      color: var(--muted);
+      line-height: 1.62;
+      margin-bottom: 2.6rem;
+      opacity: 0;
+      animation: fadeUp 0.55s ease forwards 0.28s;
+    }
+    .intro strong { color: var(--text); font-weight: 600; }
+
+    .list-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faint);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.55s ease forwards 0.34s;
     }
 
     .app-list {
@@ -148,9 +156,9 @@
       flex-direction: column;
       gap: 0.6rem;
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
       opacity: 0;
-      animation: fadeUp 0.55s ease forwards 0.3s;
+      animation: fadeUp 0.55s ease forwards 0.4s;
     }
 
     .app-link {
@@ -166,39 +174,30 @@
       color: var(--text);
       font-size: 0.95rem;
       font-weight: 600;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 6px 14px rgba(0,0,0,0.03);
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
       -webkit-tap-highlight-color: transparent;
     }
     .app-link:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08), 0 16px 40px rgba(196,21,43,0.07);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08), 0 18px 40px rgba(196,21,43,0.08);
       border-color: var(--red-border);
     }
-
-    .app-link .arrow {
-      color: var(--muted);
-      font-size: 1rem;
-      transition: transform 0.2s, color 0.2s;
-    }
+    .app-link .arrow { color: var(--faint); font-size: 1rem; transition: transform 0.2s, color 0.2s; }
     .app-link:hover .arrow { transform: translateX(3px); color: var(--red); }
 
     /* ── Footer ── */
-    footer {
-      position: relative;
-      z-index: 1;
-      margin-top: auto;
-      padding: 1.5rem clamp(20px, 5%, 64px);
+    footer { position: relative; z-index: 1; margin-top: auto; border-top: 1px solid var(--border); }
+    .footer-inner {
+      padding: 1.5rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
-      border-top: 1px solid var(--border);
       font-size: 0.8rem;
       color: var(--muted);
     }
-
     footer a {
       color: var(--muted);
       text-decoration: none;
@@ -210,63 +209,71 @@
       align-items: center;
     }
     footer a:hover { color: var(--text); }
-
     .footer-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
+    @media (prefers-reduced-motion: reduce) {
+      .eyebrow, h1, .intro, .list-label, .app-list { animation: none; opacity: 1; }
+    }
     @media (max-width: 480px) {
-      .nav-links a { padding: 8px 8px; font-size: 0.82rem; }
-      footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .nav-links a { padding: 8px 9px; font-size: 0.82rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a class="nav-logo" href="index.html">averyio<span>.net</span></a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
+    <div class="wrap nav-inner">
+      <a class="nav-logo" href="index.html">averyio<span>.net</span></a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </div>
   </nav>
 
-  <main>
-    <span class="page-eyebrow">Legal</span>
-    <h1>Privacy Policies</h1>
-    <div class="app-list">
-      <a href="privacy-investfast.html" class="app-link">
-        <span>InvestFast</span>
-        <span class="arrow">→</span>
-      </a>
-      <a href="privacy-surge.html" class="app-link">
-        <span>Surge</span>
-        <span class="arrow">→</span>
-      </a>
-      <a href="privacy-bigtimeclock.html" class="app-link">
-        <span>Big Time Clock</span>
-        <span class="arrow">→</span>
-      </a>
-      <a href="privacy-lume.html" class="app-link">
-        <span>Lume</span>
-        <span class="arrow">→</span>
-      </a>
-      <a href="privacy-tapdottap.html" class="app-link">
-        <span>Tap Dot Tap</span>
-        <span class="arrow">→</span>
-      </a>
-    </div>
-  </main>
+  <div class="wrap">
+    <main>
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy.</h1>
+      <p class="intro">Privacy isn't a setting — it's the default. Our apps are designed to work without accounts, logins, or third-party trackers, so collecting or selling your data <strong>just isn't part of how we operate</strong>. Choose an app below for its full policy.</p>
+
+      <p class="list-label">App policies</p>
+      <div class="app-list">
+        <a href="privacy-investfast.html" class="app-link">
+          <span>InvestFast</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="privacy-surge.html" class="app-link">
+          <span>Surge</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="privacy-bigtimeclock.html" class="app-link">
+          <span>Big Time Clock</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="privacy-lume.html" class="app-link">
+          <span>Lume</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="privacy-tapdottap.html" class="app-link">
+          <span>Tap Dot Tap</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </main>
+  </div>
 
   <footer>
-    <span>&copy; 2026 AveryIO</span>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
-      <a href="privacy.html">Privacy</a>
+    <div class="wrap footer-inner">
+      <span>&copy; 2026 averyio</span>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
     </div>
   </footer>
 

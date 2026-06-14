@@ -15,13 +15,16 @@
     :root {
       --red:        #C4152B;
       --red-light:  rgba(196,21,43,0.07);
-      --red-border: rgba(196,21,43,0.20);
-      --bg:         #F7F7F5;
+      --red-border: rgba(196,21,43,0.22);
+      --bg:         #F6F5F2;
       --surface:    #FFFFFF;
-      --border:     #E5E4E2;
-      --text:       #111111;
-      --muted:      #6B7280;
-      --body-text:  #374151;
+      --border:     #E6E4DF;
+      --text:       #111113;
+      --muted:      #6B6B70;
+      --ink:        #0E0E10;
+      --faint:      #9A9A9E;
+      --body-text:  #3A3A40;
+      --mono:       ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -43,7 +46,9 @@
       content: '';
       position: fixed;
       inset: 0;
-      background: radial-gradient(ellipse 75% 50% at 50% -8%, rgba(196,21,43,0.045) 0%, transparent 65%);
+      background:
+        radial-gradient(ellipse 70% 48% at 78% -6%, rgba(196,21,43,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 12% 4%, rgba(196,21,43,0.035) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -53,7 +58,9 @@
       position: fixed;
       inset: 0;
       background-image: radial-gradient(rgba(0,0,0,0.045) 1px, transparent 1px);
-      background-size: 24px 24px;
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
       pointer-events: none;
       z-index: 0;
     }
@@ -76,11 +83,11 @@
     }
 
     .nav-logo {
-      font-size: 0.95rem;
-      font-weight: 700;
+      font-size: 0.98rem;
+      font-weight: 800;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
     }
     .nav-logo span { color: var(--red); }
 
@@ -329,7 +336,7 @@
   </div>
 
   <footer>
-    <span>&copy; 2026 AveryIO</span>
+    <span>&copy; 2026 averyio</span>
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="contact.html">Contact</a>

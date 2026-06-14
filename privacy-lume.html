@@ -15,13 +15,16 @@
     :root {
       --red:        #C4152B;
       --red-light:  rgba(196,21,43,0.07);
-      --red-border: rgba(196,21,43,0.20);
-      --bg:         #F7F7F5;
+      --red-border: rgba(196,21,43,0.22);
+      --bg:         #F6F5F2;
       --surface:    #FFFFFF;
-      --border:     #E5E4E2;
-      --text:       #111111;
-      --muted:      #6B7280;
-      --body-text:  #374151;
+      --border:     #E6E4DF;
+      --text:       #111113;
+      --muted:      #6B6B70;
+      --ink:        #0E0E10;
+      --faint:      #9A9A9E;
+      --body-text:  #3A3A40;
+      --mono:       ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -43,7 +46,9 @@
       content: '';
       position: fixed;
       inset: 0;
-      background: radial-gradient(ellipse 75% 50% at 50% -8%, rgba(196,21,43,0.045) 0%, transparent 65%);
+      background:
+        radial-gradient(ellipse 70% 48% at 78% -6%, rgba(196,21,43,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 12% 4%, rgba(196,21,43,0.035) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -53,7 +58,9 @@
       position: fixed;
       inset: 0;
       background-image: radial-gradient(rgba(0,0,0,0.045) 1px, transparent 1px);
-      background-size: 24px 24px;
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
       pointer-events: none;
       z-index: 0;
     }
@@ -76,11 +83,11 @@
     }
 
     .nav-logo {
-      font-size: 0.95rem;
-      font-weight: 700;
+      font-size: 0.98rem;
+      font-weight: 800;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
     }
     .nav-logo span { color: var(--red); }
 
@@ -229,7 +236,7 @@
 
     <h2>1. Introduction</h2>
     <p>
-      Lume is a task manager developed by Avery IO. We built Lume to be a local-first, private
+      Lume is a task manager developed by averyio. We built Lume to be a local-first, private
       app — your tasks, categories and progress belong to you, and we deliberately do not collect,
       store or share your personal information. This policy explains exactly what happens with
       your data.
@@ -243,7 +250,7 @@
     </p>
     <p>
       If you choose to enable iCloud sync (see section 6), your data is mirrored through your own
-      private iCloud database. It is never transmitted to a server operated by Avery IO, and we
+      private iCloud database. It is never transmitted to a server operated by averyio, and we
       have no ability to read it.
     </p>
 
@@ -251,7 +258,7 @@
     <p>
       Lume offers a single one-time, non-consumable in-app purchase called <strong>Lume Pro</strong>,
       which unlocks additional features. All purchases are processed exclusively by Apple through
-      the App Store. Avery IO does not see, receive, or store your payment credentials at any
+      the App Store. averyio does not see, receive, or store your payment credentials at any
       point. Apple confirms only the entitlement (whether you have purchased Lume Pro) so that
       the app can unlock the corresponding features on your device.
     </p>
@@ -287,7 +294,7 @@
     </p>
     <p>The private database is, by design:</p>
     <ul>
-      <li>Inaccessible to Avery IO — we cannot view, query, or recover its contents.</li>
+      <li>Inaccessible to averyio — we cannot view, query, or recover its contents.</li>
       <li>Inaccessible to Apple's staff — Apple encrypts it in transit and at rest.</li>
       <li>Free of any app-level account or identifier — sync uses your Apple ID directly.</li>
     </ul>
@@ -323,7 +330,7 @@
   </div>
 
   <footer>
-    <span>&copy; 2026 AveryIO</span>
+    <span>&copy; 2026 averyio</span>
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="contact.html">Contact</a>
