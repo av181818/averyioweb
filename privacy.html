@@ -217,7 +217,10 @@
       .eyebrow, h1, .intro, .list-label, .app-list { animation: none; opacity: 1; }
     }
     @media (max-width: 480px) {
-      .nav-links a { padding: 8px 9px; font-size: 0.82rem; }
+      .nav-inner { padding-left: 16px; padding-right: 16px; }
+      .nav-links { gap: 0.05rem; }
+      .nav-links a { padding: 7px 7px; font-size: 0.8rem; }
+      .nav-logo { font-size: 0.9rem; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
     }
   </style>
@@ -228,7 +231,8 @@
     <div class="wrap nav-inner">
       <a class="nav-logo" href="index.html">averyio<span>.net</span></a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
+        <a href="apps.html">Apps</a>
+        <a href="finance.html">Finance</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -240,7 +244,7 @@
       <h1>Privacy.</h1>
       <p class="intro">Privacy isn't a setting — it's the default. Our apps are designed to work without accounts, logins, or third-party trackers, so collecting or selling your data <strong>just isn't part of how we operate</strong>. Choose an app below for its full policy.</p>
 
-      <p class="list-label">App policies</p>
+      <p class="list-label">App privacy policies</p>
       <div class="app-list">
         <a href="privacy-investfast.html" class="app-link">
           <span>InvestFast</span>
@@ -271,6 +275,8 @@
       <span>&copy; 2026 averyio</span>
       <div class="footer-links">
         <a href="index.html">Home</a>
+        <a href="apps.html">Apps</a>
+        <a href="finance.html">Finance</a>
         <a href="contact.html">Contact</a>
         <a href="privacy.html">Privacy</a>
       </div>
