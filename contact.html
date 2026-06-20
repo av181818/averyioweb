@@ -102,8 +102,6 @@
       z-index: 1;
       padding: clamp(80px, 14vw, 150px) 0 clamp(36px, 6vw, 56px);
       max-width: 640px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.1s;
     }
 
     .eyebrow {
@@ -137,8 +135,6 @@
       position: relative;
       z-index: 1;
       padding-bottom: clamp(64px, 12vw, 112px);
-      opacity: 0;
-      animation: fadeUp 0.55s ease forwards 0.25s;
     }
 
     .x-card {
@@ -189,10 +185,8 @@
     footer a:hover { color: var(--text); }
     .footer-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-
     @media (prefers-reduced-motion: reduce) {
-      .page-header, .contact-wrapper { animation: none; opacity: 1; }
+      html { scroll-behavior: auto; }
     }
     @media (max-width: 480px) {
       .nav-inner { padding-left: 16px; padding-right: 16px; }

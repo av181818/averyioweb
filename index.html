@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script>document.documentElement.classList.add('js');</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -111,11 +110,8 @@
       letter-spacing: -0.05em;
       line-height: 0.92;
       color: var(--ink);
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards;
     }
     .hero h1 .accent { color: var(--red); }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ── Section scaffolding ── */
     section { position: relative; z-index: 1; }
@@ -273,14 +269,8 @@
     footer a:hover { color: var(--text); }
     .footer-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
-    /* ── Reveal on scroll ── */
-    .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
-    .js .reveal.in { opacity: 1; transform: none; }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .hero h1 { animation: none; opacity: 1; }
     }
 
     /* ── Responsive ── */
@@ -334,7 +324,7 @@
              it automatically — no other edits needed.
         ──────────────────────────────────────────────────────────────── -->
 
-        <a href="apps.html" class="brand reveal"
+        <a href="apps.html" class="brand"
            style="--g1:#818CF8; --g2:#4F46E5; --tint:rgba(79,70,229,0.12); --line:rgba(79,70,229,0.32);">
           <div class="brand-top">
             <div class="brand-tile">
@@ -362,7 +352,7 @@
           </div>
         </a>
 
-        <a href="finance.html" class="brand reveal"
+        <a href="finance.html" class="brand"
            style="--g1:#F59E0B; --g2:#B45309; --tint:rgba(217,119,6,0.12); --line:rgba(217,119,6,0.32);">
           <div class="brand-top">
             <div class="brand-tile">
@@ -388,7 +378,7 @@
           </div>
         </a>
 
-        <a href="contact.html" class="brand soon reveal">
+        <a href="contact.html" class="brand soon">
           <div class="brand-tile">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
               <path d="M12 5v14M5 12h14"/>
@@ -416,29 +406,6 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    (function () {
-      var els = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window)) {
-        els.forEach(function (el) { el.classList.add('in'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-
-      var cards = document.querySelectorAll('.brands-grid .brand');
-      cards.forEach(function (c, i) { c.style.transitionDelay = (i * 80) + 'ms'; });
-
-      els.forEach(function (el) { io.observe(el); });
-    })();
-  </script>
 
 </body>
 </html>
