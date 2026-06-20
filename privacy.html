@@ -126,22 +126,12 @@
       font-weight: 900;
       letter-spacing: -0.05em;
       color: var(--ink);
-      margin-bottom: 1.3rem;
+      margin-bottom: 1.7rem;
       line-height: 0.92;
       opacity: 0;
       animation: fadeUp 0.55s ease forwards 0.2s;
     }
     h1 .accent { color: var(--red); }
-
-    .intro {
-      font-size: clamp(0.98rem, 2.2vw, 1.08rem);
-      color: var(--muted);
-      line-height: 1.62;
-      margin-bottom: 2.6rem;
-      opacity: 0;
-      animation: fadeUp 0.55s ease forwards 0.28s;
-    }
-    .intro strong { color: var(--text); font-weight: 600; }
 
     .list-label {
       font-family: var(--mono);
@@ -218,7 +208,7 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (prefers-reduced-motion: reduce) {
-      .eyebrow, h1, .intro, .list-label, .app-list { animation: none; opacity: 1; }
+      .eyebrow, h1, .list-label, .app-list { animation: none; opacity: 1; }
     }
     @media (max-width: 480px) {
       .nav-inner { padding-left: 16px; padding-right: 16px; }
@@ -253,7 +243,6 @@
   <div class="wrap">
     <main>
       <h1>Privacy<span class="accent">.</span></h1>
-      <p class="intro">Privacy isn't a setting — it's the default. Our apps are designed to work without accounts, logins, or third-party trackers, so collecting or selling your data <strong>just isn't part of how we operate</strong>. Choose an app below for its full policy.</p>
 
       <p class="list-label">App privacy policies</p>
       <div class="app-list">

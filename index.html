@@ -111,8 +111,11 @@
       letter-spacing: -0.05em;
       line-height: 0.92;
       color: var(--ink);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
     }
     .hero h1 .accent { color: var(--red); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ── Section scaffolding ── */
     section { position: relative; z-index: 1; }
@@ -277,6 +280,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .hero h1 { animation: none; opacity: 1; }
     }
 
     /* ── Responsive ── */
