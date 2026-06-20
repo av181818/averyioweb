@@ -97,7 +97,7 @@
     .page-header {
       position: relative;
       z-index: 1;
-      padding: clamp(72px, 12vw, 124px) 0 clamp(36px, 6vw, 56px);
+      padding: clamp(80px, 14vw, 150px) 0 clamp(36px, 6vw, 56px);
       max-width: 640px;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards 0.1s;
@@ -118,13 +118,14 @@
     .eyebrow::before { content: ''; width: 22px; height: 1.5px; background: var(--red); flex-shrink: 0; }
 
     h1 {
-      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      font-size: clamp(3rem, 11vw, 6.4rem);
       font-weight: 900;
-      letter-spacing: -0.045em;
+      letter-spacing: -0.05em;
       color: var(--ink);
-      margin-bottom: 1rem;
-      line-height: 1.02;
+      margin-bottom: 1.3rem;
+      line-height: 0.92;
     }
+    h1 .accent { color: var(--red); }
 
     .page-sub { font-size: clamp(0.98rem, 2.2vw, 1.1rem); color: var(--muted); font-weight: 400; line-height: 1.6; max-width: 440px; }
 
@@ -214,8 +215,7 @@
 
   <div class="wrap">
     <div class="page-header">
-      <span class="eyebrow">Get in touch</span>
-      <h1>Let's talk.</h1>
+      <h1>Let's talk<span class="accent">.</span></h1>
       <p class="page-sub">Have a question, an idea, or just want to say hello? The fastest way to reach us is on X.</p>
     </div>
 

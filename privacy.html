@@ -98,7 +98,7 @@
       position: relative;
       z-index: 1;
       flex: 1;
-      padding: clamp(72px, 12vw, 124px) 0 clamp(64px, 12vw, 112px);
+      padding: clamp(80px, 14vw, 150px) 0 clamp(64px, 12vw, 112px);
       max-width: 560px;
     }
 
@@ -119,15 +119,16 @@
     .eyebrow::before { content: ''; width: 22px; height: 1.5px; background: var(--red); flex-shrink: 0; }
 
     h1 {
-      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      font-size: clamp(3rem, 11vw, 6.4rem);
       font-weight: 900;
-      letter-spacing: -0.045em;
+      letter-spacing: -0.05em;
       color: var(--ink);
-      margin-bottom: 1rem;
-      line-height: 1.02;
+      margin-bottom: 1.3rem;
+      line-height: 0.92;
       opacity: 0;
       animation: fadeUp 0.55s ease forwards 0.2s;
     }
+    h1 .accent { color: var(--red); }
 
     .intro {
       font-size: clamp(0.98rem, 2.2vw, 1.08rem);
@@ -240,8 +241,7 @@
 
   <div class="wrap">
     <main>
-      <span class="eyebrow">Legal</span>
-      <h1>Privacy.</h1>
+      <h1>Privacy<span class="accent">.</span></h1>
       <p class="intro">Privacy isn't a setting — it's the default. Our apps are designed to work without accounts, logins, or third-party trackers, so collecting or selling your data <strong>just isn't part of how we operate</strong>. Choose an app below for its full policy.</p>
 
       <p class="list-label">App privacy policies</p>
