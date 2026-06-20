@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>averyio — indie apps &amp; markets</title>
-  <meta name="description" content="averyio — beautifully simple apps you buy once and truly own, plus straight-talking takes on investing, markets, and the long game. Buying dips by day, coding bugs by night." />
+  <title>averyio — independent studio &amp; brands</title>
+  <meta name="description" content="averyio — a small independent studio behind a growing family of simple, honest brands: apps you buy once and truly own, plus a no-nonsense take on markets." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C4152B'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='white'%3Ea%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -99,106 +99,40 @@
     .nav-links a.nav-cta { color: #fff; background: var(--ink); margin-left: 0.35rem; }
     .nav-links a.nav-cta:hover { background: #2a2a2e; }
 
-    /* ── Hero ── */
+    /* ── Hero: just the wordmark ── */
     .hero {
       position: relative;
       z-index: 1;
-      padding: clamp(72px, 13vw, 132px) 0 clamp(36px, 6vw, 56px);
+      padding: clamp(92px, 16vw, 168px) 0 clamp(8px, 3vw, 26px);
     }
-    .hero-inner { max-width: 900px; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--red);
-      margin-bottom: 1.7rem;
-    }
-    .eyebrow::before { content: ''; width: 22px; height: 1.5px; background: var(--red); flex-shrink: 0; }
-
     .hero h1 {
-      font-size: clamp(2.7rem, 7vw, 5.3rem);
+      font-size: clamp(3.4rem, 13vw, 8rem);
       font-weight: 900;
-      letter-spacing: -0.045em;
-      line-height: 0.98;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
       color: var(--ink);
     }
     .hero h1 .accent { color: var(--red); }
 
-    .hero-sub {
-      margin-top: 1.7rem;
-      font-size: clamp(1.02rem, 2.2vw, 1.22rem);
-      font-weight: 400;
-      color: var(--muted);
-      max-width: 620px;
-      line-height: 1.6;
-    }
-
-    .hero-actions { margin-top: 2.3rem; display: flex; flex-wrap: wrap; gap: 0.7rem; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 1.4rem;
-      border-radius: 12px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.22s ease, background 0.18s ease, border-color 0.18s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn-primary {
-      background: var(--ink);
-      color: #fff;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.18), 0 10px 24px rgba(0,0,0,0.14);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.16), 0 18px 38px rgba(0,0,0,0.16); }
-    .btn-primary .a { transition: transform 0.18s; }
-    .btn-primary:hover .a { transform: translateX(3px); }
-    .btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
-    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--red-border); color: var(--red); }
-
     /* ── Section scaffolding ── */
     section { position: relative; z-index: 1; }
-    .hairline { border: none; border-top: 1px solid var(--border); }
 
-    /* ── Pillars ── */
-    .pillars { padding: clamp(44px, 7vw, 84px) 0 clamp(64px, 11vw, 120px); }
-    .pillars-head { max-width: 640px; margin-bottom: clamp(1.8rem, 3.5vw, 2.6rem); }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--faint);
-      margin-bottom: 1.1rem;
+    /* ── Brands ── */
+    .brands { padding: clamp(28px, 6vw, 56px) 0 clamp(64px, 11vw, 120px); }
+
+    /* auto-fill grid → add a card and it places itself; no layout edits needed */
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.1rem;
     }
-    .pillars-head h2 {
-      font-size: clamp(1.6rem, 3.6vw, 2.3rem);
-      font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 1.08;
-      color: var(--ink);
-    }
-    .pillars-head p { margin-top: 0.9rem; font-size: 1rem; color: var(--muted); line-height: 1.6; }
 
-    .pillars-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
-
-    .pillar {
+    .brand {
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
-      padding: clamp(1.7rem, 3vw, 2.4rem);
+      gap: 1.3rem;
+      padding: clamp(1.6rem, 3vw, 2.2rem);
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 22px;
@@ -207,81 +141,109 @@
       box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.04);
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
       overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
-    .pillar::after {
+    .brand::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 55% at 100% 0%, var(--red-soft), transparent 70%);
+      background: radial-gradient(ellipse 62% 58% at 100% 0%, var(--tint, var(--red-soft)), transparent 70%);
       opacity: 0;
       transition: opacity 0.25s ease;
       pointer-events: none;
     }
-    .pillar:hover {
+    .brand:hover {
       transform: translateY(-5px);
-      border-color: var(--red-border);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 26px 56px rgba(196,21,43,0.10);
+      border-color: var(--line, var(--red-border));
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 26px 56px var(--tint, var(--red-soft));
     }
-    .pillar:hover::after { opacity: 1; }
-    .pillar > * { position: relative; }
+    .brand:hover::after { opacity: 1; }
+    .brand > * { position: relative; }
 
-    .pillar-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
+    .brand-top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .brand-tile {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--red);
+      color: #fff;
+      background: linear-gradient(140deg, var(--g1), var(--g2));
+      box-shadow: 0 6px 16px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.28);
     }
-    .pillar-icon svg { width: 26px; height: 26px; }
-
-    .pillar-kicker {
+    .brand-tile svg { width: 27px; height: 27px; }
+    .brand-no {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--faint);
+    }
+
+    .brand-kicker {
+      font-family: var(--mono);
+      font-size: 0.67rem;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: var(--faint);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.55rem;
     }
-    .pillar h3 {
-      font-size: clamp(1.45rem, 3vw, 1.95rem);
+    .brand-name {
+      font-size: clamp(1.4rem, 2.8vw, 1.85rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       color: var(--ink);
       line-height: 1.04;
     }
-    .pillar p { font-size: 0.96rem; color: var(--muted); line-height: 1.6; }
+    .brand-desc { margin-top: 0.6rem; font-size: 0.95rem; color: var(--muted); line-height: 1.58; }
 
-    .pillar-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .pillar-tag {
+    .brand-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap; }
+    .brand-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .brand-tag {
       display: inline-flex;
       align-items: center;
       padding: 4px 10px;
       border-radius: 20px;
       font-family: var(--mono);
-      font-size: 0.66rem;
-      letter-spacing: 0.04em;
+      font-size: 0.64rem;
+      letter-spacing: 0.05em;
       background: var(--surface-2);
       border: 1px solid var(--border);
       color: var(--muted);
     }
-
-    .pillar-cta {
-      margin-top: auto;
+    .brand-cta {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.4rem;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       letter-spacing: -0.01em;
       color: var(--ink);
+      white-space: nowrap;
     }
-    .pillar-cta .a { transition: transform 0.18s; }
-    .pillar:hover .pillar-cta { color: var(--red); }
-    .pillar:hover .pillar-cta .a { transform: translateX(3px); }
+    .brand-cta .a { transition: transform 0.18s; }
+    .brand:hover .brand-cta { color: var(--red); }
+    .brand:hover .brand-cta .a { transform: translateX(3px); }
+
+    /* Soft placeholder card — signals the family keeps growing */
+    .brand.soon {
+      background: transparent;
+      border-style: dashed;
+      box-shadow: none;
+      justify-content: center;
+      gap: 0.9rem;
+      min-height: 220px;
+    }
+    .brand.soon:hover { transform: translateY(-3px); border-color: var(--red-border); box-shadow: none; }
+    .brand.soon .brand-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--faint);
+      box-shadow: none;
+    }
+    .brand.soon .brand-name { font-size: 1.15rem; }
+    .brand.soon .brand-desc { margin-top: 0.35rem; }
 
     /* ── Footer ── */
     footer { position: relative; z-index: 1; margin-top: auto; border-top: 1px solid var(--border); }
@@ -318,8 +280,8 @@
     }
 
     /* ── Responsive ── */
-    @media (max-width: 760px) {
-      .pillars-grid { grid-template-columns: 1fr; }
+    @media (max-width: 640px) {
+      .brands-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .nav-inner { padding-left: 16px; padding-right: 16px; }
@@ -351,70 +313,86 @@
   </nav>
 
   <header class="hero">
-    <div class="wrap hero-inner">
-      <span class="eyebrow">Code &amp; capital</span>
-      <h1>Buying dips by day.<br />Coding bugs by <span class="accent">night.</span></h1>
-      <p class="hero-sub">That's averyio in a nutshell — two obsessions under one name: apps you buy once and truly own, and straight-talking takes on investing, crypto, and the long game.</p>
-      <div class="hero-actions">
-        <a href="apps.html" class="btn btn-primary">Explore the apps <span class="a">→</span></a>
-        <a href="finance.html" class="btn btn-ghost">Buy the dip</a>
-      </div>
+    <div class="wrap">
+      <h1>averyio<span class="accent">.</span></h1>
     </div>
   </header>
 
-  <div class="wrap"><hr class="hairline" /></div>
-
-  <section class="pillars">
+  <section class="brands" id="brands">
     <div class="wrap">
-      <div class="pillars-head reveal">
-        <p class="section-label">Two sides of averyio</p>
-        <h2>Pick where you'd like to start.</h2>
-        <p>Two crafts, one rule — do the simple thing well and skip the nonsense. Software on one side, markets on the other.</p>
-      </div>
+      <div class="brands-grid">
 
-      <div class="pillars-grid">
+        <!-- ───────────────────────────────────────────────────────────────
+             ADD A BRAND: copy one <a class="brand"> block below, update the
+             href, the --g1/--g2 (tile gradient) + --tint/--line (hover glow),
+             the number, kicker, name, description and tags. The grid places
+             it automatically — no other edits needed.
+        ──────────────────────────────────────────────────────────────── -->
 
-        <a href="apps.html" class="pillar reveal">
-          <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="3" y="3" width="7" height="7" rx="2"/>
-              <rect x="14" y="3" width="7" height="7" rx="2"/>
-              <rect x="3" y="14" width="7" height="7" rx="2"/>
-              <rect x="14" y="14" width="7" height="7" rx="2"/>
-            </svg>
+        <a href="apps.html" class="brand reveal"
+           style="--g1:#818CF8; --g2:#4F46E5; --tint:rgba(79,70,229,0.12); --line:rgba(79,70,229,0.32);">
+          <div class="brand-top">
+            <div class="brand-tile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="7" height="7" rx="2"/>
+                <rect x="14" y="3" width="7" height="7" rx="2"/>
+                <rect x="3" y="14" width="7" height="7" rx="2"/>
+                <rect x="14" y="14" width="7" height="7" rx="2"/>
+              </svg>
+            </div>
+            <span class="brand-no">01</span>
           </div>
           <div>
-            <p class="pillar-kicker">For iPhone &amp; iPad</p>
-            <h3>The apps</h3>
+            <p class="brand-kicker">For iPhone &amp; iPad</p>
+            <h3 class="brand-name">Apps</h3>
+            <p class="brand-desc">Beautifully simple apps you buy once and own forever. No subscriptions, no ads, no tracking.</p>
           </div>
-          <p>Beautifully simple tools you buy once and truly own. No subscriptions, no ads, no tracking — just software that respects your time and your privacy.</p>
-          <div class="pillar-tags">
-            <span class="pillar-tag">InvestFast</span>
-            <span class="pillar-tag">Surge</span>
-            <span class="pillar-tag">Big Time Clock</span>
-            <span class="pillar-tag">Lume</span>
+          <div class="brand-foot">
+            <div class="brand-tags">
+              <span class="brand-tag">iOS</span>
+              <span class="brand-tag">Pay once</span>
+              <span class="brand-tag">Private</span>
+            </div>
+            <span class="brand-cta">Explore <span class="a">→</span></span>
           </div>
-          <span class="pillar-cta">Explore the apps <span class="a">→</span></span>
         </a>
 
-        <a href="finance.html" class="pillar reveal">
-          <div class="pillar-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 17l5-5 4 3 7-8"/>
-              <path d="M16 4h5v5"/>
+        <a href="finance.html" class="brand reveal"
+           style="--g1:#F59E0B; --g2:#B45309; --tint:rgba(217,119,6,0.12); --line:rgba(217,119,6,0.32);">
+          <div class="brand-top">
+            <div class="brand-tile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17l5-5 4 3 7-8"/>
+                <path d="M16 4h5v5"/>
+              </svg>
+            </div>
+            <span class="brand-no">02</span>
+          </div>
+          <div>
+            <p class="brand-kicker">Markets &amp; investing</p>
+            <h3 class="brand-name">Finance</h3>
+            <p class="brand-desc">Straight-talking takes on investing and crypto — buy the dip, stay boring, think in decades.</p>
+          </div>
+          <div class="brand-foot">
+            <div class="brand-tags">
+              <span class="brand-tag">Investing</span>
+              <span class="brand-tag">Crypto</span>
+              <span class="brand-tag">On X</span>
+            </div>
+            <span class="brand-cta">Explore <span class="a">→</span></span>
+          </div>
+        </a>
+
+        <a href="contact.html" class="brand soon reveal">
+          <div class="brand-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <path d="M12 5v14M5 12h14"/>
             </svg>
           </div>
           <div>
-            <p class="pillar-kicker">Investing &amp; the long game</p>
-            <h3>The markets</h3>
+            <h3 class="brand-name">More in the works</h3>
+            <p class="brand-desc">New brands land here over time. Got an idea? Say hello.</p>
           </div>
-          <p>Straight-talking takes on investing, crypto, and the long game — buy the dip, stay boring, think in decades. No hype, no hot tips, plus the tools we built to act on it.</p>
-          <div class="pillar-tags">
-            <span class="pillar-tag">The playbook</span>
-            <span class="pillar-tag">BTC Prix</span>
-            <span class="pillar-tag">@averyio18</span>
-          </div>
-          <span class="pillar-cta">Buy the dip <span class="a">→</span></span>
         </a>
 
       </div>
@@ -450,7 +428,7 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
-      var cards = document.querySelectorAll('.pillars-grid .pillar');
+      var cards = document.querySelectorAll('.brands-grid .brand');
       cards.forEach(function (c, i) { c.style.transitionDelay = (i * 80) + 'ms'; });
 
       els.forEach(function (el) { io.observe(el); });
