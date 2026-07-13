@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Buy the dip — averyio</title>
-  <meta name="description" content="Buy the dip — markets and investing takes from averyio, posted day-to-day on X." />
+  <meta name="description" content="Buy the dip — the finance brand from averyio. TradingView indicators and more for traders and investors." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C4152B'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='white'%3Ea%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,10 +14,12 @@
 
     :root {
       --red:        #C4152B;
+      --red-soft:   rgba(196,21,43,0.07);
       --red-border: rgba(196,21,43,0.22);
       --ink:        #0E0E10;
       --bg:         #F6F5F2;
       --surface:    #FFFFFF;
+      --surface-2:  #FBFAF8;
       --border:     #E6E4DF;
       --text:       #111113;
       --muted:      #6B6B70;
@@ -96,9 +98,12 @@
     .nav-links a.nav-cta { color: #fff; background: var(--ink); margin-left: 0.35rem; }
     .nav-links a.nav-cta:hover { background: #2a2a2e; }
 
-    /* ── Hero: a single link to X ── */
-    main { position: relative; z-index: 1; }
-    .hero { width: 100%; padding-top: clamp(80px, 14vw, 150px); padding-bottom: clamp(18px, 4vw, 36px); }
+    /* ── Hero: wordmark + subtitle ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: clamp(80px, 14vw, 150px) 0 clamp(18px, 4vw, 36px);
+    }
     .hero h1 {
       font-size: clamp(3rem, 11vw, 6.4rem);
       font-weight: 900;
@@ -107,34 +112,144 @@
       color: var(--ink);
     }
     .hero h1 .accent { color: var(--red); }
+    .hero-sub { margin-top: 1.1rem; font-size: clamp(1rem, 2.4vw, 1.2rem); font-weight: 500; color: var(--muted); letter-spacing: -0.01em; }
 
-    .x-cta {
-      margin-top: 2.2rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.95rem 1.6rem;
-      border-radius: 13px;
-      background: var(--ink);
-      color: #fff;
+    /* ── Section scaffolding ── */
+    section { position: relative; z-index: 1; }
+
+    /* ── Brand cards ── */
+    .brands { padding: clamp(20px, 5vw, 44px) 0 clamp(28px, 6vw, 52px); }
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .brand {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      padding: clamp(1.6rem, 3vw, 2.2rem);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
       text-decoration: none;
-      font-size: 0.98rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.18), 0 10px 24px rgba(0,0,0,0.14);
-      transition: transform 0.18s ease, box-shadow 0.22s ease;
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.04);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      overflow: hidden;
       -webkit-tap-highlight-color: transparent;
     }
-    .x-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.16), 0 18px 38px rgba(0,0,0,0.16); }
-    .x-cta svg { width: 19px; height: 19px; fill: currentColor; }
-    .x-cta .a { transition: transform 0.18s; }
-    .x-cta:hover .a { transform: translateX(3px); }
+    .brand::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 62% 58% at 100% 0%, var(--tint, var(--red-soft)), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .brand:hover {
+      transform: translateY(-5px);
+      border-color: var(--line, var(--red-border));
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 26px 56px var(--tint, var(--red-soft));
+    }
+    .brand:hover::after { opacity: 1; }
+    .brand > * { position: relative; }
+
+    .brand-top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .brand-tile {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: linear-gradient(140deg, var(--g1), var(--g2));
+      box-shadow: 0 6px 16px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.28);
+    }
+    .brand-tile svg { width: 27px; height: 27px; }
+    .brand-no {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--faint);
+    }
+
+    .brand-kicker {
+      font-family: var(--mono);
+      font-size: 0.67rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--faint);
+      margin-bottom: 0.55rem;
+    }
+    .brand-name {
+      font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      line-height: 1.04;
+    }
+    .brand-desc { margin-top: 0.6rem; font-size: 0.95rem; color: var(--muted); line-height: 1.58; }
+
+    .brand-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap; }
+    .brand-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.05em;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .brand-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .brand-cta .a { transition: transform 0.18s; }
+    .brand:hover .brand-cta { color: var(--red); }
+    .brand:hover .brand-cta .a { transform: translateX(3px); }
+
+    /* Soft placeholder card — signals more is coming under the brand */
+    .brand.soon {
+      background: transparent;
+      border-style: dashed;
+      box-shadow: none;
+      justify-content: center;
+      gap: 0.9rem;
+      min-height: 220px;
+    }
+    .brand.soon:hover { transform: translateY(-3px); border-color: var(--red-border); box-shadow: none; }
+    .brand.soon .brand-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--faint);
+      box-shadow: none;
+    }
+    .brand.soon .brand-name { font-size: 1.15rem; }
+    .brand.soon .brand-desc { margin-top: 0.35rem; }
 
     .disclaimer {
-      margin-top: 1.6rem;
+      position: relative;
+      z-index: 1;
+      padding-bottom: clamp(40px, 8vw, 80px);
       font-size: 0.78rem;
       color: var(--faint);
-      max-width: 420px;
+      max-width: 620px;
       line-height: 1.55;
     }
 
@@ -168,6 +283,7 @@
     }
 
     /* ── Responsive ── */
+    @media (max-width: 640px) { .brands-grid { grid-template-columns: 1fr; } }
     @media (max-width: 480px) {
       .nav-inner { padding-left: 16px; padding-right: 16px; }
       .nav-links { gap: 0.05rem; }
@@ -196,16 +312,57 @@
     </div>
   </nav>
 
-  <main>
-    <div class="wrap hero">
+  <header class="hero">
+    <div class="wrap">
       <h1>Buy the <span class="accent">dip.</span></h1>
-      <p class="disclaimer">Markets carry risk and you can lose money — crypto especially. Nothing here is financial advice.</p>
-      <a href="https://x.com/averyio18" target="_blank" rel="noopener" class="x-cta">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        Follow @averyio18 on X <span class="a">→</span>
-      </a>
     </div>
-  </main>
+  </header>
+
+  <section class="brands" id="brands">
+    <div class="wrap">
+      <div class="brands-grid">
+
+        <!-- ───────────────────────────────────────────────────────────────
+             ADD A CARD under Buy the dip: copy one <a class="brand"> block,
+             update the href, the --g1/--g2 (tile gradient) + --tint/--line
+             (hover glow), the number, kicker, name, description and tags.
+             The grid places it automatically — no other edits needed.
+        ──────────────────────────────────────────────────────────────── -->
+
+        <!-- TODO: set href to the external indicators site, add target="_blank" rel="noopener" -->
+        <a href="#" class="brand"
+           style="--g1:#F59E0B; --g2:#B45309; --tint:rgba(217,119,6,0.12); --line:rgba(217,119,6,0.32);">
+          <div class="brand-top">
+            <div class="brand-tile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17l5-5 4 3 7-8"/>
+                <path d="M16 4h5v5"/>
+              </svg>
+            </div>
+            <span class="brand-no">01</span>
+          </div>
+          <div>
+            <p class="brand-kicker">On TradingView</p>
+            <h3 class="brand-name">TradingView indicators</h3>
+            <p class="brand-desc">Coming soon.</p>
+          </div>
+          <div class="brand-foot">
+            <div class="brand-tags">
+              <span class="brand-tag">Indicators</span>
+              <span class="brand-tag">TradingView</span>
+              <span class="brand-tag">Investing</span>
+            </div>
+            <span class="brand-cta">Explore <span class="a">→</span></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap disclaimer">
+    Nothing here is financial advice. Markets carry risk and you can lose money — crypto especially.
+  </div>
 
   <footer>
     <div class="wrap footer-inner">
