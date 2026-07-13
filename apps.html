@@ -112,6 +112,12 @@
       color: var(--ink);
     }
     .hero h1 .accent { color: var(--red); }
+    .hero h1 .by {
+      font-size: clamp(1.25rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
 
     section { position: relative; z-index: 1; }
 
@@ -170,15 +176,10 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      background: rgba(196,21,43,0.08);
+      border: 1px solid var(--red-border);
+      color: #9E1420;
     }
-    .tag.ios          { background: rgba(0,122,255,0.09);  border: 1px solid rgba(0,122,255,0.18);  color: #004ECC; }
-    .tag.web          { background: rgba(16,185,129,0.09); border: 1px solid rgba(16,185,129,0.2);  color: #047857; }
-    .tag.finance      { background: rgba(217,119,6,0.09);  border: 1px solid rgba(217,119,6,0.2);   color: #92400E; }
-    .tag.crypto       { background: rgba(249,115,22,0.09); border: 1px solid rgba(249,115,22,0.2);  color: #9A3412; }
-    .tag.utilities    { background: rgba(99,102,241,0.09); border: 1px solid rgba(99,102,241,0.2);  color: #3730A3; }
-    .tag.fitness      { background: rgba(239,68,68,0.09);  border: 1px solid rgba(239,68,68,0.2);   color: #B91C1C; }
-    .tag.productivity { background: rgba(168,85,247,0.09); border: 1px solid rgba(168,85,247,0.2);  color: #7E22CE; }
-    .tag.games        { background: rgba(13,148,136,0.09); border: 1px solid rgba(13,148,136,0.2);  color: #0F766E; }
 
     /* ── Footer ── */
     footer { position: relative; z-index: 1; margin-top: auto; border-top: 1px solid var(--border); }
@@ -241,7 +242,7 @@
 
   <header class="hero">
     <div class="wrap">
-      <h1>Apps by averyio<span class="accent">.</span></h1>
+      <h1>Apps <span class="by">by averyio<span class="accent">.</span></span></h1>
     </div>
   </header>
 
@@ -251,7 +252,7 @@
 
         <a href="https://apps.apple.com/gb/app/investfast-learn-investing/id6762561241" target="_blank" rel="noopener" class="card">
           <div class="card-top">
-            <div class="monogram" style="--g1:#F59E0B;--g2:#D97706;">IF</div>
+            <div class="monogram" style="--g1:#E24657;--g2:#C4152B;">IF</div>
             <span class="card-arrow">↗</span>
           </div>
           <div>
@@ -266,7 +267,7 @@
 
         <a href="https://apps.apple.com/gb/app/surge-interval-hiit-timer/id6762224044" target="_blank" rel="noopener" class="card">
           <div class="card-top">
-            <div class="monogram" style="--g1:#EF4444;--g2:#DC2626;">S</div>
+            <div class="monogram" style="--g1:#E24657;--g2:#C4152B;">S</div>
             <span class="card-arrow">↗</span>
           </div>
           <div>
@@ -281,7 +282,7 @@
 
         <a href="https://apps.apple.com/gb/app/big-time-clock-full-screen/id6763140176" target="_blank" rel="noopener" class="card">
           <div class="card-top">
-            <div class="monogram" style="--g1:#818CF8;--g2:#4F46E5;">B</div>
+            <div class="monogram" style="--g1:#E24657;--g2:#C4152B;">B</div>
             <span class="card-arrow">↗</span>
           </div>
           <div>
@@ -296,7 +297,7 @@
 
         <a href="https://apps.apple.com/gb/app/lume-gamified-to-do-list/id6770331131" target="_blank" rel="noopener" class="card">
           <div class="card-top">
-            <div class="monogram" style="--g1:#C084FC;--g2:#7E22CE;">L</div>
+            <div class="monogram" style="--g1:#E24657;--g2:#C4152B;">L</div>
             <span class="card-arrow">↗</span>
           </div>
           <div>
@@ -311,7 +312,7 @@
 
         <a href="https://apps.apple.com/gb/app/tap-dot-tap-reflex-aim/id6778353191" target="_blank" rel="noopener" class="card">
           <div class="card-top">
-            <div class="monogram" style="--g1:#2DD4BF;--g2:#0D9488;">T</div>
+            <div class="monogram" style="--g1:#E24657;--g2:#C4152B;">T</div>
             <span class="card-arrow">↗</span>
           </div>
           <div>
@@ -326,7 +327,7 @@
 
         <a href="https://btcprix.net" target="_blank" rel="noopener" class="card">
           <div class="card-top">
-            <div class="monogram" style="--g1:#FB923C;--g2:#EA580C;">₿</div>
+            <div class="monogram" style="--g1:#E24657;--g2:#C4152B;">₿</div>
             <span class="card-arrow">↗</span>
           </div>
           <div>
@@ -349,7 +350,7 @@
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="apps.html">Apps</a>
-        <a href="finance.html">Buy the dip</a>
+        <a href="finance.html">Buy the Dip by averyio</a>
         <a href="contact.html">Contact</a>
         <a href="privacy.html">Privacy</a>
       </div>
