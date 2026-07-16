@@ -5,7 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy — averyio</title>
   <meta name="description" content="Privacy policies for averyio apps. Our apps work without accounts, logins, or third-party trackers — collecting your data isn't part of how we operate." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C4152B'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='white'%3Ea%3C/text%3E%3C/svg%3E" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="averyio" />
+  <meta property="og:title" content="Privacy — averyio" />
+  <meta property="og:description" content="Privacy policies for averyio apps. Our apps work without accounts, logins, or third-party trackers — collecting your data isn't part of how we operate." />
+  <meta property="og:image" content="https://averyio.net/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://averyio.net/privacy.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@averyio18" />
+  <meta name="twitter:image" content="https://averyio.net/assets/og-image.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -77,8 +90,9 @@
     }
     .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
 
-    .nav-logo { font-size: 0.98rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.04em; }
+    .nav-logo { display: inline-flex; align-items: center; font-size: 0.98rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.04em; }
     .nav-logo span { color: var(--red); }
+    .nav-logo img { width: 1.75em; height: 1.75em; border-radius: 50%; display: block; flex-shrink: 0; margin-right: 0.5rem; }
 
     .nav-links { display: flex; gap: 0.15rem; align-items: center; }
     .nav-links a {
@@ -208,7 +222,7 @@
 
   <nav>
     <div class="wrap nav-inner">
-      <a class="nav-logo" href="index.html">averyio<span>.net</span></a>
+      <a class="nav-logo" href="index.html"><img src="assets/logo-64.png" alt="" width="26" height="26" decoding="async" />averyio<span>.net</span></a>
       <div class="nav-links">
         <a href="index.html" aria-label="Home" class="nav-home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></svg></a>
         <a href="privacy.html" class="active">Privacy</a>
