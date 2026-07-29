@@ -596,15 +596,15 @@ nav {
   font-weight: 500;
   background: var(--surface-2);
 }
-/* Whole row is the link. The anchor in the first cell stretches over the
-   row via an absolutely-positioned overlay, so there is exactly one link
-   per row for screen readers and no JavaScript. If a browser ignores
-   position:relative on <tr>, the app name itself is still a normal link. */
-.cmp tbody tr { transition: background 0.15s; position: relative; }
+/* Whole row is clickable. This CANNOT be done with a stretched-link
+   overlay: Safari does not treat position:relative on a <tr> as a
+   containing block, so every row's overlay resolves against a much larger
+   ancestor, they stack, and only the last row painted stays clickable.
+   A small handler on apps.html sends row clicks to that row's link
+   instead; without JS the app name in the first cell is still a link. */
+.cmp tbody tr { transition: background 0.15s; }
 .cmp tbody tr:hover { background: var(--surface-2); cursor: pointer; }
-.cmp .app-cell::after { content: ''; position: absolute; inset: 0; z-index: 2; }
-.cmp tbody tr:focus-within { background: var(--surface-2); outline: 2px solid var(--red); outline-offset: -2px; }
-.cmp .app-cell:focus-visible { outline: none; }
+.cmp tbody tr:focus-within { background: var(--surface-2); }
 
 /* whole first cell is the link — a much bigger target than the name alone */
 .cmp .app-cell {
@@ -627,6 +627,16 @@ nav {
 .cmp td.what { white-space: normal; min-width: 14em; color: var(--muted); line-height: 1.5; }
 
 .cmp .size { font-family: var(--mono); font-weight: 700; color: var(--red); font-size: 0.92rem; }
+
+/* Footnote under the table (also used for the affiliate disclosure on
+   finance.html). Accidentally deleted with the mobile card block. */
+.cmp-note {
+  margin-top: 0.95rem;
+  max-width: 78ch;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--faint);
+}
 
 /* FAQ — plain visible Q&A so Google indexes every word (no JS, no <details>) */
 .faq { padding: clamp(30px, 6vw, 56px) 0; }

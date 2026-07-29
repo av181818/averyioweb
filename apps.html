@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/site.css?v=ac521da3" />
+  <link rel="stylesheet" href="/assets/site.css?v=2837f035" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -231,6 +231,24 @@
       </div>
     </div>
   </section>
+
+  <script>
+    /* Whole-row click for the app table. A <tr> cannot be wrapped in an
+       anchor, and a stretched-link overlay is not reliable: Safari does not
+       treat position:relative on a <tr> as a containing block, so every
+       row's overlay resolves against a larger ancestor, they stack, and
+       only the last row painted stays clickable. This sends a row click to
+       that row's own link. With JS off, the app name is still a link. */
+    document.querySelectorAll('.cmp tbody tr').forEach(function (row) {
+      var link = row.querySelector('a.app-cell');
+      if (!link) return;
+      row.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return;                  // real link wins
+        if (window.getSelection().toString()) return;       // allow selection
+        window.location = link.href;
+      });
+    });
+  </script>
   <footer>
     <div class="wrap footer-inner">
       <div class="footer-cols">
