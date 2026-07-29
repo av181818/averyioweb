@@ -596,19 +596,15 @@ nav {
   font-weight: 500;
   background: var(--surface-2);
 }
-.cmp tbody tr { transition: background 0.15s; }
-.cmp tbody tr:hover { background: var(--surface-2); }
-
-/* The app name column is the navigation, so it stays put while the rest of
-   the table scrolls sideways on a narrow screen. */
-.cmp th:first-child, .cmp td:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 1;
-  background: var(--surface);
-}
-.cmp thead th:first-child { background: var(--surface-2); }
-.cmp tbody tr:hover td:first-child { background: var(--surface-2); }
+/* Whole row is the link. The anchor in the first cell stretches over the
+   row via an absolutely-positioned overlay, so there is exactly one link
+   per row for screen readers and no JavaScript. If a browser ignores
+   position:relative on <tr>, the app name itself is still a normal link. */
+.cmp tbody tr { transition: background 0.15s; position: relative; }
+.cmp tbody tr:hover { background: var(--surface-2); cursor: pointer; }
+.cmp .app-cell::after { content: ''; position: absolute; inset: 0; z-index: 2; }
+.cmp tbody tr:focus-within { background: var(--surface-2); outline: 2px solid var(--red); outline-offset: -2px; }
+.cmp .app-cell:focus-visible { outline: none; }
 
 /* whole first cell is the link — a much bigger target than the name alone */
 .cmp .app-cell {
@@ -628,9 +624,74 @@ nav {
 .cmp tbody tr:hover .app-cell .a { color: var(--red); transform: translateX(3px); }
 
 /* the description column wraps; everything else stays on one line */
-.cmp td.what { white-space: normal; min-width: 19em; color: var(--muted); line-height: 1.5; }
+.cmp td.what { white-space: normal; min-width: 14em; color: var(--muted); line-height: 1.5; }
 
 .cmp .size { font-family: var(--mono); font-weight: 700; color: var(--red); font-size: 0.92rem; }
+
+/* ── Comparison table on a phone ──────────────────────────────────────
+   A six-column table cannot be read on a 375px screen: the frozen name
+   column alone eats half the width, leaving a sliver to scroll. Below
+   this breakpoint each row becomes a self-contained block with the
+   column headings repeated as inline labels, so nothing scrolls
+   sideways and every value keeps its context. Same markup, same data,
+   same single link per row. */
+@media (max-width: 900px) {
+  .cmp-wrap {
+    overflow-x: visible;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .cmp table { min-width: 0; display: block; }
+  .cmp thead {                      /* headings move into the cells below */
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+  .cmp tbody, .cmp tr, .cmp td { display: block; width: 100%; }
+  .cmp tbody tr {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 0.85rem;
+    padding: 0.35rem 0 0.15rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 6px 18px rgba(0,0,0,0.035);
+  }
+  .cmp tbody tr:last-child { margin-bottom: 0; }
+  .cmp td {
+    border-bottom: 0;
+    padding: 0.4rem 1.05rem;
+    white-space: normal;
+  }
+  .cmp td:first-child { padding-top: 0.85rem; }
+  .cmp .app-cell { font-size: 1.02rem; }
+  .cmp td.what { min-width: 0; padding-bottom: 0.85rem; }
+
+  /* data cells become label / value pairs */
+  .cmp td:not(:first-child):not(.what) {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.62rem;
+    padding-bottom: 0.62rem;
+    color: var(--text);
+  }
+  .cmp td:not(:first-child):not(.what)::before {
+    content: attr(data-label);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--faint);
+    flex-shrink: 0;
+  }
+}
 .cmp tfoot td {
   background: var(--surface-2);
   color: var(--ink);
