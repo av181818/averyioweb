@@ -212,7 +212,7 @@ APPS = [
    ("surge-6","A finished workout summary in Surge"),
  ],
  "features":[
-   ("bolt","Presets that cover most sessions","Tabata 20/10 × 8, HIIT 40/20 × 10, Boxing 3:00/1:00 × 6, EMOM 60s × 10, Circuit 45/15 × 12 and Stretch 30/10 × 12 — all built in, timings already set."),
+   ("bolt","Presets that cover most sessions","Tabata 20/10 × 8, HIIT 40/20 × 10, Boxing 3:00/1:00 × 6, EMOM 60s × 10 and Stretch 30/10 × 12 — all built in, timings already set."),
    ("clock","Fully customisable","Work from 5 seconds to 10 minutes, rest up to 5 minutes, 1–50 rounds and a preparation countdown of up to 30 seconds."),
    ("phone","Built to be glanceable","A dark interface with a large animated progress ring you can read mid-burpee from across the room."),
    ("check","Cues you don’t have to look for","Audio countdown beeps and haptic feedback on every phase change, so you can keep your eyes off the screen."),
