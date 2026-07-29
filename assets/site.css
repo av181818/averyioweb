@@ -242,6 +242,16 @@ nav {
 .card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.55; }
 .card-footer { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; margin-top: auto; }
 
+/* Final tile on the home grid: a route to the full list rather than an app.
+   Dashed so it reads as navigation, not as another product. */
+.card-more {
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+}
+.card-more:hover { box-shadow: none; background: var(--surface-2); }
+.card-more .feature-ico { margin-bottom: 0; }
+
 /* Real App Store icon in place of the old letter monogram */
 .app-icon {
   width: 54px; height: 54px;
