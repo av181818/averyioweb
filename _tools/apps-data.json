@@ -1,0 +1,92 @@
+[
+ {
+  "slug": "investfast",
+  "asset": "investfast",
+  "name": "InvestFast",
+  "store_name": "Invest Fast: Stocks & Money",
+  "tagline": "Learn to invest in 24 hours.",
+  "desc": "Learn to invest in 24 hours. 144 plain-English lessons on stocks, ETFs, index funds and tax. Module 1 free \u2014 one-time unlock, no subscription, no ads.",
+  "store_url": "https://apps.apple.com/gb/app/invest-fast-stocks-money/id6762561241",
+  "genre": "Education",
+  "price_label": "Free \u00b7 Module 1 free, one-time unlock",
+  "tags": [
+   "iOS",
+   "Finance"
+  ]
+ },
+ {
+  "slug": "surge",
+  "asset": "surge",
+  "name": "Surge",
+  "store_name": "Surge: Interval Timer & HIIT",
+  "tagline": "An interval timer built for the way you actually train.",
+  "desc": "A HIIT and interval timer for iPhone and iPad with Tabata, Boxing and EMOM presets built in. Audio cues, haptics, no ads and no subscription.",
+  "store_url": "https://apps.apple.com/gb/app/surge-interval-timer-hiit/id6762224044",
+  "genre": "Health &amp; Fitness",
+  "price_label": "Free \u00b7 optional one-time Pro unlock",
+  "tags": [
+   "iOS",
+   "Fitness"
+  ]
+ },
+ {
+  "slug": "big-time-clock",
+  "asset": "bigtimeclock",
+  "name": "Big Time Clock",
+  "store_name": "Big Time Clock: Full Screen",
+  "tagline": "Turn any iPhone or iPad into a full-screen clock.",
+  "desc": "Turn an iPhone or iPad into a full-screen digital or analog clock for a bedside, desk or kitchen. 12/24-hour, screen stays awake, no ads.",
+  "store_url": "https://apps.apple.com/gb/app/big-time-clock-full-screen/id6763140176",
+  "genre": "Utilities",
+  "price_label": "\u00a30.99 \u00b7 one-time purchase",
+  "tags": [
+   "iOS",
+   "Utilities"
+  ]
+ },
+ {
+  "slug": "lume",
+  "asset": "lume",
+  "name": "Lume",
+  "store_name": "Lume: Simple Task & To Do List",
+  "tagline": "A to-do list you actually want to open.",
+  "desc": "A gamified to-do list for iPhone and iPad. Finish tasks to earn points, climb 12 ranks and keep a streak alive. Free iCloud sync, no ads, no account.",
+  "store_url": "https://apps.apple.com/gb/app/lume-simple-task-to-do-list/id6770331131",
+  "genre": "Productivity",
+  "price_label": "Free",
+  "tags": [
+   "iOS",
+   "Productivity"
+  ]
+ },
+ {
+  "slug": "tap-dot-tap",
+  "asset": "tapdottap",
+  "name": "Tap Dot Tap",
+  "store_name": "Tap Dot Tap: Neon Speed Test",
+  "tagline": "A dot appears. Tap it before it vanishes.",
+  "desc": "A one-tap reflex and reaction time game for iPhone. Tap the dot before it vanishes \u2014 one miss ends the run. Game Center leaderboards, offline, no ads.",
+  "store_url": "https://apps.apple.com/gb/app/tap-dot-tap-neon-speed-test/id6778353191",
+  "genre": "Games",
+  "price_label": "Free \u00b7 optional one-time unlock",
+  "tags": [
+   "iOS",
+   "Game"
+  ]
+ },
+ {
+  "slug": "btc-prix",
+  "asset": null,
+  "name": "BTC Prix",
+  "store_name": "BTC Prix",
+  "tagline": "The live Bitcoin price, free on the web.",
+  "desc": "BTC Prix is a free, real-time Bitcoin price tracker on the web. Live BTC/USDT pricing and market data in a clean, fast page with no account and no ads.",
+  "store_url": "https://btcprix.net",
+  "genre": "Finance",
+  "price_label": "Free",
+  "tags": [
+   "Web",
+   "Crypto"
+  ]
+ }
+]
