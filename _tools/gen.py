@@ -151,12 +151,12 @@ def ico(k):
 # ── app data ─────────────────────────────────────────────────────────────
 APPS = [
 {
- "slug":"investfast", "size":"1.8", "footprint":"Every one of the 144 lessons, the whole course, your progress and your stats — in about 1.8 MB. There is no video to stream, no ad library to load and no tracking SDK taking up the space. It opens instantly, even on an older iPhone.", "ios":"18.6", "asset":"investfast", "name":"InvestFast",
+ "slug":"investfast", "size":"1.8", "footprint":"Every one of the 144 lessons, the whole course, your progress and your stats — in about 1.8 MB. No ad library, no tracking SDK, nothing taking up room that is not the course itself.", "ios":"18.6", "asset":"investfast", "name":"InvestFast",
  "store_name":"Invest Fast: Stocks & Money",
  "tagline":"Learn to invest in 24 hours.",
  "title":"InvestFast — Learn to Invest in 24 Hours | Investing App for Beginners",
  "desc":"Learn to invest in 24 hours. 144 plain-English lessons on stocks, ETFs, index funds and tax. Module 1 free — one-time unlock, no subscription, no ads.",
- "lead":"InvestFast is a beginner investing course built into an iPhone and iPad app. Twenty-four modules and 144 bite-sized lessons take you from “I don’t know where to start” to placing your first trade with a plan behind it — no jargon, no hype, and no tickers to chase.",
+ "lead":"InvestFast is a beginner investing course built into an iPhone and iPad app. Twenty-four modules and 144 bite-sized lessons take you from zero to confident — mindset, money, investing, tax and alternatives, ending in an investing plan of your own. No fluff, no jargon, no tickers to chase.",
  "appid":"6762561241",
  "store_url":"https://apps.apple.com/gb/app/invest-fast-stocks-money/id6762561241",
  "privacy":"/privacy-investfast.html",
@@ -173,24 +173,24 @@ APPS = [
    ("investfast-6","InvestFast lifetime access — one-time purchase, no subscription"),
  ],
  "features":[
-   ("book","24 modules, 144 lessons","A structured path through mindset, money, investing, tax and alternatives — each lesson short enough to finish on a coffee break."),
+   ("book","24 modules, 144 lessons","A clear path from zero to confident, hour by hour — each lesson bite-sized enough to finish in one sitting."),
    ("clock","About 24 hours, end to end","Spread it over a week, a weekend, or one determined day. Every lesson ends in an action, not a cliffhanger for the next paid tier."),
-   ("chart","Stocks, ETFs and index funds","How they actually work — diversification, the maths of compounding, and why costs quietly decide your outcome."),
+   ("chart","Stocks, ETFs and index funds","How stocks, bonds and index funds actually work — plus ETFs, diversification and the maths of compounding."),
    ("eye","Fundamental and technical analysis","How to read a company before you buy it, what charts genuinely tell you, and where they mislead."),
-   ("coin","Money first, investing second","Debt, emergency fund and budgeting that sticks — because investing on a shaky base is how people get hurt."),
+   ("coin","Money first, investing second","Debt, emergency fund and budgeting that sticks, before a penny goes into the market."),
    ("check","Module 1 free, forever","Try the whole first module before you pay anything. If it isn’t for you, you’ve lost nothing."),
  ],
  "faq":[
-   ("Is InvestFast free?","Module 1 is free forever, so you can try the app properly before paying. Unlocking the remaining modules is a single one-time purchase of £1.99 that gives you lifetime access. There is no subscription and there are no ads."),
+   ("Is InvestFast free?","Module 1 is free forever, so you can try the app properly before paying. Unlocking the remaining modules is a single one-time purchase of £1.99 that gives you lifetime access. No subscription, no upsell."),
    ("Do I need any investing experience?","None. InvestFast is built for complete beginners — nurses, engineers, freelancers, anyone who found finance intimidating or condescending. It starts at zero and explains every term in plain English."),
    ("How long does it really take?","Roughly 24 hours of focused reading from the first lesson to the last. Most people spread that across a week or two. Your progress is saved, so you can dip in and out."),
    ("Does InvestFast tell me what to buy?","No. It teaches you the mechanics so you can make your own decisions. There are no stock tips, no signals and no “secrets” — and nothing in the app is financial advice."),
-   ("Does it track me or sell my data?","No. InvestFast has no ads and no tracking. See the <a href=\"/privacy-investfast.html\">InvestFast privacy policy</a> for the full detail."),
+   ("Does it track me or sell my data?","No. Apple's privacy label for InvestFast reads Data Not Collected. See the <a href=\"/privacy-investfast.html\">InvestFast privacy policy</a> for the full detail."),
    ("What devices does it run on?","iPhone and iPad running iOS 18.6 or later. One purchase covers both."),
  ],
 },
 {
- "slug":"surge", "size":"0.8", "footprint":"The entire timer is under a megabyte — smaller than one photo on your phone. Nothing to load means it opens the instant you tap it, which matters when you are stood over a mat waiting to start.", "ios":"18.6", "asset":"surge", "name":"Surge",
+ "slug":"surge", "size":"0.8", "footprint":"The entire timer is under a megabyte — smaller than one photo on your phone. No ads, no account and no data collection, so nothing ships that is not the timer.", "ios":"18.6", "asset":"surge", "name":"Surge",
  "store_name":"Surge: Interval Timer & HIIT",
  "tagline":"An interval timer built for the way you actually train.",
  "title":"Surge — Interval Timer & HIIT App for iPhone & iPad | averyio",
@@ -214,7 +214,7 @@ APPS = [
  "features":[
    ("bolt","Presets that cover most sessions","Tabata 20/10 × 8, HIIT 40/20 × 10, Boxing 3:00/1:00 × 6, EMOM 60s × 10 and Stretch 30/10 × 12 — all built in, timings already set."),
    ("clock","Fully customisable","Work from 5 seconds to 10 minutes, rest up to 5 minutes, 1–50 rounds and a preparation countdown of up to 30 seconds."),
-   ("phone","Built to be glanceable","A dark interface with a large animated progress ring you can read mid-burpee from across the room."),
+   ("phone","Built to be glanceable","A dark interface with a large, glanceable countdown display and an animated progress ring."),
    ("check","Cues you don’t have to look for","Audio countdown beeps and haptic feedback on every phase change, so you can keep your eyes off the screen."),
    ("sun","The screen stays awake","No lock-outs halfway through a round, and one app that works on both iPhone and iPad."),
    ("shield","Nothing to sign up for","No account, no ads, no data collection. Your presets stay on your device."),
@@ -222,8 +222,7 @@ APPS = [
  "faq":[
    ("Is Surge free?","Yes. The timer, every built-in preset and full customisation are free. Surge Pro is an optional one-time purchase of £0.99 that adds up to 20 saved presets of your own, editable built-ins, all 20 preset icons and mid-workout phase skipping. It is a one-time unlock, never a subscription."),
    ("What workouts does it suit?","Anything on a clock — HIIT, Tabata, CrossFit-style WODs, boxing and MMA rounds, EMOM, circuit training, jump rope intervals, strength work with timed rest, and yoga or stretching flows."),
-   ("Does it work without the internet?","Yes. Surge runs entirely on your device, so it works in a basement gym with no signal."),
-   ("Will it keep running with the screen off or music playing?","Surge keeps the screen awake for the whole workout so you never lose the count, and its audio cues are designed to sit alongside your music."),
+     ("Does the screen stay on?","Yes. The screen stays awake during workouts, so you never lose the count mid-round."),
    ("Does Surge collect my data?","No. There is no account, no tracking and no ads, and your presets never leave your device. The full detail is in the <a href=\"/privacy-surge.html\">Surge privacy policy</a>."),
    ("Does it work on iPad?","Yes — Surge is universal. One app, one purchase, iPhone and iPad."),
  ],
@@ -307,7 +306,7 @@ APPS = [
  ],
 },
 {
- "slug":"tap-dot-tap", "size":"1.2", "footprint":"The whole game, every neon skin and the leaderboard come to about 1.2 MB. There is no ad network to load before you play, which is exactly why it starts the moment you tap it.", "ios":"17.0", "asset":"tapdottap", "name":"Tap Dot Tap",
+ "slug":"tap-dot-tap", "size":"1.2", "footprint":"The whole game, every neon skin and the leaderboard come to about 1.2 MB. Nothing ships that is not the game itself.", "ios":"17.0", "asset":"tapdottap", "name":"Tap Dot Tap",
  "store_name":"Tap Dot Tap: Neon Speed Test",
  "tagline":"A dot appears. Tap it before it vanishes.",
  "title":"Tap Dot Tap — Reaction Time & Reflex Game for iPhone | averyio",
@@ -376,7 +375,7 @@ APPS = [
 ]
 
 ETHOS = [
- ("No bloat","Megabytes, not gigabytes. No frameworks bolted on, no ad libraries, no analytics SDK phoning home — nothing ships that has not earned its place, so our apps open instantly and stay out of your way."),
+ ("No bloat","Megabytes, not gigabytes. No frameworks bolted on, no ad libraries, no analytics SDK phoning home — nothing ships that has not earned its place."),
  ("No subscriptions","Where an app charges, it is a single one-time unlock that stays unlocked. No monthly fee waiting to catch you out."),
  ("No ads, ever","Not a banner, not an interstitial, not a “watch this to continue”. You are the customer, never the product."),
  ("Private by design","No tracking, no analytics, nothing sold. Your data lives on your device — and where an app syncs or backs up, it goes through your own private iCloud account, never a server of ours or anyone else's."),
