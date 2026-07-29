@@ -702,7 +702,11 @@ nav {
 /* ── Footer ── */
 footer { position: relative; z-index: 1; margin-top: auto; border-top: 1px solid var(--border); }
 .footer-inner {
-  padding: 2rem 0;
+  /* This element is `class="wrap footer-inner"`. Use padding longhands —
+     the `padding: 2rem 0` shorthand zeroes the horizontal inset .wrap
+     supplies, which pinned the whole footer to the viewport edge. */
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
