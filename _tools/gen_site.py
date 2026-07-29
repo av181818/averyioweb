@@ -61,7 +61,7 @@ W = lambda rel, s: (os.makedirs(os.path.dirname(os.path.join(ROOT, rel)) or ROOT
 
 PRICE_SHORT = {
  "investfast":"Free + unlock", "surge":"Free + unlock", "big-time-clock":"\u00a30.99",
- "lume":"Free", "tap-dot-tap":"Free + unlock", "btc-prix":"Free",
+ "lume":"Free + unlock", "tap-dot-tap":"Free + unlock", "btc-prix":"Free",
 }
 
 def cmp_table():

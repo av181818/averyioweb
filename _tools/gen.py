@@ -151,7 +151,7 @@ def ico(k):
 # ── app data ─────────────────────────────────────────────────────────────
 APPS = [
 {
- "slug":"investfast", "size":"1.7", "footprint":"Every one of the 144 lessons, the whole course, your progress and your stats — in about 1.7 MB. There is no video to stream, no ad library to load and no tracking SDK taking up the space. It opens instantly, even on an older iPhone.", "ios":"18.6", "asset":"investfast", "name":"InvestFast",
+ "slug":"investfast", "size":"1.8", "footprint":"Every one of the 144 lessons, the whole course, your progress and your stats — in about 1.8 MB. There is no video to stream, no ad library to load and no tracking SDK taking up the space. It opens instantly, even on an older iPhone.", "ios":"18.6", "asset":"investfast", "name":"InvestFast",
  "store_name":"Invest Fast: Stocks & Money",
  "tagline":"Learn to invest in 24 hours.",
  "title":"InvestFast — Learn to Invest in 24 Hours | Investing App for Beginners",
@@ -162,7 +162,7 @@ APPS = [
  "privacy":"/privacy-investfast.html",
  "category":"EducationalApplication", "genre":"Education",
  "price":"0", "price_label":"Free · Module 1 free, one-time unlock",
- "meta":["Free to start","iPhone &amp; iPad","iOS 18.6+","~1.7 MB download","Education &amp; Finance","No subscription"],
+ "meta":["Free to start","iPhone &amp; iPad","iOS 18.6+","~1.8 MB download","Education &amp; Finance","No subscription"],
  "tags":["iOS","Finance"],
  "shots":[
    ("investfast-1","InvestFast lesson screen — go from beginner to confident investor"),
@@ -268,7 +268,7 @@ APPS = [
  ],
 },
 {
- "slug":"lume", "size":"1.7", "footprint":"A full task manager, 12 ranks of progression, a stats dashboard and a 180-day heatmap, all inside about 1.7 MB. No analytics SDK, no ad library and no account system — so none of that weight ever ships to your phone.", "ios":"17.0", "asset":"lume", "name":"Lume",
+ "slug":"lume", "size":"1.8", "footprint":"A full task manager, 12 ranks of progression, a stats dashboard and a 180-day heatmap, all inside about 1.8 MB. No analytics SDK, no ad library and no account system — so none of that weight ever ships to your phone.", "ios":"17.0", "asset":"lume", "name":"Lume",
  "store_name":"Lume: Simple Task & To Do List",
  "tagline":"A to-do list you actually want to open.",
  "title":"Lume — Gamified To-Do List & Task Manager for iPhone & iPad | averyio",
@@ -278,8 +278,8 @@ APPS = [
  "store_url":"https://apps.apple.com/gb/app/lume-simple-task-to-do-list/id6770331131",
  "privacy":"/privacy-lume.html",
  "category":"BusinessApplication", "genre":"Productivity",
- "price":"0", "price_label":"Free",
- "meta":["Free","iPhone &amp; iPad","iOS 17+","~1.7 MB download","Productivity","iCloud sync included"],
+ "price":"0", "price_label":"Free · optional one-time Pro unlock",
+ "meta":["Free","iPhone &amp; iPad","iOS 17+","~1.8 MB download","Productivity","iCloud sync included"],
  "tags":["iOS","Productivity"],
  "shots":[
    ("lume-1","Lume task list showing points earned for every completed task"),
@@ -294,11 +294,11 @@ APPS = [
    ("trophy","12 ranks, 5 stars each","Climb a long-term ladder from Spark all the way to Cosmos, so the work you deliver adds up to something visible."),
    ("flame","Streaks that respect you","Keep a daily streak alive with a built-in grace day for the one you miss — and no guilt-trip notifications, ever."),
    ("check","A proper task manager","A title and a due date is all you need. Low and high priority, optional categories, and an Overdue / Today / Coming up view sorted by due date."),
-   ("chart","A real stats dashboard","Completion quality, personal records and a 180-day activity heatmap that shows the shape of your habits."),
+   ("chart","A real stats dashboard","Completion quality, personal records and a 180-day activity heatmap that shows the shape of your habits. The full dashboard comes with Pro."),
    ("cloud","Free iCloud sync, always on","Your tasks stay in step across iPhone and iPad with no setup and no account to create. It is your iCloud, not our server — we cannot see any of it."),
  ],
  "faq":[
-   ("Is Lume free?","Yes, Lume is free to download and use, and iCloud sync is included at no cost. There is no subscription and there are no ads."),
+   ("Is Lume free?","Lume is free to download and use, and iCloud sync is included at no cost. Lume Pro is an optional one-time £1.49 unlock that lifts the free limits and adds JSON backup, the morning brief and the full Stats dashboard. One payment, yours forever — never a subscription, and no ads either way."),
    ("What makes Lume different from other to-do apps?","The scoring. Your score reflects work you actually finished on time, so it is progress you can trust rather than a number you can inflate. Finish early and you are rewarded; finish late and you still score, just for less."),
    ("Do I need an account?","No. There is no sign-up. iCloud sync uses your own iCloud account automatically, so your tasks follow you across devices with nothing to configure."),
    ("What happens if I miss a day?","One missed day is forgiven by the built-in grace day, so a single bad day does not wipe out a long streak. Lume also never sends guilt-inducing notifications."),
