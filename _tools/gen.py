@@ -181,7 +181,7 @@ APPS = [
    ("check","Module 1 free, forever","Try the whole first module before you pay anything. If it isn’t for you, you’ve lost nothing."),
  ],
  "faq":[
-   ("Is InvestFast free?","Module 1 is free forever, so you can try the app properly before paying. Unlocking the remaining modules is a single one-time purchase that gives you lifetime access. There is no subscription and there are no ads."),
+   ("Is InvestFast free?","Module 1 is free forever, so you can try the app properly before paying. Unlocking the remaining modules is a single one-time purchase of £1.99 that gives you lifetime access. There is no subscription and there are no ads."),
    ("Do I need any investing experience?","None. InvestFast is built for complete beginners — nurses, engineers, freelancers, anyone who found finance intimidating or condescending. It starts at zero and explains every term in plain English."),
    ("How long does it really take?","Roughly 24 hours of focused reading from the first lesson to the last. Most people spread that across a week or two. Your progress is saved, so you can dip in and out."),
    ("Does InvestFast tell me what to buy?","No. It teaches you the mechanics so you can make your own decisions. There are no stock tips, no signals and no “secrets” — and nothing in the app is financial advice."),
@@ -220,7 +220,7 @@ APPS = [
    ("shield","Nothing to sign up for","No account, no ads, no data collection. Your presets stay on your device."),
  ],
  "faq":[
-   ("Is Surge free?","Yes. The timer, all five built-in presets and full customisation are free. Surge Pro is an optional one-time purchase that adds up to 20 saved presets of your own, editable built-ins, all 20 preset icons and mid-workout phase skipping. It is a one-time unlock, never a subscription."),
+   ("Is Surge free?","Yes. The timer, all five built-in presets and full customisation are free. Surge Pro is an optional one-time purchase of £0.99 that adds up to 20 saved presets of your own, editable built-ins, all 20 preset icons and mid-workout phase skipping. It is a one-time unlock, never a subscription."),
    ("What workouts does it suit?","Anything on a clock — HIIT, Tabata, CrossFit-style WODs, boxing and MMA rounds, EMOM, circuit training, jump rope intervals, strength work with timed rest, and yoga or stretching flows."),
    ("Does it work without the internet?","Yes. Surge runs entirely on your device, so it works in a basement gym with no signal."),
    ("Will it keep running with the screen off or music playing?","Surge keeps the screen awake for the whole workout so you never lose the count, and its audio cues are designed to sit alongside your music."),
@@ -337,7 +337,7 @@ APPS = [
    ("shield","No ads, no sign-up","No advertising, no account and no tracking — just slick neon visuals, sharp haptics and smooth animation."),
  ],
  "faq":[
-   ("Is Tap Dot Tap free?","Yes, it is free to play with no ads. One optional purchase unlocks all five neon skins and two extra lives per run, forever. It is a single one-time unlock, not a subscription."),
+   ("Is Tap Dot Tap free?","Yes, it is free to play with no ads. One optional purchase of £0.49 unlocks all five neon skins and two extra lives per run, forever. It is a single one-time unlock, not a subscription."),
    ("How does the game work?","One target at a time, and under a second to reach it. Survive and the difficulty climbs in waves; miss once and that is the run over."),
    ("Are there leaderboards?","Yes, powered by Game Center, and entirely opt-in — you can play forever without ever appearing on one."),
    ("Can I play without an internet connection?","Yes. Tap Dot Tap plays fully offline; only the optional leaderboard needs a connection."),
