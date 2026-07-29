@@ -7,7 +7,7 @@
 Every check here exists because it caught a real bug at least once. Run it
 before ./upload.sh, and again with --live afterwards.
 """
-import glob, hashlib, json, os, re, subprocess, sys, urllib.request
+import glob, hashlib, json, os, re, subprocess, sys
 from collections import Counter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -126,23 +126,23 @@ if "--live" in sys.argv:
     v = re.search(r"site\.css\?v=([a-f0-9]+)", open("apps.html", encoding="utf-8").read())
     m = dict(LIVE_MAP)
     m["assets/site.css"] = f"/assets/site.css?v={v.group(1)}" if v else "/assets/site.css"
+    def fetch(path):
+        """curl, not urllib — some Python installs have no CA bundle and every
+        request fails cert verification, which looks like a site outage."""
+        r = subprocess.run(["curl", "-sS", "--fail", f"{SITE}{path}"], capture_output=True)
+        return r.stdout if r.returncode == 0 else None
+
     diffs = []
     for local, path in m.items():
-        try:
-            got = urllib.request.urlopen(f"{SITE}{path}").read()
-        except Exception as e:
-            diffs.append(f"{local}: {e}")
+        got = fetch(path)
+        if got is None:
+            diffs.append(f"{local}: not served")
             continue
         if hashlib.sha256(got).hexdigest() != hashlib.sha256(open(local, "rb").read()).hexdigest():
             diffs.append(f"{local}: differs")
     check(f"all {len(m)} files identical to live", not diffs, "; ".join(diffs[:4]))
-    published = []
-    for u in ["/_tools/gen.py", "/_tools/gen_site.py", "/_tools/check.py"]:
-        try:
-            if urllib.request.urlopen(f"{SITE}{u}").getcode() == 200:
-                published.append(u)          # served = Jekyll is no longer excluding _tools
-        except Exception:
-            pass                             # 404 is the expected, correct outcome
+    published = [u for u in ["/_tools/gen.py", "/_tools/gen_site.py", "/_tools/check.py"]
+                 if fetch(u) is not None]   # a 404 is the expected, correct outcome
     check("generators are not published", not published, ", ".join(published))
 
 print("\n" + ("ALL CHECKS PASSED" if not fails else f"{len(fails)} FAILED: " + ", ".join(fails)))
