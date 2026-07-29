@@ -585,7 +585,8 @@ nav {
   white-space: nowrap;
 }
 /* let the long category names wrap rather than forcing the table wider */
-.cmp th:nth-child(3), .cmp td:nth-child(3) { white-space: normal; min-width: 6.5em; }
+/* Category (4th column) may wrap; Platform stays on one line */
+.cmp th:nth-child(4), .cmp td:nth-child(4) { white-space: normal; min-width: 7em; }
 .cmp thead th {
   font-family: var(--mono);
   font-size: 0.62rem;
@@ -597,11 +598,38 @@ nav {
 }
 .cmp tbody tr { transition: background 0.15s; }
 .cmp tbody tr:hover { background: var(--surface-2); }
-.cmp .app-cell { display: flex; align-items: center; gap: 0.7rem; }
-.cmp .app-cell img { width: 32px; height: 32px; border-radius: 8px; display: block; box-shadow: 0 2px 6px rgba(0,0,0,0.14); }
+
+/* The app name column is the navigation, so it stays put while the rest of
+   the table scrolls sideways on a narrow screen. */
+.cmp th:first-child, .cmp td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--surface);
+}
+.cmp thead th:first-child { background: var(--surface-2); }
+.cmp tbody tr:hover td:first-child { background: var(--surface-2); }
+
+/* whole first cell is the link — a much bigger target than the name alone */
+.cmp .app-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-size: 0.95rem;
+}
+.cmp .app-cell img { width: 32px; height: 32px; border-radius: 8px; display: block; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.14); }
 .cmp .app-cell .mono-tile { width: 32px; height: 32px; border-radius: 8px; font-size: 0.95rem; box-shadow: 0 2px 6px rgba(0,0,0,0.14); }
-.cmp .app-cell a { font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; font-size: 0.95rem; }
-.cmp .app-cell a:hover { color: var(--red); }
+.cmp .app-cell .a { color: var(--faint); transition: transform 0.18s, color 0.18s; }
+.cmp tbody tr:hover .app-cell { color: var(--red); }
+.cmp tbody tr:hover .app-cell .a { color: var(--red); transform: translateX(3px); }
+
+/* the description column wraps; everything else stays on one line */
+.cmp td.what { white-space: normal; min-width: 19em; color: var(--muted); line-height: 1.5; }
+
 .cmp .size { font-family: var(--mono); font-weight: 700; color: var(--red); font-size: 0.92rem; }
 .cmp tfoot td {
   background: var(--surface-2);
