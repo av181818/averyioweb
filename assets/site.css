@@ -63,13 +63,6 @@ body::after {
 .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
 section { position: relative; z-index: 1; }
 
-/* Screen-reader-only helper */
-.sr-only {
-  position: absolute; width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-}
-
 /* Keyboard focus — visible for a11y (a Lighthouse/SEO signal) */
 a:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 2px solid var(--red);
@@ -128,12 +121,6 @@ nav {
 /* the red half of a sub-brand wordmark (averyioApps / averyioFinance) */
 .accent { color: var(--red); }
 .hero h1 .accent { color: var(--red); }
-.hero h1 .by {
-  font-size: clamp(1.25rem, 4vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
 .hero-lead {
   margin-top: clamp(1.1rem, 2.5vw, 1.5rem);
   font-size: clamp(1.02rem, 2.1vw, 1.22rem);
@@ -683,12 +670,6 @@ nav {
 }
 .cta-inner .btn-ghost:hover { background: rgba(255,255,255,0.13); border-color: rgba(255,255,255,0.4); }
 
-/* Long-form prose (privacy index, 404, finance) */
-.prose { max-width: 68ch; }
-.prose p { color: var(--muted); font-size: 1rem; line-height: 1.72; }
-.prose p + p { margin-top: 1rem; }
-.prose a { color: var(--red); }
-
 .disclaimer {
   position: relative;
   z-index: 1;
@@ -726,7 +707,6 @@ footer a {
   align-items: center;
 }
 footer a:hover { color: var(--text); }
-.footer-links { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-left: -8px; }
 .footer-col-head {
   font-family: var(--mono);
   font-size: 0.64rem;
