@@ -647,6 +647,9 @@ nav {
 .cta-inner .btn-row { margin-top: 1.6rem; }
 .cta-inner .btn-store { background: #fff; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
 .cta-inner .btn-store:hover { background: #f2f1ee; transform: translateY(-3px); }
+/* white primary button, for the dark panels */
+.btn-light { background: #fff; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+.btn-light:hover { background: #f2f1ee; transform: translateY(-3px); }
 .cta-inner .btn-ghost {
   background: rgba(255,255,255,0.07);
   border-color: rgba(255,255,255,0.22);
