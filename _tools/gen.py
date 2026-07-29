@@ -212,7 +212,7 @@ APPS = [
    ("surge-6","A finished workout summary in Surge"),
  ],
  "features":[
-   ("bolt","Presets that cover most sessions","Tabata 20/10 × 8, HIIT 40/20 × 10, Boxing 3:00/1:00 × 6, EMOM 60s × 10 and Stretch 30/10 × 12 — all built in and ready to go."),
+   ("bolt","Presets that cover most sessions","Tabata 20/10 × 8, HIIT 40/20 × 10, Boxing 3:00/1:00 × 6, EMOM 60s × 10, Stretch 30/10 × 12 and more — built in, timings already set."),
    ("clock","Fully customisable","Work from 5 seconds to 10 minutes, rest up to 5 minutes, 1–50 rounds and a preparation countdown of up to 30 seconds."),
    ("phone","Built to be glanceable","A dark interface with a large animated progress ring you can read mid-burpee from across the room."),
    ("check","Cues you don’t have to look for","Audio countdown beeps and haptic feedback on every phase change, so you can keep your eyes off the screen."),
@@ -220,7 +220,7 @@ APPS = [
    ("shield","Nothing to sign up for","No account, no ads, no data collection. Your presets stay on your device."),
  ],
  "faq":[
-   ("Is Surge free?","Yes. The timer, all five built-in presets and full customisation are free. Surge Pro is an optional one-time purchase of £0.99 that adds up to 20 saved presets of your own, editable built-ins, all 20 preset icons and mid-workout phase skipping. It is a one-time unlock, never a subscription."),
+   ("Is Surge free?","Yes. The timer, every built-in preset and full customisation are free. Surge Pro is an optional one-time purchase of £0.99 that adds up to 20 saved presets of your own, editable built-ins, all 20 preset icons and mid-workout phase skipping. It is a one-time unlock, never a subscription."),
    ("What workouts does it suit?","Anything on a clock — HIIT, Tabata, CrossFit-style WODs, boxing and MMA rounds, EMOM, circuit training, jump rope intervals, strength work with timed rest, and yoga or stretching flows."),
    ("Does it work without the internet?","Yes. Surge runs entirely on your device, so it works in a basement gym with no signal."),
    ("Will it keep running with the screen off or music playing?","Surge keeps the screen awake for the whole workout so you never lose the count, and its audio cues are designed to sit alongside your music."),
