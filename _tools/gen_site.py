@@ -468,7 +468,9 @@ pv += crumb([("Home","/"),("Privacy",None)])
 pv += f"""
   <header class="hero" style="padding-top:clamp(30px,6vw,52px);">
     <div class="wrap">
+      <p class="eyebrow">Across every app</p>
       <h1>Privacy<span class="accent">.</span></h1>
+      <p class="app-tagline">Your data is yours.</p>
       <p class="hero-lead">The short version: our apps do not track you, do not show ads, and do not sell your data. Where an app syncs or backs up, it uses your own private iCloud account \u2014 never a server owned by us or by anyone else. The full policy for each app is below.</p>
     </div>
   </header>
