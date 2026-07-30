@@ -140,7 +140,7 @@ home += f"""
     <div class="wrap">
       <img class="hero-avatar" src="/assets/logo-256.png" alt="averyio" width="128" height="128" />
       <h1>averyio<span class="accent">.</span></h1>
-      <p class="hero-lead">Small, fast apps for iPhone, iPad and the web \u2014 and <a href="/finance.html" style="color:var(--red);text-decoration:none;font-weight:600;">averyioFinance</a>. No subscriptions, no ads, no tracking and none of the bloat.</p>
+      <p class="hero-lead">Small, fast apps for iPhone, iPad and the web. No subscriptions, no ads, no tracking and none of the bloat. <a href="/finance.html" style="color:var(--red);text-decoration:none;font-weight:600;">averyioFinance</a> covers the markets — recaps, dips and the long game.</p>
       <div class="btn-row" style="margin-top:1.7rem;">
         <a class="btn btn-dark" href="/apps.html">See the apps <span class="a">&rarr;</span></a>
         <a class="btn btn-ghost" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} Follow on X</a>
@@ -330,7 +330,7 @@ fin += f"""
     <div class="wrap">
       <p class="eyebrow">Markets &amp; investing</p>
       <h1 class="long">averyio<span class="accent">Finance.</span></h1>
-      <p class="app-tagline">Buying dips by day. Coding bugs by night.</p>
+      <p class="app-tagline">Buying dips.</p>
       <p class="hero-lead">Daily market recaps, dip-buying vibes and a running commentary on whatever the market has decided to do to us today. The thinking lives here. The chaos lives on X.</p>
       <p class="notice">{WARN_SVG}<span><strong>This is not financial advice.</strong> We are not financial advisers and nothing here is a recommendation to buy or sell anything. It is how we think, written down \u2014 for education, not instruction.</span></p>
       <div class="btn-row" style="margin-top:1.6rem;">
@@ -355,8 +355,8 @@ fin += f"""
   <section class="features" id="tools">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">The tools</p>
-        <h2>What we actually use</h2>
+        <p class="eyebrow">The kit</p>
+        <h2>Useful tools</h2>
       </div>
       <div class="grid">
 
