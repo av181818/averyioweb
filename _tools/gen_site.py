@@ -433,7 +433,9 @@ con += crumb([("Home","/"),("Contact",None)])
 con += f"""
   <header class="hero" style="padding-top:clamp(30px,6vw,52px);">
     <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
       <h1>Let&rsquo;s talk<span class="accent">.</span></h1>
+      <p class="app-tagline">A human answers.</p>
     </div>
   </header>
 
@@ -460,7 +462,7 @@ PRIV = [("InvestFast","/privacy-investfast.html"),("Surge","/privacy-surge.html"
 priv_bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
   {"@type":"ListItem","position":1,"name":"Home","item":SITE+"/"},
   {"@type":"ListItem","position":2,"name":"Privacy","item":SITE+"/privacy.html"}]}
-pv = head("Privacy Policies — averyio Apps",
+pv = head("Privacy Policies — averyio",
   "Privacy policies for every averyio app: InvestFast, Surge, Big Time Clock, Lume and Tap Dot Tap. No ads, no tracking, no data sold.",
   SITE+"/privacy.html", extra=ld(priv_bc))
 pv += nav("privacy")
@@ -468,10 +470,10 @@ pv += crumb([("Home","/"),("Privacy",None)])
 pv += f"""
   <header class="hero" style="padding-top:clamp(30px,6vw,52px);">
     <div class="wrap">
-      <p class="eyebrow">Across every app</p>
+      <p class="eyebrow">Across averyio</p>
       <h1>Privacy<span class="accent">.</span></h1>
       <p class="app-tagline">Your data is yours.</p>
-      <p class="hero-lead">The short version: our apps do not track you, do not show ads, and do not sell your data. Where an app syncs or backs up, it uses your own private iCloud account \u2014 never a server owned by us or by anyone else. The full policy for each app is below.</p>
+      <p class="hero-lead">One rule across everything we do: no tracking, no data sold, no surprises. Every policy we have lives on this page, starting with the apps.</p>
     </div>
   </header>
 
@@ -480,6 +482,7 @@ pv += f"""
       <div class="sec-head">
         <p class="eyebrow">Legal</p>
         <h2>App privacy policies</h2>
+        <p>The short version: our apps do not track you, do not show ads, and do not sell your data. Where an app syncs or backs up, it uses your own private iCloud account — never a server owned by us or by anyone else. The full policy for each app is below.</p>
       </div>
       <div class="grid">
 {chr(10).join(f'''        <a href="{href}" class="card">
