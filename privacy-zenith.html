@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenith Privacy — averyio.net</title>
+  <meta name="description" content="Privacy Policy for the Zenith app by AveryIO." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="averyio" />
+  <meta property="og:title" content="Zenith Privacy — averyio.net" />
+  <meta property="og:description" content="Privacy Policy for the Zenith app by AveryIO." />
+  <meta property="og:image" content="https://averyio.net/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://averyio.net/privacy-zenith.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@averyio18" />
+  <meta name="twitter:image" content="https://averyio.net/assets/og-image.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #C4152B;
+      --red-light:  rgba(196,21,43,0.07);
+      --red-border: rgba(196,21,43,0.22);
+      --bg:         #F6F5F2;
+      --surface:    #FFFFFF;
+      --border:     #E6E4DF;
+      --text:       #111113;
+      --muted:      #6B6B70;
+      --ink:        #0E0E10;
+      --faint:      #9A9A9E;
+      --body-text:  #3A3A40;
+      --mono:       ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 48% at 78% -6%, rgba(196,21,43,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 12% 4%, rgba(196,21,43,0.035) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(0,0,0,0.045) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      padding: 0 clamp(20px, 5%, 64px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(247,247,245,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-logo img { width: 1.75em; height: 1.75em; border-radius: 50%; display: block; flex-shrink: 0; margin-right: 0.5rem; }
+
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+
+    /* ── Header ── */
+    .header {
+      position: relative;
+      z-index: 1;
+      padding: clamp(48px, 9vw, 88px) clamp(20px, 5%, 64px) clamp(32px, 6vw, 56px);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.05;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: clamp(0.8rem, 2.5vw, 0.875rem);
+      font-weight: 400;
+    }
+
+    /* ── Content ── */
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      padding: clamp(40px, 7vw, 64px) clamp(20px, 5%, 40px) clamp(64px, 12vw, 104px);
+    }
+
+    h2 {
+      font-size: clamp(0.9rem, 2.8vw, 1rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 80px;
+      letter-spacing: -0.01em;
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+    p {
+      font-size: clamp(0.875rem, 2.5vw, 0.925rem);
+      color: var(--body-text);
+      margin-bottom: 0.85rem;
+    }
+
+    ul {
+      padding-left: 1.4rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    li {
+      font-size: clamp(0.875rem, 2.5vw, 0.925rem);
+      color: var(--body-text);
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--red); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+      padding: 1.5rem clamp(20px, 5%, 64px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+      padding: 4px 8px;
+      border-radius: 6px;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+    }
+    footer a:hover { color: var(--text); text-decoration: none; }
+
+    .footer-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) {
+      .nav-links a { padding: 8px 8px; font-size: 0.82rem; }
+      footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html"><img src="assets/logo-64.png" alt="" width="26" height="26" decoding="async" />averyio<span>.net</span></a>
+    <div class="nav-links">
+      <a href="privacy.html">← Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <h1>Zenith</h1>
+    <p>Privacy Policy &mdash; Effective August 4, 2026</p>
+  </div>
+
+  <div class="content">
+
+    <h2>1. Introduction</h2>
+    <p>
+      Zenith is a game developed by averyio. We built Zenith to be a local-first, private app —
+      your best level, your settings and your climb belong to you, and we deliberately do not
+      collect, store or share your personal information. This policy explains exactly what
+      happens with your data.
+    </p>
+
+    <h2>2. Information Collection and Use</h2>
+    <p>
+      Zenith does not collect, store, or share any personal information. There is no app-level
+      account, no sign-up, no login. Your best level and your game settings (ambience, sounds,
+      haptics) are stored locally on your device and nowhere else.
+    </p>
+    <p>
+      If you play with Game Center (see section 6), your best level is submitted through Apple's
+      Game Center so you can compete with other players on the leaderboard. It is never
+      transmitted to a server operated by averyio — we do not operate one.
+    </p>
+
+    <h2>3. Purchases</h2>
+    <p>
+      Zenith is a paid app: you buy it once, up front, on the App Store — and that is the entire
+      business model. There are <strong>no in-app purchases</strong>, no subscriptions, no
+      consumables and no ads. The sale is processed exclusively by Apple through the App Store;
+      averyio does not see, receive, or store your payment credentials at any point.
+    </p>
+
+    <h2>4. Analytics and Usage Data</h2>
+    <p>
+      Zenith does not include any third-party analytics SDK, telemetry library, or in-app
+      tracking. The App Store privacy nutrition label declares "Data Not Collected", and that is
+      literally the case.
+    </p>
+    <p>
+      Apple may, separately and only with your consent, provide developers with anonymous,
+      aggregated metrics through App Store Connect — such as download counts, crash reports, and
+      session counts. These reports contain no personally identifiable information and cannot be
+      linked back to an individual user. You can opt out of sharing this data with developers at
+      any time in <em>iOS Settings &gt; Privacy &amp; Security &gt; Analytics &amp; Improvements</em>.
+    </p>
+
+    <h2>5. Third-Party Services and Advertising</h2>
+    <p>
+      Zenith does not display advertisements, does not use ad networks, and does not embed
+      third-party tracking or marketing tools. The game plays entirely offline. The only external
+      service Zenith talks to is Apple's Game Center, for the optional leaderboard — which is
+      governed by
+      <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's own privacy policy</a>.
+    </p>
+
+    <h2>6. Game Center Leaderboard</h2>
+    <p>
+      Zenith has a single Game Center leaderboard — <strong>Highest Level</strong> — so you can
+      see how near the zenith you have climbed compared with other players. Whether it is active
+      simply follows your device: if you are signed into Game Center on your device, Zenith
+      submits your best level when you set a new personal best; if you are not signed in, nothing
+      is ever sent, and the full game plays exactly the same.
+    </p>
+    <p>The leaderboard is, by design:</p>
+    <ul>
+      <li><strong>Operated entirely by Apple</strong> — your Game Center nickname and best level are submitted through Apple's Game Center and are visible to other players on the leaderboard.</li>
+      <li><strong>Inaccessible to averyio</strong> — we cannot view, query, or recover any personal data, and we operate no server of our own.</li>
+      <li><strong>Pseudonymous</strong> — any player identifiers are managed by Apple and cannot be used to identify you across other developers' apps.</li>
+      <li><strong>Free of any app-level account</strong> — it uses your Apple ID's Game Center profile directly.</li>
+      <li><strong>Minimal</strong> — the only thing Zenith ever submits is one number: your best level. Nothing else leaves the app.</li>
+    </ul>
+    <p>
+      You can manage or turn off Game Center — for Zenith specifically or entirely — at any time
+      in <em>iOS Settings &gt; Game Center</em>. If you sign in later, your existing best level is
+      submitted at that point, so nothing is lost by waiting.
+    </p>
+
+    <h2>7. Children's Privacy</h2>
+    <p>
+      Zenith is rated 4+ and is suitable for all ages. Because the app does not collect any
+      personal information from any user, it does not knowingly collect personal information from
+      children under 13. The optional Game Center leaderboard is provided by Apple and subject to
+      Apple's own protections and parental controls. If you believe a child has somehow provided
+      personal information through the app, please contact us so we can address it.
+    </p>
+
+    <h2>8. Changes to This Privacy Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time to reflect changes to the app or to
+      clarify our practices. When we do, we will update the "Effective" date at the top of this
+      page. We encourage you to review this page periodically.
+    </p>
+
+    <h2>9. Contact Us</h2>
+    <p>
+      If you have any questions about this Privacy Policy or about how Zenith handles your
+      data, please visit our <a href="contact.html">Contact Us</a> page.
+    </p>
+
+  </div>
+
+  <footer>
+    <span>&copy; 2026 averyio</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </footer>
+
+</body>
+</html>
