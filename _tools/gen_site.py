@@ -7,7 +7,7 @@ import os
 _src = open(os.path.join(os.path.dirname(__file__), "gen.py"), encoding="utf-8").read()
 exec(_src.split("# ── write app pages")[0], globals())
 
-TODAY = "2026-07-28"
+TODAY = "2026-08-06"
 
 CARD_DESC = {
  "investfast":     "Learn to invest in 24 hours — 144 plain-English lessons on stocks, ETFs and tax.",
@@ -18,108 +18,92 @@ CARD_DESC = {
  "btc-prix":       "Real-time Bitcoin price tracking, free on the web.",
 }
 
-def app_card(a):
-    icon = f"/assets/apps/{a['asset']}-icon.webp" if a["asset"] else "/assets/logo-256.png"
-    icon2 = f"/assets/apps/{a['asset']}-icon@2x.webp" if a["asset"] else "/assets/logo-256.png"
+# ── app showcase tile ────────────────────────────────────────────────────
+# The tile leads with the app's real App Store artwork, cropped by the
+# stage to its headline and the top of the device. BTC Prix has no
+# screenshots, so it falls back to the monogram on an ink stage.
+def show_card(a):
+    if a["asset"]:
+        icon = (f'<img class="app-icon" src="/assets/apps/{a["asset"]}-icon.webp" '
+                f'srcset="/assets/apps/{a["asset"]}-icon.webp 1x, /assets/apps/{a["asset"]}-icon@2x.webp 2x" '
+                f'alt="" width="46" height="46" loading="lazy" decoding="async" />')
+    else:
+        icon = f'<div class="mono-tile" aria-hidden="true">{a["mono"]}</div>'
+
+    if a["shots"]:
+        n, alt = a["shots"][0]
+        stage = (f'<div class="show-stage"><img src="/assets/apps/{n}.webp" '
+                 f'srcset="/assets/apps/{n}-sm.webp 320w, /assets/apps/{n}.webp 638w" '
+                 f'sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 31vw" '
+                 f'alt="{alt}" width="638" height="1387" loading="lazy" decoding="async" /></div>')
+    else:
+        stage = (f'<div class="show-stage show-blank">'
+                 f'<div class="mono-tile mono-tile-lg" aria-hidden="true">{a["mono"]}</div></div>')
+
+    # The real download size rides along on the tile. It used to live in the
+    # apps.html spec table, which was removed 2026-08-06 — and "no bloat" is
+    # the whole pitch, so the number should not vanish from the browse pages.
     tags = "".join(f'<span class="tag">{t}</span>' for t in a["tags"])
-    tile = (f'<img class="app-icon" src="{icon}" srcset="{icon} 1x, {icon2} 2x" alt="" width="54" height="54" loading="lazy" decoding="async" />'
-            if a["asset"] else
-            f'<div class="mono-tile" aria-hidden="true">{a["mono"]}</div>')
-    return f"""        <a href="/apps/{a['slug']}/" class="card">
-          <div class="card-top">
-            {tile}
-            <span class="card-arrow">&rarr;</span>
-          </div>
-          <div>
-            <p class="card-title">{a['name']}</p>
-            <p class="card-desc">{CARD_DESC[a['slug']]}</p>
-          </div>
-          <div class="card-footer">{tags}</div>
-        </a>"""
-
-SEE_ALL_CARD = f"""        <a href="/apps.html" class="card card-more">
-          <div class="card-top">
-            <div class="feature-ico">{ico('grid')}</div>
-            <span class="card-arrow">&rarr;</span>
-          </div>
-          <div>
-            <p class="card-title">See all apps</p>
-            <p class="card-desc">The full line-up &mdash; what each one does, how it works and what it costs.</p>
+    if a["size"]:
+        tags += f'<span class="tag neutral">~{a["size"]} MB</span>'
+    return f"""        <a href="/apps/{a['slug']}/" class="show">
+          {stage}
+          <div class="show-body">
+            <div class="show-head">
+              {icon}
+              <p class="show-name">{a['name']}</p>
+              <span class="show-go">&rarr;</span>
+            </div>
+            <p class="show-tag">{CARD_DESC[a['slug']]}</p>
+            <div class="show-tags">{tags}</div>
           </div>
         </a>"""
 
-ethos_html = "\n".join(
-    f"""        <div class="ethos-item">
-          <h3>{t}</h3>
-          <p>{d}</p>
-        </div>""" for t, d in ETHOS)
+# Terminal tile on the home grid. The home page shows the first three apps
+# and then this; the full line-up lives on apps.html. Adding a fourth app
+# therefore never changes the home page.
+#
+# Its stage is a cluster of the real app icons rather than a generic glyph —
+# it shows what is behind the link, and gives the tile something to look at
+# next to three pieces of App Store artwork. Capped at six so the 3x2 grid
+# never ends on a ragged row.
+_ALL_ICONS = "\n              ".join(
+    (f'<img src="/assets/apps/{a["asset"]}-icon.webp" '
+     f'srcset="/assets/apps/{a["asset"]}-icon.webp 1x, /assets/apps/{a["asset"]}-icon@2x.webp 2x" '
+     f'alt="" width="46" height="46" loading="lazy" decoding="async" />')
+    if a["asset"] else
+    f'<span class="show-all-mono" aria-hidden="true">{a["mono"]}</span>'
+    for a in APPS[:6])
+
+SHOW_MORE = f"""        <a href="/apps.html" class="show show-more">
+          <div class="show-stage">
+            <div class="show-all-grid">
+              {_ALL_ICONS}
+            </div>
+          </div>
+          <div class="show-body">
+            <div class="show-head">
+              <p class="show-name">See all apps</p>
+            </div>
+            <p class="show-tag">What each one does, how it works and what it costs.</p>
+            <span class="show-more-cta">The full line-up <span class="a">&rarr;</span></span>
+          </div>
+        </a>"""
 
 W = lambda rel, s: (os.makedirs(os.path.dirname(os.path.join(ROOT, rel)) or ROOT, exist_ok=True),
                     open(os.path.join(ROOT, rel), "w", encoding="utf-8").write(s),
                     print(f"  {rel:26s} {len(s.encode())//1024}KB"))
 
-
-PRICE_SHORT = {
- "investfast":"Free + unlock", "surge":"Free + unlock", "big-time-clock":"\u00a30.99",
- "lume":"Free + unlock", "tap-dot-tap":"Free + unlock", "btc-prix":"Free",
-}
-
-def cmp_table():
-    """One row per app, A-Z. This is the apps page's main content, so it
-    carries everything the old tiles did — icon, name, link and description —
-    plus the data the tiles could not show."""
-    rows = sorted(APPS, key=lambda a: a["name"].lower())
-    out = []
-    for a in rows:
-        icon = (f'<img src="/assets/apps/{a["asset"]}-icon.webp" srcset="/assets/apps/{a["asset"]}-icon.webp 1x, /assets/apps/{a["asset"]}-icon@2x.webp 2x" alt="" width="32" height="32" loading="lazy" decoding="async" />'
-                if a["asset"] else f'<span class="mono-tile" aria-hidden="true">{a["mono"]}</span>')
-        platform = "iPhone &amp; iPad" if a["ios"] else "Web"
-        size = f'<span class="size">~{a["size"]} MB</span>' if a["size"] else '<span class="size">\u2014</span>'
-        out.append(f"""          <tr>
-            <td><a class="app-cell" href="/apps/{a['slug']}/">{icon}{a['name']} <span class="a">&rarr;</span></a></td>
-            <td class="what">{CARD_DESC[a['slug']]}</td>
-            <td>{platform}</td>
-            <td>{a['genre']}</td>
-            <td>{size}</td>
-            <td>{PRICE_SHORT[a['slug']]}</td>
-          </tr>""")
-    body = "\n".join(out)
-    return f"""
-  <section class="cmp" id="apps">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Take your pick</p>
-        <h2>Find the one you need</h2>
-        <p>Tap any name for the full story \u2014 what it does, how it works, the screenshots, and the honest download size.</p>
-      </div>
-      <div class="cmp-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">App</th>
-              <th scope="col">What it does</th>
-              <th scope="col">Platform</th>
-              <th scope="col">Category</th>
-              <th scope="col">Download</th>
-              <th scope="col">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-{body}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-"""
-
 # ── index.html ───────────────────────────────────────────────────────────
+# The home page is the apps page. averyioFinance has its own section of the
+# site and is deliberately not promoted here — the nav and footer carry the
+# only links to it (owner directive 2026-08-06).
 org = {
   "@context":"https://schema.org","@type":"Organization","name":"averyio",
   "url":SITE+"/","logo":f"{SITE}/assets/logo-512.png",
-  "description":"averyio builds small, fast apps for iPhone, iPad and the web, alongside averyioFinance — no subscriptions, no ads, no tracking and no bloat.",
+  "description":"averyio builds small, fast apps for iPhone, iPad and the web — no subscriptions, no ads, no tracking and no bloat.",
   "sameAs":["https://x.com/averyio18"],
-  # sub-brands: the six apps plus the finance arm
+  # sub-brands: the apps plus the two divisions
   "brand":[{"@type":"Brand","name":a["name"],"url":f"{SITE}/apps/{a['slug']}/"} for a in APPS]
           + [{"@type":"Brand","name":"averyioApps","url":SITE+"/apps.html"},
               {"@type":"Brand","name":"averyioFinance","url":SITE+"/finance.html"}],
@@ -131,82 +115,78 @@ itemlist = {
   "itemListElement":[{"@type":"ListItem","position":i,"name":a["name"],
                       "url":f"{SITE}/apps/{a['slug']}/"} for i, a in enumerate(APPS, 1)]}
 
+# The hero trio, in DOM order: left (rotated back), centre (forward), right.
+HERO_SHOTS = [("surge-1","Surge, the interval timer, running on iPhone"),
+              ("investfast-1","InvestFast, the investing course, running on iPhone"),
+              ("lume-1","Lume, the gamified to-do list, running on iPhone")]
+hero_fan = "\n".join(
+    f'          <img src="/assets/apps/{n}.webp" srcset="/assets/apps/{n}-sm.webp 320w, /assets/apps/{n}.webp 638w" '
+    f'sizes="220px" alt="{alt}" width="638" height="1387" decoding="async" />'
+    for n, alt in HERO_SHOTS)
+
 home = head("averyio — Fast, Lightweight Apps for iPhone, iPad & the Web. No Bloat.",
-  "Small, fast apps for iPhone, iPad and the web — megabytes, not gigabytes. Plus averyioFinance. No subscriptions, no ads, no tracking, no bloat.",
+  "Small, fast apps for iPhone, iPad and the web — megabytes, not gigabytes. No subscriptions, no ads, no tracking and no bloat.",
   SITE+"/", extra=ld(org)+ld(website)+ld(itemlist))
 home += nav("home")
 home += f"""
   <header class="hero">
     <div class="wrap">
-      <img class="hero-avatar" src="/assets/logo-256.png" alt="averyio" width="128" height="128" />
-      <h1>averyio<span class="accent">.</span></h1>
-      <p class="hero-lead">Small, fast apps for iPhone, iPad and the web. No subscriptions, no ads, no tracking and none of the bloat. <a href="/finance.html" style="color:var(--red);text-decoration:none;font-weight:600;">averyioFinance</a> covers the markets — recaps, dips and the long game.</p>
-      <div class="btn-row" style="margin-top:1.7rem;">
-        <a class="btn btn-dark" href="/apps.html">See the apps <span class="a">&rarr;</span></a>
-        <a class="btn btn-ghost" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} Follow on X</a>
+      <div class="hero-split">
+        <div>
+          <img class="hero-avatar" src="/assets/logo-256.png" alt="averyio" width="128" height="128" />
+          <h1>averyio<span class="accent">.</span></h1>
+          <p class="hero-lead">Small, fast apps for iPhone, iPad and the web. No subscriptions, no ads, no tracking, and nothing bolted on that you never asked for.</p>
+          <div class="btn-row">
+            <a class="btn btn-dark" href="/apps.html">See the apps <span class="a">&rarr;</span></a>
+          </div>
+        </div>
+        <div class="fan">
+{hero_fan}
+        </div>
       </div>
     </div>
   </header>
 
-  <section class="features" id="apps">
+  <section class="sec sec-white" id="apps">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">For iPhone, iPad &amp; the web</p>
         <h2>averyio<span class="accent">Apps</span></h2>
-        <p>Each one does a single job properly, without the bloat. Most are free to try, and none of them will ever ask you for a monthly fee.</p>
+        <p>Every one built to do a single job properly and then get out of the way. Most are free to try, and none of them will ever ask you for a monthly fee.</p>
       </div>
-      <div class="grid">
-{chr(10).join(app_card(a) for a in APPS[:5])}
-{SEE_ALL_CARD}
-      </div>
-    </div>
-  </section>
-
-  <section class="footprint" id="footprint">
-    <div class="wrap">
-      <div class="footprint-inner dark">
-        <div class="footprint-stat">
-          <div class="footprint-num word">Megabytes.</div>
-          <p class="footprint-label">Not gigabytes</p>
-        </div>
-        <div class="footprint-copy">
-          <h2>Where the size actually goes</h2>
-          <p>Where an app of ours is bigger, it is because of what it actually does — not what came along for the ride. Every app page lists its exact size, and the comparison table puts them side by side. We are not hiding from the number.</p>
-        </div>
+      <div class="show-grid quad">
+{chr(10).join(show_card(a) for a in APPS[:3])}
+{SHOW_MORE}
       </div>
     </div>
   </section>
 
-  <section class="ethos">
+  <section class="band" id="footprint">
     <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">The promise</p>
-        <h2>The same four rules, every time</h2>
-      </div>
-      <div class="ethos-grid">
-{ethos_html}
-      </div>
-    </div>
-  </section>
-
-  <section class="division" id="finance">
-    <div class="wrap">
-      <div class="division-inner">
+      <div class="band-inner">
         <div>
-          <p class="eyebrow">The finance arm</p>
-          <p class="division-name">averyio<span class="accent">Finance</span></p>
-          <p class="division-desc">The other half of what we do. A long-term, low-cost, anti-hype way of looking at markets \u2014 written down as evergreen thinking, backed by the tools we build. Educational only, and never advice.</p>
-          <div class="btn-row">
-            <a class="btn btn-dark" href="/finance.html">Explore averyioFinance <span class="a">&rarr;</span></a>
-            <a class="btn btn-ghost" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} @averyio18</a>
-          </div>
+          <div class="band-num">Megabytes.</div>
+          <p class="band-label">Not gigabytes</p>
         </div>
-        <ul class="division-points">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Buy the dip.</b> Red months are the discount, not the emergency.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Stay boring.</b> Broad and dull compounds; clever and concentrated usually does not.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Keep costs low.</b> Fees are the one input you control completely.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Only risk what you can lose.</b> Especially in crypto.</span></li>
-        </ul>
+        <div class="band-copy">
+          <h2>Where the size actually goes</h2>
+          <p>Where an app of ours is bigger, it is because of what it actually does — not what came along for the ride. Every app carries its real download size, right on the tile and again on its own page. We are not hiding from the number.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+home += ethos_section("The same four rules, every time")
+home += f"""
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="cta-inner">
+        <h2>Have a proper look around</h2>
+        <p>Every app has a page of its own: real screenshots, what it does, what it costs and the honest download size. No signup wall to get past first.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="/apps.html">Browse averyioApps <span class="a">&rarr;</span></a>
+          <a class="btn btn-ghost" href="/contact.html">Contact <span class="a">&rarr;</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -226,7 +206,7 @@ ap = head("averyioApps — iPhone, iPad & Web Apps With No Ads, No Subscriptions
 ap += nav("apps")
 ap += crumb([("Home","/"),("averyioApps",None)])
 ap += f"""
-  <header class="hero" style="padding-top:clamp(30px,6vw,52px);">
+  <header class="hero">
     <div class="wrap">
       <p class="eyebrow">For iPhone, iPad &amp; the web</p>
       <h1 class="long">averyio<span class="accent">Apps.</span></h1>
@@ -235,55 +215,37 @@ ap += f"""
     </div>
   </header>
 
-{cmp_table()}
-  <section class="ethos">
+  <section class="sec" id="apps">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">The promise</p>
-        <h2>What every averyio app has in common</h2>
+        <p class="eyebrow">The line-up</p>
+        <h2>Everything we have shipped</h2>
       </div>
-      <div class="ethos-grid">
-{ethos_html}
+      <div class="show-grid">
+{chr(10).join(show_card(a) for a in APPS)}
       </div>
     </div>
   </section>
-
+"""
+ap += ethos_section("What every averyio app has in common")
+ap += f"""
   <section class="cta-band">
     <div class="wrap">
       <div class="cta-inner">
         <h2>Something you&rsquo;d like us to build?</h2>
         <p>We&rsquo;re a small operation and we take ideas seriously. The fastest way to reach us is on X.</p>
         <div class="btn-row">
-          <a class="btn btn-ghost" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} @averyio18</a>
+          <a class="btn btn-light" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} @averyio18</a>
           <a class="btn btn-ghost" href="/contact.html">Contact <span class="a">&rarr;</span></a>
         </div>
       </div>
     </div>
   </section>
 """
-ap += """
-  <script>
-    /* Whole-row click for the app table. A <tr> cannot be wrapped in an
-       anchor, and a stretched-link overlay is not reliable: Safari does not
-       treat position:relative on a <tr> as a containing block, so every
-       row's overlay resolves against a larger ancestor, they stack, and
-       only the last row painted stays clickable. This sends a row click to
-       that row's own link. With JS off, the app name is still a link. */
-    document.querySelectorAll('.cmp tbody tr').forEach(function (row) {
-      var link = row.querySelector('a.app-cell');
-      if (!link) return;
-      row.addEventListener('click', function (e) {
-        if (e.target.closest('a')) return;                  // real link wins
-        if (window.getSelection().toString()) return;       // allow selection
-        window.location = link.href;
-      });
-    });
-  </script>
-"""
 ap += footer(APPS)
 W("apps.html", ap)
 
-# ── finance.html — the averyioFinance sub-brand ──────────────────────────
+# ── finance.html — the averyioFinance division ───────────────────────────
 # Voice calibrated to the @averyio18 X account (bio: "Buying dips by day |
 # Coding bugs by night | Daily market recaps, dip buying vibes & overall
 # chaos"): witty and irreverent, but written as a website — no emoji walls,
@@ -326,20 +288,20 @@ fin = head("averyioFinance — Daily Market Recaps, Dip Buying & Long-Term Inves
 fin += nav("finance")
 fin += crumb([("Home","/"),("averyioFinance",None)])
 fin += f"""
-  <header class="hero" style="padding-top:clamp(30px,6vw,52px);">
+  <header class="hero">
     <div class="wrap">
       <p class="eyebrow">Markets &amp; investing</p>
       <h1 class="long">averyio<span class="accent">Finance.</span></h1>
       <p class="app-tagline">Buying dips.</p>
       <p class="hero-lead">Daily market recaps, dip-buying vibes and a running commentary on whatever the market has decided to do to us today. The thinking lives here. The chaos lives on X.</p>
-      <p class="notice">{WARN_SVG}<span><strong>This is not financial advice.</strong> We are not financial advisers and nothing here is a recommendation to buy or sell anything. It is how we think, written down \u2014 for education, not instruction.</span></p>
-      <div class="btn-row" style="margin-top:1.6rem;">
+      <p class="notice">{WARN_SVG}<span><strong>This is not financial advice.</strong> We are not financial advisers and nothing here is a recommendation to buy or sell anything. It is how we think, written down — for education, not instruction.</span></p>
+      <div class="btn-row">
         <a class="btn btn-dark" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} Follow @averyio18 on X</a>
       </div>
     </div>
   </header>
 
-  <section class="features" id="principles">
+  <section class="sec sec-white" id="principles">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">How we think</p>
@@ -352,7 +314,7 @@ fin += f"""
     </div>
   </section>
 
-  <section class="features" id="tools">
+  <section class="sec" id="tools">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">The kit</p>
@@ -386,7 +348,7 @@ fin += f"""
 
         <a href="/apps/investfast/" class="card">
           <div class="card-top">
-            <img class="app-icon" src="/assets/apps/investfast-icon.webp" srcset="/assets/apps/investfast-icon.webp 1x, /assets/apps/investfast-icon@2x.webp 2x" alt="" width="54" height="54" loading="lazy" decoding="async" />
+            <img class="app-icon" src="/assets/apps/investfast-icon.webp" srcset="/assets/apps/investfast-icon.webp 1x, /assets/apps/investfast-icon@2x.webp 2x" alt="" width="46" height="46" loading="lazy" decoding="async" />
             <span class="card-arrow">&rarr;</span>
           </div>
           <div>
@@ -397,7 +359,7 @@ fin += f"""
         </a>
 
       </div>
-      <p class="cmp-note">The TradingView link is an affiliate link \u2014 if you sign up through it we get a small cut, at no extra cost to you. We use it every day ourselves, which is the only reason it is on this page.</p>
+      <p class="cmp-note">The TradingView link is an affiliate link — if you sign up through it we get a small cut, at no extra cost to you. We use it every day ourselves, which is the only reason it is on this page.</p>
     </div>
   </section>
 
@@ -407,7 +369,7 @@ fin += f"""
         <h2>The good stuff is on X</h2>
         <p>Recaps every session, takes that have not been through a compliance department, and a running tally of whatever oil is doing to us this week.</p>
         <div class="btn-row">
-          <a class="btn btn-store btn-ghost" href="https://x.com/averyio18" target="_blank" rel="noopener" style="padding:0.9rem 1.5rem;">{X_SVG} Follow @averyio18</a>
+          <a class="btn btn-light" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} Follow @averyio18</a>
           <a class="btn btn-ghost" href="/apps/investfast/">Learn the basics <span class="a">&rarr;</span></a>
         </div>
       </div>
@@ -415,7 +377,7 @@ fin += f"""
   </section>
 
   <div class="wrap disclaimer">
-    Nothing on this page is financial advice. averyio is not a financial adviser and none of this is a recommendation to buy or sell any investment. Markets carry risk and you can lose money \u2014 crypto especially. Past performance tells you nothing reliable about future returns. Only ever risk what you can afford to lose, and if you want advice, speak to someone qualified and regulated to give it.
+    Nothing on this page is financial advice. averyio is not a financial adviser and none of this is a recommendation to buy or sell any investment. Markets carry risk and you can lose money — crypto especially. Past performance tells you nothing reliable about future returns. Only ever risk what you can afford to lose, and if you want advice, speak to someone qualified and regulated to give it.
   </div>
 """
 fin += footer(APPS)
@@ -430,22 +392,57 @@ con = head("Contact averyio",
   SITE+"/contact.html", extra=ld(con_bc))
 con += nav("contact")
 con += crumb([("Home","/"),("Contact",None)])
+# Deliberately no `.cta-band` here. Every other page closes on the ink
+# panel, but this page IS the call to action — a second dark shout added
+# nothing and read as heavy. It closes on the light `.contact-panel`.
+CONTACT_REASONS = [
+ ("bolt", "Something is broken",
+  "Tell us what happened and which app you were using. We are a small operation, which is the whole reason fixes go out quickly."),
+ ("star", "An app you wish existed",
+  "We take suggestions seriously. If there is a small, sharp tool you would reach for every day, we would like to hear about it."),
+ ("shield", "A question about your data",
+  "Every policy we have is published in full and in plain English. If any of it is unclear, ask and we will explain it properly."),
+]
+reason_cards = "\n".join(
+    f"""        <div class="feature">
+          <div class="feature-ico">{ico(k)}</div>
+          <h3>{t}</h3>
+          <p>{d}</p>
+        </div>""" for k, t, d in CONTACT_REASONS)
+
 con += f"""
-  <header class="hero" style="padding-top:clamp(30px,6vw,52px);">
+  <header class="hero">
     <div class="wrap">
       <p class="eyebrow">Get in touch</p>
       <h1>Let&rsquo;s talk<span class="accent">.</span></h1>
       <p class="app-tagline">A human answers.</p>
+      <p class="hero-lead">No contact form, no ticket number, no support bot with a cheerful name. Just us, and we read everything that comes in.</p>
     </div>
   </header>
 
-  <section class="cta-band" style="padding-top:clamp(20px,4vw,32px);">
+  <section class="sec sec-white">
     <div class="wrap">
-      <div class="cta-inner">
-        <h2>Questions, bugs and ideas all welcome</h2>
-        <p>Got a question, found a bug, or thought of an app you wish existed? Tell us what happened and which app it was, and we&rsquo;ll get on it. Small operation, fast fixes — and we read everything.</p>
-        <div class="btn-row">
-          <a class="btn btn-light" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} @averyio18 on X</a>
+      <div class="sec-head">
+        <p class="eyebrow">What to send</p>
+        <h2>Worth getting in touch about</h2>
+      </div>
+      <div class="feature-grid">
+{reason_cards}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="contact-panel">
+        <div class="contact-mark">{X_SVG}</div>
+        <div>
+          <p class="eyebrow">The fastest way</p>
+          <p class="contact-handle">@averyio18</p>
+          <p class="contact-note">A message or a mention on X reaches us directly, and it is where we are most days anyway. Expect a reply from a person who worked on the thing you are asking about.</p>
+        </div>
+        <div class="btn-row contact-actions">
+          <a class="btn btn-dark" href="https://x.com/averyio18" target="_blank" rel="noopener">{X_SVG} Message us on X</a>
           <a class="btn btn-ghost" href="/privacy.html">Privacy policies <span class="a">&rarr;</span></a>
         </div>
       </div>
@@ -455,20 +452,24 @@ con += f"""
 con += footer(APPS)
 W("contact.html", con)
 
-# ── privacy.html — hrefs to privacy-*.html MUST stay exactly as they are ──
+# ── privacy.html ─────────────────────────────────────────────────────────
+# The hrefs to privacy-*.html MUST stay exactly as they are: Apple links to
+# those URLs from the live App Store listings. This page is the cover-all
+# for the whole business, so app policies sit in their own section and
+# future business areas get sections of their own.
 PRIV = [("InvestFast","/privacy-investfast.html"),("Surge","/privacy-surge.html"),
         ("Big Time Clock","/privacy-bigtimeclock.html"),("Lume","/privacy-lume.html"),
-        ("Tap Dot Tap","/privacy-tapdottap.html")]
+        ("Tap Dot Tap","/privacy-tapdottap.html"),("Zenith","/privacy-zenith.html")]
 priv_bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
   {"@type":"ListItem","position":1,"name":"Home","item":SITE+"/"},
   {"@type":"ListItem","position":2,"name":"Privacy","item":SITE+"/privacy.html"}]}
 pv = head("Privacy Policies — averyio",
-  "Privacy policies for every averyio app: InvestFast, Surge, Big Time Clock, Lume and Tap Dot Tap. No ads, no tracking, no data sold.",
+  "Privacy policies for every averyio app. No tracking, no ads and no data sold — read the full policy for each app in plain English.",
   SITE+"/privacy.html", extra=ld(priv_bc))
 pv += nav("privacy")
 pv += crumb([("Home","/"),("Privacy",None)])
 pv += f"""
-  <header class="hero" style="padding-top:clamp(30px,6vw,52px);">
+  <header class="hero">
     <div class="wrap">
       <p class="eyebrow">Across averyio</p>
       <h1>Privacy<span class="accent">.</span></h1>
@@ -477,7 +478,7 @@ pv += f"""
     </div>
   </header>
 
-  <section class="features">
+  <section class="sec sec-white">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Legal</p>
@@ -494,7 +495,6 @@ pv += f"""
       </div>
     </div>
   </section>
-
 """
 pv += footer(APPS)
 W("privacy.html", pv)
@@ -508,7 +508,7 @@ nf += f"""
     <div class="wrap">
       <h1>404<span class="accent">.</span></h1>
       <p class="hero-lead">That page does not exist — it may have moved. The apps are all still here.</p>
-      <div class="btn-row" style="margin-top:1.7rem;">
+      <div class="btn-row">
         <a class="btn btn-dark" href="/apps.html">See the apps <span class="a">&rarr;</span></a>
         <a class="btn btn-ghost" href="/">Home <span class="a">&rarr;</span></a>
       </div>

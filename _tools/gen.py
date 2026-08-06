@@ -381,6 +381,29 @@ ETHOS = [
  ("Private by design","No tracking, no analytics, nothing sold. Your data lives on your device — and where an app syncs or backs up, it goes through your own private iCloud account, never a server of ours or anyone else's."),
 ]
 
+def ethos_section(heading):
+    """The four rules. Rendered identically wherever it appears, on the
+    tinted ground so it separates the sections either side of it."""
+    items = "\n".join(
+        f"""        <div class="ethos-item">
+          <span class="ethos-num">{i:02d}</span>
+          <h3>{t}</h3>
+          <p>{d}</p>
+        </div>""" for i, (t, d) in enumerate(ETHOS, 1))
+    return f"""
+  <section class="sec sec-tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The promise</p>
+        <h2>{heading}</h2>
+      </div>
+      <div class="ethos-grid">
+{items}
+      </div>
+    </div>
+  </section>
+"""
+
 # ── app page renderer ────────────────────────────────────────────────────
 def store_btn(app, dark=True):
     if app["appid"]:
@@ -470,10 +493,10 @@ def app_page(app, apps):
             '<div class="footprint-num">0<span class="unit">KB</span></div>'
             '<p class="footprint-label">To install</p>')
     out += f"""
-  <section class="footprint" id="footprint">
+  <section class="sec sec-white" id="footprint">
     <div class="wrap">
       <div class="footprint-inner">
-        <div class="footprint-stat">
+        <div>
           {stat}
         </div>
         <div class="footprint-copy">
@@ -493,7 +516,7 @@ def app_page(app, apps):
           <p>{d}</p>
         </div>""" for k, t, d in app["features"])
     out += f"""
-  <section class="features">
+  <section class="sec">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Features</p>
@@ -505,25 +528,8 @@ def app_page(app, apps):
     </div>
   </section>
 """
-    # ethos
-    eth = "\n".join(
-        f"""        <div class="ethos-item">
-          <h3>{t}</h3>
-          <p>{d}</p>
-        </div>""" for t, d in ETHOS)
-    out += f"""
-  <section class="ethos">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">The promise</p>
-        <h2>How every averyio app works</h2>
-      </div>
-      <div class="ethos-grid">
-{eth}
-      </div>
-    </div>
-  </section>
-"""
+    out += ethos_section("How every averyio app works")
+
     # faq
     qs = "\n".join(
         f"""        <div class="faq-item">
@@ -531,7 +537,7 @@ def app_page(app, apps):
           <p>{a}</p>
         </div>""" for q, a in app["faq"])
     out += f"""
-  <section class="faq">
+  <section class="sec">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">FAQ</p>
@@ -544,8 +550,6 @@ def app_page(app, apps):
   </section>
 """
     # closing cta
-    others = [a for a in apps if a["slug"] != app["slug"]][:3]
-    olinks = " ".join(f'<a href="/apps/{o["slug"]}/">{o["name"]}</a>' for o in others)
     out += f"""
   <section class="cta-band">
     <div class="wrap">

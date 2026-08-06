@@ -17,7 +17,7 @@ os.chdir(ROOT)
 PAGES = ["index.html", "apps.html", "finance.html", "contact.html",
          "privacy.html", "404.html"] + sorted(glob.glob("apps/*/index.html"))
 FROZEN = ["privacy-investfast.html", "privacy-surge.html", "privacy-bigtimeclock.html",
-          "privacy-lume.html", "privacy-tapdottap.html"]
+          "privacy-lume.html", "privacy-tapdottap.html", "privacy-zenith.html"]
 LIVE_MAP = {"index.html": "/", "apps.html": "/apps.html", "finance.html": "/finance.html",
             "privacy.html": "/privacy.html", "contact.html": "/contact.html",
             "404.html": "/404.html", "sitemap.xml": "/sitemap.xml", "robots.txt": "/robots.txt",
@@ -119,7 +119,7 @@ check("no banned claims (counts, size promises, brand-architecture jargon)", not
 print("\nFROZEN FILES")
 dirty = subprocess.run(["git", "status", "--porcelain"] + FROZEN,
                        capture_output=True, text=True).stdout.strip()
-check("the five App Store privacy pages are unmodified", not dirty, dirty.replace("\n", "; "))
+check(f"the {len(FROZEN)} App Store privacy pages are unmodified", not dirty, dirty.replace("\n", "; "))
 
 if "--live" in sys.argv:
     print("\nLIVE (averyio.net)")
