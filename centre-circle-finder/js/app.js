@@ -949,12 +949,10 @@
   // ---------- place search / near me ----------
 
   const placeResults = $("#place-results");
-  const exploreEmpty = $("#explore-empty");
 
   function prMessage(html, busy) {
     showTab("explore");
     placeResults.classList.remove("hidden");
-    exploreEmpty.classList.add("hidden");
     placeResults.innerHTML = `<div class="pr-empty">${busy ? '<span class="spin-ball" aria-hidden="true"></span>' : ""}${html}</div>`;
   }
 
@@ -962,7 +960,6 @@
     if (placePin) { placePin.remove(); placePin = null; }
     placeResults.classList.add("hidden");
     placeResults.innerHTML = "";
-    exploreEmpty.classList.remove("hidden");
     markLiveState();
   }
 
@@ -1003,7 +1000,6 @@
 
     showTab("explore");
     placeResults.classList.remove("hidden");
-    exploreEmpty.classList.add("hidden");
     placeResults.innerHTML = `
       <div class="pr-head"><span>Grounds near <strong>${esc(label)}</strong></span>
       <button class="link-btn" id="place-clear">clear ×</button></div>

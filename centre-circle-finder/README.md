@@ -27,9 +27,8 @@ football's own print culture instead:
 - **Club cards as team sheets** — a jersey-number badge, the club name in big
   condensed caps on a black band, and a stat grid whose rules are 1px gaps
   showing the background through, so lines appear only between real neighbours.
-- **Structural motifs**: mown stripes, pitch lines and a centre-circle arc on the
-  "Kick off here" card, a corner-flag place marker, and every ground drawn as a
-  football.
+- **Structural motifs**: mown stripes and pitch lines behind the masthead, a
+  corner-flag place marker, and every ground drawn as a football.
 - **Small print sits under the masthead**, not in a footer — a two-line strip
   above the search box. It is sized to wrap to exactly two lines (10px, with
   `hyphens: auto`, because the text packs to ~1.9 lines and a ragged right edge
