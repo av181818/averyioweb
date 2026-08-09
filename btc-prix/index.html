@@ -201,8 +201,11 @@
             <div class="flex flex-col leading-tight">
                 <h1 class="text-sm font-semibold tracking-[0.2em] uppercase opacity-90 transition-theme"
                     style="color: var(--text-main);">BTCPRIX</h1>
-                <span class="text-[10px] tracking-widest lowercase opacity-60 transition-theme"
-                    style="color: var(--text-secondary);">by averyio</span>
+                <!-- Was a plain span. It is the only way back to the rest of the
+                     site from here, so it is a link — underlined on hover rather
+                     than always, to keep the masthead as quiet as it was. -->
+                <a href="/" class="text-[10px] tracking-widest lowercase opacity-[0.85] hover:opacity-100 hover:underline underline-offset-2 transition-theme w-fit"
+                    style="color: var(--text-secondary);">by averyio</a>
             </div>
         </div>
         <div class="flex items-center gap-4">
