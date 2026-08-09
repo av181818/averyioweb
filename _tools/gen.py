@@ -85,7 +85,8 @@ def nav(active=""):
 
 def footer(apps):
     links = "\n".join(
-        f'          <a href="/apps/{a["slug"]}/">{a["name"]}</a>' for a in apps)
+        [f'          <a href="{s["url"]}">{s["name"]}</a>' for s in SITE_APPS] +
+        [f'          <a href="/apps/{a["slug"]}/">{a["name"]}</a>' for a in apps])
     return f"""  <footer>
     <div class="wrap footer-inner">
       <div class="footer-cols">
@@ -371,6 +372,32 @@ APPS = [
    ("What price does it show?","The live Bitcoin price against USDT, updated in real time."),
    ("Is this financial advice?","No. BTC Prix displays market data for information only. Nothing on it is financial advice — see <a href=\"/finance.html\">Finance by averyio</a> for how we think about markets."),
  ],
+},
+]
+
+# ── apps hosted on averyio.net but outside the /apps/<slug>/ system ──────
+# These ship as their own self-contained page (own CSS, own JS, own visual
+# identity) rather than as an App Store listing with a generated marketing
+# page. They still need a tile on apps.html, a footer link and a sitemap
+# entry — declare them HERE rather than hand-editing the generated HTML,
+# which the generators overwrite. That is exactly how the Centre Circle
+# Finder card was silently lost once already.
+#
+# Do not restyle these pages to the site theme: they keep their own identity
+# on purpose (owner directive 2026-08-09), the same way each App Store app
+# keeps its own.
+SITE_APPS = [
+{
+ "name": "Centre Circle Finder",
+ "url": "/centre-circle-finder/",
+ "asset": "centre-circle-finder",
+ "shot": ("centre-circle-finder-1",
+          "Centre Circle Finder — every UK football ground on one map"),
+ "desc": ("Every professional and semi-professional football ground in the UK "
+          "&mdash; 597 grounds across 31 leagues, on one map."),
+ "tags": ["Web", "Football"],
+ "note": "Free",
+ "priority": "0.8",
 },
 ]
 

@@ -7,7 +7,7 @@ import os
 _src = open(os.path.join(os.path.dirname(__file__), "gen.py"), encoding="utf-8").read()
 exec(_src.split("# ── write app pages")[0], globals())
 
-TODAY = "2026-08-06"
+TODAY = "2026-08-09"
 
 CARD_DESC = {
  "investfast":     "Learn to invest in 24 hours — 144 plain-English lessons on stocks, ETFs and tax.",
@@ -55,6 +55,27 @@ def show_card(a):
               <span class="show-go">&rarr;</span>
             </div>
             <p class="show-tag">{CARD_DESC[a['slug']]}</p>
+            <div class="show-tags">{tags}</div>
+          </div>
+        </a>"""
+
+# Same tile, for an app that lives outside the /apps/<slug>/ system (see
+# SITE_APPS in gen.py). Identical markup to show_card so the grid stays
+# uniform; it just links straight to the app's own page.
+def site_app_card(s):
+    n, alt = s["shot"]
+    tags = "".join(f'<span class="tag">{t}</span>' for t in s["tags"])
+    if s.get("note"):
+        tags += f'<span class="tag neutral">{s["note"]}</span>'
+    return f"""        <a href="{s['url']}" class="show">
+          <div class="show-stage"><img src="/assets/apps/{n}.webp" srcset="/assets/apps/{n}-sm.webp 320w, /assets/apps/{n}.webp 638w" sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 31vw" alt="{alt}" width="638" height="1387" loading="lazy" decoding="async" /></div>
+          <div class="show-body">
+            <div class="show-head">
+              <img class="app-icon" src="/assets/apps/{s['asset']}-icon.webp" srcset="/assets/apps/{s['asset']}-icon.webp 1x, /assets/apps/{s['asset']}-icon@2x.webp 2x" alt="" width="46" height="46" loading="lazy" decoding="async" />
+              <p class="show-name">{s['name']}</p>
+              <span class="show-go">&rarr;</span>
+            </div>
+            <p class="show-tag">{s['desc']}</p>
             <div class="show-tags">{tags}</div>
           </div>
         </a>"""
@@ -222,6 +243,7 @@ ap += f"""
         <h2>Everything we have shipped</h2>
       </div>
       <div class="show-grid">
+{chr(10).join(site_app_card(s) for s in SITE_APPS)}
 {chr(10).join(show_card(a) for a in APPS)}
       </div>
     </div>
@@ -522,11 +544,20 @@ W("404.html", nf)
 urls = [(SITE+"/", "1.0"), (SITE+"/apps.html", "0.9"), (SITE+"/finance.html", "0.7"),
         (SITE+"/privacy.html", "0.3"), (SITE+"/contact.html", "0.5")]
 urls += [(f"{SITE}/apps/{a['slug']}/", "0.8") for a in APPS]
+urls += [(SITE + s["url"], s["priority"]) for s in SITE_APPS]
 urls += [(SITE+p, "0.2") for _, p in PRIV]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 for u, pr in urls:
     sm += f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{TODAY}</lastmod>\n    <priority>{pr}</priority>\n  </url>\n"
 sm += "</urlset>\n"
 W("sitemap.xml", sm)
-W("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
+# Jekyll only hides `_`- and `.`-prefixed paths, so an app folder's dev files
+# (README, dev server) are served publicly alongside the app itself. They hold
+# nothing sensitive — the repo is public — but they should not be indexed.
+NOINDEX = [f"{s['url']}README.md" for s in SITE_APPS] + \
+          [f"{s['url']}serve.py" for s in SITE_APPS]
+W("robots.txt",
+  "User-agent: *\nAllow: /\n"
+  + "".join(f"Disallow: {p}\n" for p in NOINDEX)
+  + f"\nSitemap: {SITE}/sitemap.xml\n")
 print(f"\nsitemap: {len(urls)} URLs")

@@ -18,11 +18,17 @@ PAGES = ["index.html", "apps.html", "finance.html", "contact.html",
          "privacy.html", "404.html"] + sorted(glob.glob("apps/*/index.html"))
 FROZEN = ["privacy-investfast.html", "privacy-surge.html", "privacy-bigtimeclock.html",
           "privacy-lume.html", "privacy-tapdottap.html", "privacy-zenith.html"]
+# Self-contained apps hosted on the site (SITE_APPS in gen.py). They are NOT in
+# PAGES because they ship their own stylesheet — running the site-wide class
+# audit against them would report every one of their classes as an orphan of
+# assets/site.css. They still get link, markup and live-integrity checks.
+STANDALONE = {"centre-circle-finder/index.html": "/centre-circle-finder/"}
 LIVE_MAP = {"index.html": "/", "apps.html": "/apps.html", "finance.html": "/finance.html",
             "privacy.html": "/privacy.html", "contact.html": "/contact.html",
             "404.html": "/404.html", "sitemap.xml": "/sitemap.xml", "robots.txt": "/robots.txt",
             **{f"apps/{s}/index.html": f"/apps/{s}/" for s in
                ["investfast", "surge", "big-time-clock", "lume", "tap-dot-tap", "btc-prix"]},
+            **STANDALONE,
             **{f: "/" + f for f in FROZEN}}
 
 fails = []
@@ -54,7 +60,7 @@ check("no dead CSS rules", not dead, ", ".join(dead))
 
 print("\nLINKS")
 broken, checked = [], 0
-for p in PAGES + FROZEN:
+for p in PAGES + FROZEN + list(STANDALONE):
     src = open(p, encoding="utf-8").read()
     refs = re.findall(r'(?:href|src)="([^"]+)"', src)
     refs += [x.strip().split()[0] for s in re.findall(r'srcset="([^"]+)"', src) for x in s.split(",")]

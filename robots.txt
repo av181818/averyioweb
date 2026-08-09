@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /centre-circle-finder/README.md
+Disallow: /centre-circle-finder/serve.py
 
 Sitemap: https://averyio.net/sitemap.xml
