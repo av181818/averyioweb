@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-  <link rel="stylesheet" href="css/styles.css?v=75">
+  <link rel="stylesheet" href="css/styles.css?v=76">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -96,6 +96,10 @@
               <p class="sub">Pick a city · find a ground · go to the match</p>
             </div>
           </div>
+          <!-- The way back to the rest of the site. In .head-top rather than the
+               strip below it, because .brand .sub and .stat-row are both hidden
+               under 900px and a link nobody can see on a phone is no link. -->
+          <a class="head-home" href="/">averyio<span>.net</span></a>
         </div>
         <div class="stat-row">
           <span class="pill"><b id="club-total">—</b> grounds</span>
@@ -283,7 +287,7 @@
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="data/teams.js?v=2"></script>
-  <script src="js/config.js?v=75"></script>
-  <script src="js/app.js?v=75"></script>
+  <script src="js/config.js?v=76"></script>
+  <script src="js/app.js?v=76"></script>
 </body>
 </html>

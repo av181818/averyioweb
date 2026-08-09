@@ -49,6 +49,9 @@
      matters for one marker at a time, and the amber's pulse ring carries that
      distinction without colour. */
   --visited: #f43f5e;
+  /* The searched-for place. Keep in step with the flag fill in .place-pin .pin,
+     which is inside an SVG data URI and cannot read this. */
+  --locator: #3b82f6;
   --attr-bg: rgba(251, 250, 247, 0.82);
   --wash: rgba(14, 21, 18, 0.045);
   --wash-2: rgba(14, 21, 18, 0.08);
@@ -236,6 +239,22 @@ body.dark #sidebar::before { opacity: 0.05; mix-blend-mode: screen; }
 .side-head > *:not(.aurora):not(.mow) { position: relative; z-index: 2; }
 
 .head-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+/* Sits on the black masthead, so it is dimmed white rather than the app green —
+   quiet enough not to compete with the title, bright enough to find. */
+.head-home {
+  flex: none;
+  margin-top: 3px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+.head-home span { color: rgba(255, 255, 255, 0.38); }
+.head-home:hover, .head-home:hover span { color: #fff; }
 .brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
 .brand .ball { font-size: 26px; line-height: 1; flex: none; }
 .brand h1 {
@@ -1130,6 +1149,12 @@ details[open] .fc-name::before { content: "▾"; }
 .club-tip .tip-league { font-weight: 500; color: rgba(255, 255, 255, 0.6); }
 
 /* corner flag */
+/* The searched-for place, blue rather than green. It used to be the same green
+   as the grounds themselves, so "where I searched" and "a ground" read as the
+   same thing on a crowded map. Blue also survives red-green colour blindness,
+   which green-flag-among-green-grounds-and-red-visited did not.
+   The flag fill is baked into the SVG below and cannot read a custom property —
+   keep it and --locator the same colour. */
 .place-pin { background: none; border: none; }
 .place-pin .pin {
   position: absolute;
@@ -1137,7 +1162,7 @@ details[open] .fc-name::before { content: "▾"; }
   top: 0;
   width: 30px;
   height: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 40'%3E%3Cpath d='M9 38V4' stroke='%23fff' stroke-width='5.5' stroke-linecap='round'/%3E%3Cpath d='M9 38V4' stroke='%230e1512' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M10.6 4.5L27 10.2 10.6 16.4Z' fill='%2300985f' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 40'%3E%3Cpath d='M9 38V4' stroke='%23fff' stroke-width='5.5' stroke-linecap='round'/%3E%3Cpath d='M9 38V4' stroke='%230e1512' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M10.6 4.5L27 10.2 10.6 16.4Z' fill='%233b82f6' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-size: 100% 100%;
   filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.35));
 }
@@ -1148,7 +1173,7 @@ details[open] .fc-name::before { content: "▾"; }
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 2px solid var(--green);
+  border: 2px solid var(--locator);
   opacity: 0;
   animation: pin-pulse 1.8s ease-out infinite;
 }
