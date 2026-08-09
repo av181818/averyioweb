@@ -14,8 +14,16 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://averyio.net"
 os.chdir(ROOT)
 
+def _is_redirect_stub(p):
+    """Retired URLs keep a meta-refresh stub so they do not 404 (REDIRECTS in
+    gen.py). They have no h1, no description and no site chrome by design, so
+    they are excluded from the page audits — but still link-checked and
+    byte-diffed against live."""
+    return 'http-equiv="refresh"' in open(p, encoding="utf-8").read()
+
 PAGES = ["index.html", "apps.html", "finance.html", "contact.html",
-         "privacy.html", "404.html"] + sorted(glob.glob("apps/*/index.html"))
+         "privacy.html", "404.html"] + \
+        [p for p in sorted(glob.glob("apps/*/index.html")) if not _is_redirect_stub(p)]
 FROZEN = ["privacy-investfast.html", "privacy-surge.html", "privacy-bigtimeclock.html",
           "privacy-lume.html", "privacy-tapdottap.html", "privacy-zenith.html"]
 # Self-contained apps hosted on the site (SITE_APPS in gen.py). They are NOT in

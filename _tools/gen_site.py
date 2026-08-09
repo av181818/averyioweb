@@ -51,14 +51,17 @@ def stage_html(a):
 # The tile leads with the app's real App Store artwork, cropped by the
 # stage to its headline and the top of the device. BTC Prix has no
 # screenshots, so it falls back to the monogram on an ink stage.
-def show_card(a):
-    if a["asset"]:
-        icon = (f'<img class="app-icon" src="/assets/apps/{a["asset"]}-icon.webp" '
+# The tile's icon. Products with no App Store icon (BTC Prix) fall back to
+# the monogram, so both card renderers share this.
+def icon_html(a):
+    if a.get("asset"):
+        return (f'<img class="app-icon" src="/assets/apps/{a["asset"]}-icon.webp" '
                 f'srcset="/assets/apps/{a["asset"]}-icon.webp 1x, /assets/apps/{a["asset"]}-icon@2x.webp 2x" '
                 f'alt="" width="46" height="46" loading="lazy" decoding="async" />')
-    else:
-        icon = f'<div class="mono-tile" aria-hidden="true">{a["mono"]}</div>'
+    return f'<div class="mono-tile" aria-hidden="true">{a["mono"]}</div>'
 
+def show_card(a):
+    icon = icon_html(a)
     stage = stage_html(a)
 
     # The real download size rides along on the tile. It used to live in the
@@ -91,7 +94,7 @@ def site_app_card(s):
           {stage_html(s)}
           <div class="show-body">
             <div class="show-head">
-              <img class="app-icon" src="/assets/apps/{s['asset']}-icon.webp" srcset="/assets/apps/{s['asset']}-icon.webp 1x, /assets/apps/{s['asset']}-icon@2x.webp 2x" alt="" width="46" height="46" loading="lazy" decoding="async" />
+              {icon_html(s)}
               <p class="show-name">{s['name']}</p>
               <span class="show-go">&rarr;</span>
             </div>
@@ -112,9 +115,11 @@ _ALL_ICONS = "\n              ".join(
     (f'<img src="/assets/apps/{a["asset"]}-icon.webp" '
      f'srcset="/assets/apps/{a["asset"]}-icon.webp 1x, /assets/apps/{a["asset"]}-icon@2x.webp 2x" '
      f'alt="" width="46" height="46" loading="lazy" decoding="async" />')
-    if a["asset"] else
+    if a.get("asset") else
     f'<span class="show-all-mono" aria-hidden="true">{a["mono"]}</span>'
-    for a in APPS[:6])
+    # every product, not just APPS — BTC Prix moved to SITE_APPS and would
+    # otherwise vanish from the cluster, leaving 5 icons in a 3-wide grid
+    for a in (SITE_APPS + APPS)[:6])
 
 SHOW_MORE = f"""        <a href="/apps.html" class="show show-more">
           <div class="show-stage">
@@ -381,7 +386,7 @@ fin += f"""
           <div class="card-footer"><span class="tag">$15 off</span><span class="tag neutral">Affiliate</span></div>
         </a>
 
-        <a href="/apps/btc-prix/" class="card">
+        <a href="/btc-prix/" class="card">
           <div class="card-top">
             <div class="mono-tile" aria-hidden="true">&#8383;</div>
             <span class="card-arrow">&rarr;</span>
@@ -564,6 +569,26 @@ nf += f"""
 """
 nf += footer(APPS)
 W("404.html", nf)
+
+# ── retired URLs ─────────────────────────────────────────────────────────
+# A meta-refresh stub, not a deletion: the old URL stays resolvable for anyone
+# who has it, and the canonical points Google at the destination. It is
+# deliberately noindex so the two do not compete.
+for path, dest, name in REDIRECTS:
+    W(path, f"""<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <title>{name} has moved</title>
+  <link rel="canonical" href="{SITE}{dest}" />
+  <meta name="robots" content="noindex, follow" />
+  <meta http-equiv="refresh" content="0; url={dest}" />
+</head>
+<body>
+  <p>{name} has moved to <a href="{dest}">{SITE}{dest}</a>.</p>
+</body>
+</html>
+""")
 
 # ── sitemap.xml + robots.txt ─────────────────────────────────────────────
 # lastmod is per-URL, taken from the file's own last commit date. Stamping

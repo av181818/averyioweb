@@ -73,20 +73,5 @@
    "iOS",
    "Game"
   ]
- },
- {
-  "slug": "btc-prix",
-  "asset": null,
-  "name": "BTC Prix",
-  "store_name": "BTC Prix",
-  "tagline": "The live Bitcoin price, free on the web.",
-  "desc": "BTC Prix is a free, real-time Bitcoin price tracker on the web. Live BTC/USDT pricing and market data in a clean, fast page with no account and no ads.",
-  "store_url": "https://averyio.net/btc-prix/",
-  "genre": "Finance",
-  "price_label": "Free",
-  "tags": [
-   "Web",
-   "Crypto"
-  ]
  }
 ]

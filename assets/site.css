@@ -415,13 +415,6 @@ nav {
   background: linear-gradient(140deg, #E24657, #C4152B);
   box-shadow: 0 3px 10px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.25);
 }
-.mono-tile-lg {
-  width: clamp(72px, 11vw, 92px);
-  height: clamp(72px, 11vw, 92px);
-  border-radius: clamp(17px, 2.6vw, 21px);
-  font-size: clamp(2.1rem, 4.4vw, 2.7rem);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.16), 0 20px 44px rgba(196,21,43,0.16), inset 0 1px 0 rgba(255,255,255,0.25);
-}
 
 .tag {
   display: inline-flex;

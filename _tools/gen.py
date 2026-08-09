@@ -346,42 +346,6 @@ APPS = [
    ("Does it collect any data?","No account, no sign-up and no tracking. Nothing is shared unless you opt into the leaderboard. See the <a href=\"/privacy-tapdottap.html\">Tap Dot Tap privacy policy</a>."),
  ],
 },
-{
- # No App Store screenshots, so the tile used to fall back to the bare
- # monogram on ink. This is BTC Prix's own share image, cropped to 5:4.
- "tile": ("btcprix-tile", "BTC Prix — the live Bitcoin price, free on the web"),
- # The app itself moved off btcprix.net and onto this domain (2026-08-09), so
- # the "open it" links point at /btc-prix/ rather than the old domain. The
- # marketing page at /apps/btc-prix/ stays where it is — it is indexed and
- # externally linked, and the two serve different jobs.
- "hosted": "/btc-prix/",
- "slug":"btc-prix", "size":None, "footprint":"There is nothing to install at all. BTC Prix is a single clean page that loads in a blink on a phone or a laptop — no app, no account and no ad scripts sitting between you and the price.", "ios":None, "mono":"\u20bf", "asset":None, "name":"BTC Prix",
- "store_name":"BTC Prix",
- "tagline":"The live Bitcoin price, free on the web.",
- "title":"BTC Prix — Live Bitcoin Price (BTC/USDT) Tracker | averyio",
- "desc":"BTC Prix is a free, real-time Bitcoin price tracker on the web. Live BTC/USDT pricing and market data in a clean, fast page with no account and no ads.",
- "lead":"BTC Prix is a free real-time Bitcoin price tracker that runs in any browser. Live BTC/USDT pricing and market data on a clean, fast page — nothing to install, no account to create, and no ads in the way of the number you came for.",
- "appid":None,
- "store_url":"https://averyio.net/btc-prix/",
- "privacy":None,
- "category":"FinanceApplication", "genre":"Finance",
- "price":"0", "price_label":"Free",
- "meta":["Free","Web · any browser","No account","Finance · Crypto","Real time"],
- "tags":["Web","Crypto"],
- "shots":[],
- "features":[
-   ("chart","Live BTC/USDT pricing","The current Bitcoin price streamed in real time, so the number in front of you is the number right now."),
-   ("bolt","Fast and lightweight","It opens straight to the number. No splash screen, no cookie wall, and nothing to wait for before the price appears."),
-   ("eye","Readable at a glance","Built to be left open in a tab or propped on a second screen while you get on with something else."),
-   ("shield","No account, no ads","Nothing to sign up for and nothing selling to you. Open the page and read the price."),
- ],
- "faq":[
-   ("Is BTC Prix free?","Yes. BTC Prix is completely free to use, with no account and no ads."),
-   ("Do I need to install anything?","No. BTC Prix runs in any modern browser on phone, tablet or desktop. Add it to your home screen if you want it a tap away."),
-   ("What price does it show?","The live Bitcoin price against USDT, updated in real time."),
-   ("Is this financial advice?","No. BTC Prix displays market data for information only. Nothing on it is financial advice — see <a href=\"/finance.html\">Finance by averyio</a> for how we think about markets."),
- ],
-},
 ]
 
 # ── apps hosted on averyio.net but outside the /apps/<slug>/ system ──────
@@ -411,7 +375,29 @@ SITE_APPS = [
  "note": "Free",
  "priority": "0.8",
 },
+{
+ # Moved out of APPS on 2026-08-09. It had a generated /apps/btc-prix/
+ # marketing page, so the tile led to a description page and only then to
+ # the app — a middle layer the owner asked to remove. The tile now goes
+ # straight to the app. The old URL still resolves via REDIRECTS below.
+ "name": "BTC Prix",
+ "url": "/btc-prix/",
+ "asset": None,          # no App Store icon — falls back to the ₿ monogram
+ "mono": "₿",
+ "tile": ("btcprix-tile", "BTC Prix — the live Bitcoin price, free on the web"),
+ "desc": "Real-time Bitcoin price tracking, free on the web.",
+ "tags": ["Web", "Crypto"],
+ "note": "Free",
+ "priority": "0.7",
+},
 ]
+
+# ── retired URLs ─────────────────────────────────────────────────────────
+# GitHub Pages cannot issue a 301, so a page that moves leaves a meta-refresh
+# stub behind: the old URL keeps working for anyone who has it, and the
+# canonical consolidates its ranking onto the destination. Deleting the file
+# outright would 404 a URL that is indexed and linked from the sitemap.
+REDIRECTS = [("apps/btc-prix/index.html", "/btc-prix/", "BTC Prix")]
 
 ETHOS = [
  ("No bloat","Megabytes, not gigabytes. No frameworks bolted on, no ad libraries, no analytics SDK phoning home — nothing ships that has not earned its place."),
@@ -461,9 +447,13 @@ def app_page(app, apps):
     url = f"{SITE}/apps/{app['slug']}/"
     icon = f"/assets/apps/{app['asset']}-icon.webp" if app["asset"] else "/assets/logo-256.png"
     icon2x = f"/assets/apps/{app['asset']}-icon@2x.webp" if app["asset"] else "/assets/logo-256.png"
-    hero_icon = (f'<img class="app-icon-lg" src="{icon2x}" alt="{app["name"]} app icon" width="92" height="92" />'
-                 if app["asset"] else
-                 f'<div class="mono-tile mono-tile-lg" aria-hidden="true">{app["mono"]}</div>')
+    # Every APPS entry has an App Store icon. The monogram fallback went with
+    # BTC Prix when it moved to SITE_APPS, and its `.mono-tile-lg` rule was
+    # deleted as dead CSS — so an assetless app here would render unstyled.
+    if not app["asset"]:
+        raise SystemExit(f"{app['name']}: /apps/<slug>/ pages need an 'asset' icon.")
+    hero_icon = (f'<img class="app-icon-lg" src="{icon2x}" '
+                 f'alt="{app["name"]} app icon" width="92" height="92" />')
 
     sw = {
       "@context":"https://schema.org", "@type":"SoftwareApplication",
