@@ -944,12 +944,50 @@ details[open] .fc-name::before { content: "▾"; }
 /* ---- groundhopper ------------------------------------------------------- */
 
 /* the tick control on a club card */
+/* The button and its ⓘ share the row that .pp-visit used to occupy alone, so
+   the inset stays on the row and the button just flexes to fill what is left. */
+.pp-visit-row {
+  display: flex;
+  align-items: stretch;
+  gap: 7px;
+  margin: 10px 14px 0;
+}
+.pp-info {
+  flex: none;
+  width: 34px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+}
+.pp-info:hover { border-color: var(--green); color: var(--ink); }
+.pp-info.is-on {
+  color: var(--on-green);
+  background: var(--green-dk);
+  border-color: var(--green-dk);
+}
+.pp-note {
+  margin: 7px 14px 0;
+  padding: 9px 11px;
+  font-size: 11.5px;
+  line-height: 1.42;
+  color: var(--muted);
+  background: var(--wash);
+  border-radius: var(--r2);
+}
+.pp-note b { color: var(--ink-2); font-weight: 600; }
+
 .pp-visit {
   display: flex;
   align-items: center;
   gap: 9px;
-  width: calc(100% - 28px);
-  margin: 10px 14px 0;
+  flex: 1;
   padding: 9px 11px;
   font-family: var(--font-display);
   font-size: 15px;
@@ -1155,7 +1193,17 @@ body.hl-on .cl-donut { opacity: 0.2; }
 }
 .maplibregl-popup-close-button:hover { color: #fff; background: none; }
 
-.pp { width: 262px; max-width: 100%; }
+/* A ceiling so the card can never outgrow the map. With the ⓘ note open the
+   card is ~560px, which does not fit above or below the pin on a short laptop
+   window — re-anchoring cannot help when neither side has room, so the card
+   scrolls inside itself instead of hanging off the bottom. */
+.pp {
+  width: 262px;
+  max-width: 100%;
+  max-height: min(84vh, 600px);
+  overflow-y: auto;
+  overscroll-behavior: contain;   /* don't hand the scroll to the map behind */
+}
 /* header band: black, like the masthead */
 .pp-head {
   display: flex;

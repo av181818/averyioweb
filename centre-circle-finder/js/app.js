@@ -538,6 +538,17 @@
 
   // ---------- popup / selection ----------
 
+  // Behind the ⓘ next to "Mark as visited". Deliberately the same words as the
+  // .tally-note paragraph in index.html — the warning matters most at the moment
+  // someone starts a collection, which is here, not in a panel they may never
+  // open. **If you edit one, edit the other.**
+  const VISIT_NOTE =
+    'Open any ground and tap <b>Mark as visited</b> to tick it off. ' +
+    "Your list is saved <b>in this browser only</b> — there's no account, so " +
+    'clearing your browsing data, or switching browser or device, starts you ' +
+    'from scratch. Use <b>Export</b> to save a backup file, and <b>Import</b> ' +
+    'to merge it back in.';
+
   function popupHtml(t) {
     const lg = LEAGUES[t.league];
     const cap = fmtCap(t.capacity);
@@ -557,10 +568,16 @@
           <div class="pp-stat"><div class="k">Capacity</div><div class="v num">${cap || "—"}</div></div>
           <div class="pp-stat wide"><div class="k">Status</div><div class="v">${esc(lg.status)} <span class="lvl-pill">Level ${lg.tier} · ${esc(lg.country)}</span></div></div>
         </div>
-        <button class="pp-visit${isVisited(t) ? " is-on" : ""}" onclick="window._ukfmVisit(${t.id})">
-          <span class="pv-box" aria-hidden="true">${isVisited(t) ? "✓" : ""}</span>
-          ${isVisited(t) ? "Been here" : "Mark as visited"}
-        </button>
+        <div class="pp-visit-row">
+          <button class="pp-visit${isVisited(t) ? " is-on" : ""}" onclick="window._ukfmVisit(${t.id})">
+            <span class="pv-box" aria-hidden="true">${isVisited(t) ? "✓" : ""}</span>
+            ${isVisited(t) ? "Been here" : "Mark as visited"}
+          </button>
+          <button class="pp-info" type="button" aria-expanded="false"
+                  aria-label="How your ticked-off list is stored"
+                  onclick="window._ukfmVisitInfo(this)">i</button>
+        </div>
+        <p class="pp-note" hidden>${VISIT_NOTE}</p>
         <div class="pp-actions">
           <a class="pp-btn primary" href="${gmaps}" target="_blank" rel="noopener">Directions</a>
           <button class="pp-btn" onclick="window._ukfmNearby(${t.id})">Nearby</button>
@@ -985,6 +1002,38 @@
     renderTally();
     if (currentPopup) currentPopup.setHTML(popupHtml(t));
     markLiveState();
+  };
+
+  // The ⓘ beside "Mark as visited". A native title= tooltip would be invisible
+  // on a touch screen, which is most of this app's use, so it toggles a note.
+  window._ukfmVisitInfo = (btn) => {
+    const note = btn.closest(".pp").querySelector(".pp-note");
+    if (!note) return;
+    const opening = note.hidden;
+    note.hidden = !opening;
+    btn.setAttribute("aria-expanded", opening ? "true" : "false");
+    btn.classList.toggle("is-on", opening);
+    if (!currentPopup) return;
+    // The card just grew by the height of the note. maplibre picks which side of
+    // the pin to hang a popup when it places it and never re-checks, so re-set
+    // the same coordinate to re-run that choice against the new height.
+    currentPopup.setLngLat(currentPopup.getLngLat());
+    // Re-anchoring only helps when one side has room. On a short window neither
+    // does, and the card would keep Directions and Nearby below the fold — so
+    // pan the map by however much is hanging off. Measured next frame, once the
+    // note has actually been laid out.
+    if (!opening) return;
+    // Measured straight away, not in a rAF: reading a rect forces layout, so the
+    // note's height is already accounted for, and a frame callback is throttled
+    // in a background tab — which is exactly when this silently did nothing.
+    const card = btn.closest(".pp");
+    if (!card) return;
+    const c = card.getBoundingClientRect();
+    const m = map.getContainer().getBoundingClientRect();
+    const below = c.bottom - m.bottom + 12;
+    const above = m.top - c.top + 12;
+    if (below > 0) map.panBy([0, below], { duration: 240 });
+    else if (above > 0) map.panBy([0, -above], { duration: 240 });
   };
 
   // "Nearby" button inside popups — re-centre the nearby search on that ground
