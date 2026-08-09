@@ -613,6 +613,26 @@
     markLiveState();
   }
 
+  // maplibre chooses which side of the pin to hang a popup when it places it and
+  // never re-checks, so a tall card — a long club name, or the ⓘ note open — can
+  // hang off the map with Directions and Nearby out of reach. Pan by whatever is
+  // overhanging. A no-op when the card already fits.
+  function fitPopupIntoView() {
+    if (!currentPopup) return;
+    const card = currentPopup.getElement();
+    if (!card) return;
+    const c = card.getBoundingClientRect();
+    const m = map.getContainer().getBoundingClientRect();
+    // On a phone the sheet sits over the foot of the map, so the usable floor is
+    // its top edge rather than the map's — the same allowance flyPad makes.
+    const sheet = isMobile() && $("#sidebar");
+    const floor = sheet ? Math.min(m.bottom, sheet.getBoundingClientRect().top) : m.bottom;
+    const below = c.bottom - floor + 12;
+    const above = m.top - c.top + 12;
+    if (below > 0) map.panBy([0, below], { duration: 240 });
+    else if (above > 0) map.panBy([0, -above], { duration: 240 });
+  }
+
   function openClubPopup(t, recenter) {
     if (currentPopup) currentPopup.remove();
     stopPulse();
@@ -632,7 +652,12 @@
     pulseAt(t);
 
     if (recenter) {
+      // Fit after the ease lands, not during — mid-flight rects are meaningless,
+      // and panning into a running animation fights it.
       map.easeTo({ center: [t.lng, t.lat], padding: flyPad(), duration: 500 });
+      map.once("moveend", fitPopupIntoView);
+    } else {
+      fitPopupIntoView();
     }
   }
 
@@ -1022,18 +1047,10 @@
     // does, and the card would keep Directions and Nearby below the fold — so
     // pan the map by however much is hanging off. Measured next frame, once the
     // note has actually been laid out.
-    if (!opening) return;
     // Measured straight away, not in a rAF: reading a rect forces layout, so the
     // note's height is already accounted for, and a frame callback is throttled
-    // in a background tab — which is exactly when this silently did nothing.
-    const card = btn.closest(".pp");
-    if (!card) return;
-    const c = card.getBoundingClientRect();
-    const m = map.getContainer().getBoundingClientRect();
-    const below = c.bottom - m.bottom + 12;
-    const above = m.top - c.top + 12;
-    if (below > 0) map.panBy([0, below], { duration: 240 });
-    else if (above > 0) map.panBy([0, -above], { duration: 240 });
+    // in a background tab — which is exactly where this silently did nothing.
+    if (opening) fitPopupIntoView();
   };
 
   // "Nearby" button inside popups — re-centre the nearby search on that ground
