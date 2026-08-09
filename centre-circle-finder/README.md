@@ -147,12 +147,9 @@ with an underscore, so Jekyll leaves it alone.
 - **Compact filters** — two chip rows (nation, tier) with live counts cover
   most queries; all 31 leagues sit behind one disclosure. See *Filters* below.
 - **Groundhopper mode** — tick grounds off as you visit them. The **Grounds**
-  tab carries a running tally (`9 of 597`), visited grounds are drawn **red** against the green ones still to do, and a **Ticked off** filter
-  narrows the map to *To visit* or *Visited*. Separately, a **Highlight visited
-on the map** toggle turns the colour-coding off without hiding anything — the
-grounds stay put and simply revert to ordinary green footballs, which keeps
-"stop colouring my map" distinct from "filter these out". It persists across
-visits. Those filter chips carry colour
+  tab carries a running tally (`9 of 597`), visited grounds are drawn **red**
+  against the green ones still to do, and a **Ticked off** filter narrows the
+  map to *To visit* or *Visited*. Those filter chips carry colour
   swatches, so they double as the map's key and no legend has to sit over the
   map. **Export / Import** write and read a small versioned `.json` file;
   import *merges* and silently drops any slug that doesn't match a current club.

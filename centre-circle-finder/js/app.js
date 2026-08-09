@@ -154,12 +154,6 @@
   const isVisited = (t) => visited.has(t.slug);
   // "all" | "todo" | "done" — a view filter, never a data change
   let visitFilter = "all";
-  // Purely a display setting: off means visited grounds still show, just as
-  // ordinary green footballs. It does NOT hide them — that's what the
-  // "Ticked off" filter is for. Persisted, because toggles should stick.
-  let highlightVisited = (localStorage.getItem("ccf-highlight") ??
-    localStorage.getItem("footballmap-highlight") ??
-    localStorage.getItem("awaydays-highlight")) !== "0";
 
   // Coordinates carry `exact` when verified against OpenStreetMap / Wikidata.
   // Unverified professional grounds (levels 1–4) came from stadium infoboxes and
@@ -384,7 +378,7 @@
       properties: {
         id: t.id, league: t.league, tier: lg.tier,
         // drives the icon only; the record itself is untouched
-        visited: highlightVisited && isVisited(t)
+        visited: isVisited(t)
       }
     };
   }
@@ -1186,16 +1180,6 @@
     document.querySelectorAll("#visit-chips .f-chip").forEach((chip) => {
       chip.classList.toggle("on", chip.dataset.visit === visitFilter);
       chip.querySelector(".fc-n").textContent = counts[chip.dataset.visit];
-    });
-  }
-
-  const showVisited = $("#show-visited");
-  if (showVisited) {
-    showVisited.checked = highlightVisited;
-    showVisited.addEventListener("change", () => {
-      highlightVisited = showVisited.checked;
-      try { localStorage.setItem("ccf-highlight", highlightVisited ? "1" : "0"); } catch {}
-      refresh();               // re-icons the layer; nothing is filtered out
     });
   }
 
