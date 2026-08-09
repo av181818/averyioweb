@@ -1145,8 +1145,9 @@
     $("#tally-n").textContent = n;
     $("#tally-of").textContent = "of " + TEAMS.length;
     $("#tally-fill").style.width = (n / TEAMS.length * 100).toFixed(2) + "%";
-    $("#tally-clear").hidden = n === 0;
-    $("#tally-export").hidden = n === 0;
+    // disabled, not hidden — see the comment on these buttons in index.html
+    $("#tally-clear").disabled = n === 0;
+    $("#tally-export").disabled = n === 0;
     syncVisitChips();
   }
 

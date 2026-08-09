@@ -506,6 +506,15 @@ body.dark #sidebar::before { opacity: 0.05; mix-blend-mode: screen; }
   padding: 3px 4px;
 }
 .link-btn:hover { text-decoration: underline; }
+/* Export/Clear sit disabled until something is ticked off. Muted rather than
+   removed, so the feature stays visible and the panel's note about Export
+   still points at something real. */
+.link-btn:disabled {
+  color: var(--muted);
+  opacity: 0.55;
+  cursor: default;
+}
+.link-btn:disabled:hover { text-decoration: none; }
 
 /* ==========================================================================
    EXPLORE

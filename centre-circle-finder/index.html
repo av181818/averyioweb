@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-  <link rel="stylesheet" href="css/styles.css?v=66">
+  <link rel="stylesheet" href="css/styles.css?v=67">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -215,9 +215,15 @@
             <div class="tally-head">
               <span class="tally-label">Grounds ticked off</span>
               <span class="tally-tools">
-                <button id="tally-export" class="link-btn" hidden>Export</button>
+                <!-- Export and Clear stay visible with nothing ticked off, and are
+                     disabled instead of hidden: the note below tells you to "use
+                     Export to save a backup", and a control that is not there to
+                     see reads as a missing feature rather than an inactive one. -->
+                <button id="tally-export" class="link-btn" disabled
+                        title="Tick off a ground first — there is nothing to export yet">Export</button>
                 <button id="tally-import" class="link-btn">Import</button>
-                <button id="tally-clear" class="link-btn" hidden>Clear</button>
+                <button id="tally-clear" class="link-btn" disabled
+                        title="Tick off a ground first — there is nothing to clear yet">Clear</button>
               </span>
             </div>
             <input id="tally-file" type="file" accept="application/json,.json" hidden>
@@ -274,7 +280,7 @@
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="data/teams.js?v=2"></script>
-  <script src="js/config.js?v=66"></script>
-  <script src="js/app.js?v=66"></script>
+  <script src="js/config.js?v=67"></script>
+  <script src="js/app.js?v=67"></script>
 </body>
 </html>
