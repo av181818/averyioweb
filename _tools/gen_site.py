@@ -624,13 +624,22 @@ for u, pr, src in urls:
            f"    <priority>{pr}</priority>\n  </url>\n")
 sm += "</urlset>\n"
 W("sitemap.xml", sm)
-# Jekyll only hides `_`- and `.`-prefixed paths, so an app folder's dev files
-# (README, dev server) are served publicly alongside the app itself. They hold
-# nothing sensitive — the repo is public — but they should not be indexed.
-NOINDEX = [f"{s['url']}README.md" for s in SITE_APPS] + \
-          [f"{s['url']}serve.py" for s in SITE_APPS] + \
-          [f"{a['hosted']}{f}" for a in APPS if a.get("hosted")
-           for f in ("SEO_ACTION_CHECKLIST.md", "SEO_OPTIMIZATION_GUIDE.md", "vercel.json")]
+# Jekyll only hides `_`- and `.`-prefixed paths, so an app folder's working
+# files (notes, dev server) are served publicly alongside the app itself. They
+# hold nothing sensitive — the repo is public — but they should not be indexed.
+#
+# Found by looking, not by listing: the previous version named README.md and
+# serve.py for every SITE_APP and a third set keyed off APPS' "hosted" flag.
+# BTCPRIX lost that flag when it moved into SITE_APPS, so its two SEO markdown
+# files went unlisted and stayed crawlable, while robots disallowed a README and
+# a serve.py that do not exist in its folder. Globbing keeps the file and the
+# rule in step no matter which app grows or loses one.
+import glob as _glob
+NOINDEX = sorted(
+    s["url"] + os.path.basename(p)
+    for s in SITE_APPS
+    for pattern in ("*.md", "*.py")
+    for p in _glob.glob(os.path.join(ROOT, s["url"].strip("/"), pattern)))
 W("robots.txt",
   "User-agent: *\nAllow: /\n"
   + "".join(f"Disallow: {p}\n" for p in NOINDEX)

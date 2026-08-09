@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /btc-prix/SEO_ACTION_CHECKLIST.md
+Disallow: /btc-prix/SEO_OPTIMIZATION_GUIDE.md
 Disallow: /centre-circle-finder/README.md
-Disallow: /btc-prix/README.md
 Disallow: /centre-circle-finder/serve.py
-Disallow: /btc-prix/serve.py
 
 Sitemap: https://averyio.net/sitemap.xml
