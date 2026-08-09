@@ -542,7 +542,6 @@
     const lg = LEAGUES[t.league];
     const cap = fmtCap(t.capacity);
     const gmaps = `https://www.google.com/maps/search/?api=1&query=${t.lat}%2C${t.lng}`;
-    const wiki = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(t.name + " football club")}`;
     return `
       <div class="pp">
         <div class="pp-head">
@@ -564,7 +563,6 @@
         </button>
         <div class="pp-actions">
           <a class="pp-btn primary" href="${gmaps}" target="_blank" rel="noopener">Directions</a>
-          <a class="pp-btn" href="${wiki}" target="_blank" rel="noopener">Club info</a>
           <button class="pp-btn" onclick="window._ukfmNearby(${t.id})">Nearby</button>
         </div>
         ${links.hotels || links.transit ? `<div class="pp-actions secondary">

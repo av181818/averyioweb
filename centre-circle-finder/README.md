@@ -133,7 +133,7 @@ with an underscore, so Jekyll leaves it alone.
   the results appear where you just tapped, not further down the panel.
 - **Club cards** — a team-sheet card: click any dot for stadium, town, capacity
   and status (with the pyramid level inline), plus
-  **Directions** (Google Maps), **Club info** (Wikipedia) and **Nearby** — which
+  **Directions** (Google Maps) and **Nearby** — which
   re-centres the nearby search on that ground for hopping between matches.
 - **League spotlight** — hover any league in the filter list and only those
   grounds stay lit on the map; everything else dims. Pointer-only, so the
