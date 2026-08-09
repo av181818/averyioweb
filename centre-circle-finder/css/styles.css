@@ -1153,8 +1153,10 @@ details[open] .fc-name::before { content: "▾"; }
    as the grounds themselves, so "where I searched" and "a ground" read as the
    same thing on a crowded map. Blue also survives red-green colour blindness,
    which green-flag-among-green-grounds-and-red-visited did not.
-   The flag fill is baked into the SVG below and cannot read a custom property —
-   keep it and --locator the same colour. */
+   Blue throughout: #3b82f6 flag, #1d4ed8 pole, so the pole still reads as a
+   pole instead of merging into the flag. Both are baked into the SVG below and
+   cannot read a custom property — keep the flag and --locator in step. The
+   white halo under the pole is what keeps it legible on any map tile. */
 .place-pin { background: none; border: none; }
 .place-pin .pin {
   position: absolute;
@@ -1162,7 +1164,7 @@ details[open] .fc-name::before { content: "▾"; }
   top: 0;
   width: 30px;
   height: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 40'%3E%3Cpath d='M9 38V4' stroke='%23fff' stroke-width='5.5' stroke-linecap='round'/%3E%3Cpath d='M9 38V4' stroke='%230e1512' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M10.6 4.5L27 10.2 10.6 16.4Z' fill='%233b82f6' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 40'%3E%3Cpath d='M9 38V4' stroke='%23fff' stroke-width='5.5' stroke-linecap='round'/%3E%3Cpath d='M9 38V4' stroke='%231d4ed8' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M10.6 4.5L27 10.2 10.6 16.4Z' fill='%233b82f6' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-size: 100% 100%;
   filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.35));
 }
