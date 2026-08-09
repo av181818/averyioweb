@@ -151,10 +151,15 @@ org = {
 }
 website = {"@context":"https://schema.org","@type":"WebSite","name":"averyio",
            "url":SITE+"/","publisher":{"@type":"Organization","name":"averyio"}}
+# Every product, in the order the apps page lists them. SITE_APPS must be in
+# here too — an ItemList that omits a product tells Google the line-up is
+# smaller than it is.
+_all_products = [(s["name"], SITE + s["url"]) for s in SITE_APPS] + \
+                [(a["name"], f"{SITE}/apps/{a['slug']}/") for a in APPS]
 itemlist = {
   "@context":"https://schema.org","@type":"ItemList","name":"Apps by averyio",
-  "itemListElement":[{"@type":"ListItem","position":i,"name":a["name"],
-                      "url":f"{SITE}/apps/{a['slug']}/"} for i, a in enumerate(APPS, 1)]}
+  "itemListElement":[{"@type":"ListItem","position":i,"name":n,"url":u}
+                     for i,(n,u) in enumerate(_all_products, 1)]}
 
 # The hero trio, in DOM order: left (rotated back), centre (forward), right.
 HERO_SHOTS = [("surge-1","Surge, the interval timer, running on iPhone"),
@@ -165,7 +170,7 @@ hero_fan = "\n".join(
     f'sizes="220px" alt="{alt}" width="638" height="1387" decoding="async" />'
     for n, alt in HERO_SHOTS)
 
-home = head("averyio — Fast, Lightweight Apps for iPhone, iPad & the Web. No Bloat.",
+home = head("averyio — Small, Fast Apps for iPhone, iPad & the Web",
   "Small, fast apps for iPhone, iPad and the web — megabytes, not gigabytes. No subscriptions, no ads, no tracking and no bloat.",
   SITE+"/", extra=ld(org)+ld(website)+ld(itemlist))
 home += nav("home")
@@ -241,7 +246,7 @@ apps_bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListEle
   {"@type":"ListItem","position":2,"name":"averyioApps","item":SITE+"/apps.html"}]}
 apps_list = dict(itemlist); apps_list["name"] = "All apps by averyio"
 
-ap = head("averyioApps — iPhone, iPad & Web Apps With No Ads, No Subscriptions",
+ap = head("averyioApps — iPhone & iPad Apps, No Ads, No Subscriptions",
   "Every app by averyio for iPhone, iPad and the web. Each one tiny, fast and focused on a single job — with no subscriptions, no ads and no tracking.",
   SITE+"/apps.html", extra=ld(apps_list)+ld(apps_bc))
 ap += nav("apps")
@@ -324,7 +329,7 @@ principle_cards = "\n".join(
           <p>{d}</p>
         </div>""" for i, (t, d) in enumerate(PRINCIPLES, 1))
 
-fin = head("averyioFinance — Daily Market Recaps, Dip Buying & Long-Term Investing",
+fin = head("averyioFinance — Market Recaps & Long-Term Investing",
   "Daily market recaps, dip-buying vibes and a long-term take on investing that refuses to get excited. Educational only — never financial advice.",
   SITE+"/finance.html", extra=ld(fin_brand)+ld(fin_bc))
 fin += nav("finance")
@@ -429,7 +434,7 @@ W("finance.html", fin)
 con_bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
   {"@type":"ListItem","position":1,"name":"Home","item":SITE+"/"},
   {"@type":"ListItem","position":2,"name":"Contact","item":SITE+"/contact.html"}]}
-con = head("Contact averyio",
+con = head("Contact averyio — Questions, Bugs & App Ideas",
   "Get in touch with averyio. The fastest way to reach us is on X, @averyio18.",
   SITE+"/contact.html", extra=ld(con_bc))
 con += nav("contact")
@@ -505,7 +510,7 @@ PRIV = [("InvestFast","/privacy-investfast.html"),("Surge","/privacy-surge.html"
 priv_bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
   {"@type":"ListItem","position":1,"name":"Home","item":SITE+"/"},
   {"@type":"ListItem","position":2,"name":"Privacy","item":SITE+"/privacy.html"}]}
-pv = head("Privacy Policies — averyio",
+pv = head("Privacy — No Tracking, No Ads, No Data Sold | averyio",
   "Privacy policies for every averyio app. No tracking, no ads and no data sold — read the full policy for each app in plain English.",
   SITE+"/privacy.html", extra=ld(priv_bc))
 pv += nav("privacy")
@@ -561,14 +566,27 @@ nf += footer(APPS)
 W("404.html", nf)
 
 # ── sitemap.xml + robots.txt ─────────────────────────────────────────────
-urls = [(SITE+"/", "1.0"), (SITE+"/apps.html", "0.9"), (SITE+"/finance.html", "0.7"),
-        (SITE+"/privacy.html", "0.3"), (SITE+"/contact.html", "0.5")]
-urls += [(f"{SITE}/apps/{a['slug']}/", "0.8") for a in APPS]
-urls += [(SITE + s["url"], s["priority"]) for s in SITE_APPS]
-urls += [(SITE+p, "0.2") for _, p in PRIV]
+# lastmod is per-URL, taken from the file's own last commit date. Stamping
+# every URL with today's date (which this used to do) makes lastmod worthless:
+# Google learns the dates do not track real changes and starts ignoring them.
+import subprocess
+def _lastmod(path):
+    d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", path],
+                       cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    return d or TODAY
+
+urls = [(SITE+"/", "1.0", "index.html"),
+        (SITE+"/apps.html", "0.9", "apps.html"),
+        (SITE+"/finance.html", "0.7", "finance.html"),
+        (SITE+"/privacy.html", "0.3", "privacy.html"),
+        (SITE+"/contact.html", "0.5", "contact.html")]
+urls += [(f"{SITE}/apps/{a['slug']}/", "0.8", f"apps/{a['slug']}/index.html") for a in APPS]
+urls += [(SITE + s["url"], s["priority"], s["url"].strip("/") + "/index.html") for s in SITE_APPS]
+urls += [(SITE+p, "0.2", p.lstrip("/")) for _, p in PRIV]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-for u, pr in urls:
-    sm += f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{TODAY}</lastmod>\n    <priority>{pr}</priority>\n  </url>\n"
+for u, pr, src in urls:
+    sm += (f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{_lastmod(src)}</lastmod>\n"
+           f"    <priority>{pr}</priority>\n  </url>\n")
 sm += "</urlset>\n"
 W("sitemap.xml", sm)
 # Jekyll only hides `_`- and `.`-prefixed paths, so an app folder's dev files

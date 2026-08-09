@@ -24,7 +24,7 @@ SITE = "https://averyio.net"
 # ── shared chrome ────────────────────────────────────────────────────────
 def head(title, desc, canonical, og_image="/assets/og-image.png", extra=""):
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,6 +33,7 @@ def head(title, desc, canonical, og_image="/assets/og-image.png", extra=""):
   <link rel="canonical" href="{canonical}" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="averyio" />
+  <meta property="og:locale" content="en_GB" />
   <meta property="og:title" content="{title}" />
   <meta property="og:description" content="{desc}" />
   <meta property="og:image" content="{SITE}{og_image}" />
@@ -155,7 +156,7 @@ APPS = [
  "slug":"investfast", "size":"1.8", "footprint":"Every one of the 144 lessons, the whole course, your progress and your stats — in about 1.8 MB. No ad library, no tracking SDK, nothing taking up room that is not the course itself.", "ios":"18.6", "asset":"investfast", "name":"InvestFast",
  "store_name":"Invest Fast: Stocks & Money",
  "tagline":"Learn to invest in 24 hours.",
- "title":"InvestFast — Learn to Invest in 24 Hours | Investing App for Beginners",
+ "title":"InvestFast — Learn to Invest in 24 Hours, for Beginners",
  "desc":"Learn to invest in 24 hours. 144 plain-English lessons on stocks, ETFs, index funds and tax. Module 1 free — one-time unlock, no subscription, no ads.",
  "lead":"InvestFast is a beginner investing course built into an iPhone and iPad app. Twenty-four modules and 144 bite-sized lessons take you from zero to confident — mindset, money, investing, tax and alternatives, ending in an investing plan of your own. No fluff, no jargon, no tickers to chase.",
  "appid":"6762561241",
@@ -194,7 +195,7 @@ APPS = [
  "slug":"surge", "size":"0.8", "footprint":"The entire timer is under a megabyte — smaller than one photo on your phone. No ads, no account and no data collection, so nothing ships that is not the timer.", "ios":"18.6", "asset":"surge", "name":"Surge",
  "store_name":"Surge: Interval Timer & HIIT",
  "tagline":"An interval timer built for the way you actually train.",
- "title":"Surge — Interval Timer & HIIT App for iPhone & iPad | averyio",
+ "title":"Surge — Interval Timer & HIIT App for iPhone & iPad",
  "desc":"A HIIT and interval timer for iPhone and iPad with Tabata, Boxing and EMOM presets built in. Audio cues, haptics, no ads and no subscription.",
  "lead":"Surge is an interval timer for HIIT, Tabata, boxing rounds, EMOM and any circuit-style workout — at home, in the gym or ringside. Set your work and rest periods, pick your rounds, and press play. No sign-up, no setup screens, no ads standing between you and the first round.",
  "appid":"6762224044",
@@ -232,7 +233,7 @@ APPS = [
  "slug":"big-time-clock", "size":"0.4", "footprint":"It is a clock. It should be tiny, and it is — about 0.4 MB, one of the smallest things we have shipped. Small enough to leave on a decade-old iPhone you have repurposed as a bedside display without a second thought.", "ios":"18.6", "asset":"bigtimeclock", "name":"Big Time Clock",
  "store_name":"Big Time Clock: Full Screen",
  "tagline":"Turn any iPhone or iPad into a full-screen clock.",
- "title":"Big Time Clock — Full Screen Clock App for iPhone & iPad | averyio",
+ "title":"Big Time Clock — Full Screen Clock for iPhone & iPad",
  "desc":"Turn an iPhone or iPad into a full-screen digital or analog clock for a bedside, desk or kitchen. 12/24-hour, screen stays awake, no ads.",
  "lead":"A clean black canvas, crisp numerals, and nothing else competing for your attention — ideal for a bedside table, a desk, the kitchen counter or a studio wall. It is the perfect second life for an older iPhone or iPad.",
  "appid":"6763140176",
@@ -271,7 +272,7 @@ APPS = [
  "slug":"lume", "size":"1.8", "footprint":"A full task manager, 12 ranks of progression, a stats dashboard and a 180-day heatmap, all inside about 1.8 MB. No analytics SDK, no ad library and no account system — so none of that weight ever ships to your phone.", "ios":"17.0", "asset":"lume", "name":"Lume",
  "store_name":"Lume: Simple Task & To Do List",
  "tagline":"A to-do list you actually want to open.",
- "title":"Lume — Gamified To-Do List & Task Manager for iPhone & iPad | averyio",
+ "title":"Lume — Gamified To-Do List & Task Manager for iPhone",
  "desc":"A gamified to-do list for iPhone and iPad. Finish tasks to earn points, climb 12 ranks and keep a streak alive. Free iCloud sync, no ads, no account.",
  "lead":"Every task you finish earns points, beating a due date earns a bonus, and a daily streak keeps the momentum going. It is a real task manager first and a game second — fast to capture, sorted by what is actually due next.",
  "appid":"6770331131",
@@ -310,7 +311,7 @@ APPS = [
  "slug":"tap-dot-tap", "size":"1.2", "footprint":"The whole game, every neon skin and the leaderboard come to about 1.2 MB. Nothing ships that is not the game itself.", "ios":"17.0", "asset":"tapdottap", "name":"Tap Dot Tap",
  "store_name":"Tap Dot Tap: Neon Speed Test",
  "tagline":"A dot appears. Tap it before it vanishes.",
- "title":"Tap Dot Tap — Reaction Time & Reflex Game for iPhone | averyio",
+ "title":"Tap Dot Tap — Reaction Time & Reflex Game for iPhone",
  "desc":"A one-tap reflex and reaction time game for iPhone. Tap the dot before it vanishes — one miss ends the run. Game Center leaderboards, offline, no ads.",
  "lead":"A one-tap reflex game that puts your reaction time on trial. Miss a single one and the run is over. Simple to learn and ruthless to master, because the targets keep shrinking and speeding up the longer you last.",
  "appid":"6778353191",

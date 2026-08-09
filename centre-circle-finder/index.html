@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Centre Circle Finder — Every UK Football Ground on One Map | averyio</title>
+  <!-- Kept under 60 characters so Google shows it whole. og:title below is
+       deliberately the longer, more descriptive form — social cards have no
+       such limit, and the extra words help there. -->
+  <title>Centre Circle Finder — Every UK Football Ground Mapped</title>
   <!-- Keep this under ~160 characters: Google truncates around there, and the
        original 260-character version lost its last hundred in search results.
        The longer form still lives in og:description and the JSON-LD below,
@@ -13,6 +16,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="averyio">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Centre Circle Finder — Every UK Football Ground on One Map | averyio">
   <meta property="og:description" content="Find every professional and semi-professional football ground in the UK — 597 grounds across 31 leagues, from the Premier League down to level 8. Search by club, ground, town or postcode, see what's near you, and tick off the ones you've been to. Free, no ads.">
   <meta property="og:image" content="https://averyio.net/assets/apps/centre-circle-finder-og.png">
@@ -53,6 +57,20 @@
   ],
   "author": { "@type": "Organization", "name": "averyio", "url": "https://averyio.net/" },
   "spatialCoverage": { "@type": "Place", "name": "United Kingdom" }
+}
+  </script>
+  <!-- Breadcrumbs. This page sits outside the /apps/<slug>/ system, so it does
+       not inherit the site's generated crumb markup. Without this Google has no
+       signal that it belongs under averyioApps rather than floating loose. -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://averyio.net/" },
+    { "@type": "ListItem", "position": 2, "name": "averyioApps", "item": "https://averyio.net/apps.html" },
+    { "@type": "ListItem", "position": 3, "name": "Centre Circle Finder", "item": "https://averyio.net/centre-circle-finder/" }
+  ]
 }
   </script>
 </head>
