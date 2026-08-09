@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /centre-circle-finder/README.md
 Disallow: /centre-circle-finder/serve.py
+Disallow: /btc-prix/SEO_ACTION_CHECKLIST.md
+Disallow: /btc-prix/SEO_OPTIMIZATION_GUIDE.md
+Disallow: /btc-prix/vercel.json
 
 Sitemap: https://averyio.net/sitemap.xml

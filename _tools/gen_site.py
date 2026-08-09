@@ -582,6 +582,10 @@ urls = [(SITE+"/", "1.0", "index.html"),
         (SITE+"/contact.html", "0.5", "contact.html")]
 urls += [(f"{SITE}/apps/{a['slug']}/", "0.8", f"apps/{a['slug']}/index.html") for a in APPS]
 urls += [(SITE + s["url"], s["priority"], s["url"].strip("/") + "/index.html") for s in SITE_APPS]
+# Apps hosted on this domain that also keep a /apps/<slug>/ marketing page.
+# They already have a tile via APPS, so they need only a sitemap entry.
+urls += [(SITE + a["hosted"], "0.7", a["hosted"].strip("/") + "/index.html")
+         for a in APPS if a.get("hosted")]
 urls += [(SITE+p, "0.2", p.lstrip("/")) for _, p in PRIV]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 for u, pr, src in urls:
@@ -593,7 +597,9 @@ W("sitemap.xml", sm)
 # (README, dev server) are served publicly alongside the app itself. They hold
 # nothing sensitive — the repo is public — but they should not be indexed.
 NOINDEX = [f"{s['url']}README.md" for s in SITE_APPS] + \
-          [f"{s['url']}serve.py" for s in SITE_APPS]
+          [f"{s['url']}serve.py" for s in SITE_APPS] + \
+          [f"{a['hosted']}{f}" for a in APPS if a.get("hosted")
+           for f in ("SEO_ACTION_CHECKLIST.md", "SEO_OPTIMIZATION_GUIDE.md", "vercel.json")]
 W("robots.txt",
   "User-agent: *\nAllow: /\n"
   + "".join(f"Disallow: {p}\n" for p in NOINDEX)

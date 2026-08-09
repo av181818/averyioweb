@@ -350,6 +350,11 @@ APPS = [
  # No App Store screenshots, so the tile used to fall back to the bare
  # monogram on ink. This is BTC Prix's own share image, cropped to 5:4.
  "tile": ("btcprix-tile", "BTC Prix — the live Bitcoin price, free on the web"),
+ # The app itself moved off btcprix.net and onto this domain (2026-08-09), so
+ # the "open it" links point at /btc-prix/ rather than the old domain. The
+ # marketing page at /apps/btc-prix/ stays where it is — it is indexed and
+ # externally linked, and the two serve different jobs.
+ "hosted": "/btc-prix/",
  "slug":"btc-prix", "size":None, "footprint":"There is nothing to install at all. BTC Prix is a single clean page that loads in a blink on a phone or a laptop — no app, no account and no ad scripts sitting between you and the price.", "ios":None, "mono":"\u20bf", "asset":None, "name":"BTC Prix",
  "store_name":"BTC Prix",
  "tagline":"The live Bitcoin price, free on the web.",
@@ -357,7 +362,7 @@ APPS = [
  "desc":"BTC Prix is a free, real-time Bitcoin price tracker on the web. Live BTC/USDT pricing and market data in a clean, fast page with no account and no ads.",
  "lead":"BTC Prix is a free real-time Bitcoin price tracker that runs in any browser. Live BTC/USDT pricing and market data on a clean, fast page — nothing to install, no account to create, and no ads in the way of the number you came for.",
  "appid":None,
- "store_url":"https://btcprix.net",
+ "store_url":"https://averyio.net/btc-prix/",
  "privacy":None,
  "category":"FinanceApplication", "genre":"Finance",
  "price":"0", "price_label":"Free",
@@ -445,8 +450,12 @@ def store_btn(app, dark=True):
                 f'target="_blank" rel="noopener">{APPLE_SVG}'
                 f'<span class="store-copy"><span class="store-sm">Download on the</span>'
                 f'<span class="store-lg">App Store</span></span></a>')
-    return (f'<a class="btn {"btn-dark" if dark else "btn-ghost"}" href="{app["store_url"]}" '
-            f'target="_blank" rel="noopener">Open BTC Prix <span class="a">&rarr;</span></a>')
+    # A hosted app lives on this domain now, so it opens in the same tab —
+    # target="_blank" is for leaving the site, and this no longer does.
+    href = app.get("hosted") or app["store_url"]
+    ext = "" if app.get("hosted") else ' target="_blank" rel="noopener"'
+    return (f'<a class="btn {"btn-dark" if dark else "btn-ghost"}" href="{href}"{ext}>'
+            f'Open {app["name"]} <span class="a">&rarr;</span></a>')
 
 def app_page(app, apps):
     url = f"{SITE}/apps/{app['slug']}/"
@@ -463,7 +472,7 @@ def app_page(app, apps):
       "operatingSystem": f"iOS {app['ios']} or later" if app["ios"] else "Any web browser",
       "description": html.unescape(app["desc"]),
       "url": url,
-      "installUrl": app["store_url"],
+      "installUrl": (SITE + app["hosted"]) if app.get("hosted") else app["store_url"],
       "image": f"{SITE}{icon2x}",
       "offers": {"@type":"Offer","price":app["price"],"priceCurrency":"GBP"},
       "publisher": {"@type":"Organization","name":"averyio","url":SITE+"/"},

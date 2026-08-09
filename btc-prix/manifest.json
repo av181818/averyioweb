@@ -1,0 +1,22 @@
+{
+  "name": "BTC Prix",
+  "short_name": "BTC Prix",
+  "start_url": "/btc-prix/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "description": "Minimalist real-time Bitcoin price tracker.",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "/btc-prix/"
+}

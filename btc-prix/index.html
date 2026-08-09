@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Bitcoin Price (BTC/USDT) | Real-Time Tracker – BTC Prix</title>
+    <meta name="description"
+        content="Live Bitcoin price in USDT. Real-time BTC tracker with zero bloat. Fast updates from Binance. Free, minimal Bitcoin price checker.">
+    <meta name="keywords"
+        content="Bitcoin price live, BTC price, BTC USDT, live bitcoin, Bitcoin tracker, real-time BTC, crypto price, Bitcoin chart">
+    <meta name="author" content="BTC Prix">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="theme-color" content="#000000">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph / Twitter Card -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://averyio.net/btc-prix/">
+    <meta property="og:title" content="Live Bitcoin Price (BTC/USDT) | Real-Time Tracker – BTC Prix">
+    <meta property="og:description"
+        content="Live Bitcoin price in USDT. Real-time BTC tracker with zero bloat. Fast updates from Binance.">
+    <meta property="og:image" content="https://averyio.net/btc-prix/share-image2.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="BTC Prix – Live Bitcoin price tracker">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="BTC Prix">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Live Bitcoin Price (BTC/USDT) | Real-Time Tracker – BTC Prix">
+    <meta name="twitter:description"
+        content="Live Bitcoin price in USDT. Real-time BTC tracker with zero bloat. Fast updates from Binance.">
+    <meta name="twitter:image" content="https://averyio.net/btc-prix/share-image2.png">
+    <meta name="twitter:image:alt" content="BTC Prix – Live Bitcoin price tracker">
+
+    <link rel="canonical" href="https://averyio.net/btc-prix/">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://averyio.net/sitemap.xml">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+
+
+    <link rel="preconnect" href="https://api.binance.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <!-- Fonts: Inter & JetBrains Mono -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg-main: #000000;
+            --text-main: #FFFFFF;
+            --text-secondary: #9ca3af;
+            --text-muted: #333333;
+            --grid-color: #333333;
+            --accent-green: #26CF64;
+            --accent-red: #ef4444;
+            --card-bg: #0a0a0a;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --icon-color: #ffffff;
+        }
+
+        [data-theme="light"] {
+            --bg-main: #f3f4f6;
+            --text-main: #111827;
+            --text-secondary: #4b5563;
+            --text-muted: #e5e7eb;
+            --grid-color: #e5e7eb;
+            --accent-green: #26CF64;
+            --accent-red: #ef4444;
+            --card-bg: #ffffff;
+            --card-border: #d1d5db;
+            --glass-bg: rgba(0, 0, 0, 0.03);
+            --icon-color: #1f2937;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .transition-theme {
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s, fill 0.3s;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+        }
+
+        /* Breathing Animation for Hero Price */
+        @keyframes breath {
+            0% {
+                opacity: 0.9;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.01);
+            }
+
+            100% {
+                opacity: 0.9;
+                transform: scale(1);
+            }
+        }
+
+        .breathe {
+            animation: breath 4s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://averyio.net/btc-prix/#website",
+          "url": "https://averyio.net/btc-prix/",
+          "name": "BTC Prix",
+          "description": "Live Bitcoin price in USDT. Real-time BTC tracker with zero bloat. Fast updates from Binance.",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://averyio.net/btc-prix/#webpage",
+          "url": "https://averyio.net/btc-prix/",
+          "name": "Live Bitcoin Price (BTC/USDT) | Real-Time Tracker – BTC Prix",
+          "description": "Live Bitcoin price in USDT. Real-time BTC tracker. Free, minimal Bitcoin price checker.",
+          "isPartOf": { "@id": "https://averyio.net/btc-prix/#website" },
+          "about": { "@type": "Thing", "name": "Bitcoin", "alternateName": "BTC" },
+          "inLanguage": "en-US",
+          "dateModified": "2026-04-03"
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://averyio.net/btc-prix/#app",
+          "name": "BTC Prix",
+          "url": "https://averyio.net/btc-prix/",
+          "description": "Live Bitcoin price in USDT. Real-time BTC tracker with zero bloat.",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body
+    class="flex flex-col items-center justify-between h-screen selection:bg-purple-500 selection:text-white transition-theme">
+
+    <header class="w-full px-6 py-6 flex items-center justify-between z-50">
+        <div class="flex items-center gap-3">
+            <div class="flex flex-col leading-tight">
+                <h1 class="text-sm font-semibold tracking-[0.2em] uppercase opacity-90 transition-theme"
+                    style="color: var(--text-main);">BTCPRIX.net</h1>
+                <span class="text-[10px] tracking-widest lowercase opacity-60 transition-theme"
+                    style="color: var(--text-secondary);">by averyio</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)] transition-theme">
+                <span id="connection-status">Connecting...</span>
+            </div>
+            <button id="theme-toggle"
+                class="p-2 rounded-full hover:bg-[var(--glass-bg)] transition-all focus:outline-none"
+                aria-label="Toggle Theme">
+                <svg id="icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    style="color: var(--icon-color);">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                </svg>
+                <svg id="icon-moon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    style="color: var(--icon-color);">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center w-full px-4 relative">
+        <div class="absolute inset-0 z-0 opacity-[0.05] pointer-events-none transition-theme"
+            style="background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 40px 40px;">
+        </div>
+
+        <div class="z-10 text-center relative w-full mb-12">
+            <h2 class="text-[10px] uppercase tracking-[0.4em] mb-4 transition-theme"
+                style="color: var(--text-secondary);">Live Bitcoin (BTC) Price in USDT</h2>
+
+            <div id="btc-price"
+                class="w-full text-center text-[13vw] font-bold font-mono tracking-tighter leading-none breathe tabular-nums transition-colors duration-300 whitespace-nowrap"
+                style="color: var(--text-main);">
+                -------
+            </div>
+
+            <p class="sr-only">Real-time Bitcoin price in USDT from Binance. Free live BTC tracker.</p>
+            <noscript><p class="text-[10px] text-[var(--text-secondary)] mt-2">Enable JavaScript for live price. Real-time BTC/USDT from Binance.</p></noscript>
+
+        </div>
+    </main>
+
+    <footer class="w-full max-w-4xl mx-auto px-4 pb-8 z-10 mt-12">
+        <div class="flex justify-center mb-6">
+            <button
+                onclick="window.open('https://twitter.com/intent/tweet?text=Get%20the%20fastest%20real-time%20%24BTC%20updates%20with%20zero%20bloat.%20Experience%20Bitcoin%20price%20action%20at%20its%20purest.%20Check%20it%20out%3A%20BTCPRIX.net%20%F0%9F%9A%80%20%23Bitcoin%20%23BTC%20%23Crypto', '_blank')"
+                class="flex items-center gap-2 px-4 py-2 rounded-full border bg-[var(--card-bg)] hover:bg-[var(--glass-bg)] transition-all group"
+                style="border-color: var(--card-border);">
+                <svg class="w-4 h-4 transition-colors group-hover:text-blue-400" fill="currentColor" viewBox="0 0 24 24"
+                    aria-hidden="true" style="color: var(--text-secondary);">
+                    <path
+                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                    </path>
+                </svg>
+                <span class="text-xs font-medium tracking-wide transition-colors group-hover:text-[var(--text-main)]"
+                    style="color: var(--text-secondary);">Share</span>
+            </button>
+        </div>
+
+        <a href="https://www.tradingview.com/chart/?aff_id=160229&utm_source=creative&utm_lang=EN" target="_blank"
+            rel="noopener noreferrer"
+            class="group relative block w-full rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl border mx-auto max-w-[600px] transition-theme shadow-gray-500/10 hover:shadow-gray-500/30"
+            style="background-color: var(--card-bg); border-color: var(--card-border);">
+
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-gray-500/10 via-gray-400/5 to-gray-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            </div>
+
+            <div class="relative p-2 flex flex-row items-center justify-between gap-3 sm:gap-4">
+                <div class="flex-1 min-w-0 flex justify-start">
+                    <img src="https://s3.tradingview.com/pub/referrals/creatives/DT/EN/468x60Banner.jpg"
+                        srcset="https://s3.tradingview.com/pub/referrals/creatives/DT/EN/936x120Banner.jpg 2x"
+                        alt="TradingView Banner" width="468" height="60"
+                        class="rounded-lg opacity-90 group-hover:opacity-100 transition-opacity w-full h-auto object-contain object-left grayscale group-hover:grayscale-0 transition-all duration-500" />
+                </div>
+
+                <div class="flex-shrink-0 flex flex-col items-end gap-1 pr-1">
+                    <span
+                        class="px-2 py-0.5 rounded text-[10px] md:text-xs font-black bg-gradient-to-r from-amber-300 to-orange-500 text-black uppercase tracking-wider transform md:-rotate-2 group-hover:rotate-0 transition-transform whitespace-nowrap shadow-lg">
+                        $15 Off
+                    </span>
+                    <button
+                        class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 whitespace-nowrap transition-colors group-hover:translate-x-1 duration-300"
+                        style="color: var(--text-secondary);">
+                        Claim <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </a>
+
+        <div class="mt-8 text-center space-y-2">
+            <p class="text-[8px] uppercase tracking-[0.1em] max-w-lg mx-auto leading-relaxed transition-theme"
+                style="color: var(--text-secondary);">
+                BTC PRIX IS FOR ENTERTAINMENT PURPOSES ONLY. PRICE DATA PROVIDED BY BINANCE.<br>
+                WE ACCEPT NO LIABILITY FOR ANY FINANCIAL LOSSES.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const elPrice = document.getElementById('btc-price');
+        const elConnStatus = document.getElementById('connection-status');
+        const themeBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('icon-sun');
+        const moonIcon = document.getElementById('icon-moon');
+        const html = document.documentElement;
+
+        // Theme Logic
+        function setTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+
+            if (theme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        // Init Theme (Default to Dark)
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        // Toggle Event
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+
+        // WebSocket for live price
+        let ws;
+        let latestPrice = null;
+        let displayedPrice = null;
+        let reconnectTimer = null;
+        let statusInterval = null;
+
+        // Fixed 1 second refresh frequency
+        setInterval(() => {
+            if (!latestPrice || latestPrice === displayedPrice) return;
+
+            // Update Price
+            elPrice.innerText = "$" + numberWithCommas(latestPrice);
+            document.title = `$${numberWithCommas(latestPrice)} | BTC Prix`;
+
+            // Color logic
+            if (displayedPrice) {
+                const newP = parseFloat(latestPrice);
+                const oldP = parseFloat(displayedPrice);
+
+                if (newP > oldP) {
+                    elPrice.style.color = "var(--accent-green)";
+                    elPrice.style.textShadow = "none";
+                } else if (newP < oldP) {
+                    elPrice.style.color = "var(--accent-red)";
+                    elPrice.style.textShadow = "none";
+                }
+            }
+            displayedPrice = latestPrice;
+        }, 1000);
+
+        function startStatusToggle() {
+            if (statusInterval) return;
+
+            // Immediate set
+            elConnStatus.innerText = "RECONNECTING...";
+            elConnStatus.style.color = "var(--accent-red)";
+
+            let showNoInternet = true;
+            statusInterval = setInterval(() => {
+                if (showNoInternet) {
+                    elConnStatus.innerText = "NO INTERNET";
+                } else {
+                    elConnStatus.innerText = "RECONNECTING...";
+                }
+                showNoInternet = !showNoInternet;
+            }, 2000);
+        }
+
+        function stopStatusToggle() {
+            if (statusInterval) {
+                clearInterval(statusInterval);
+                statusInterval = null;
+            }
+        }
+
+        function connect() {
+            // Prevent multiple connections
+            if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+                return;
+            }
+
+            ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@trade');
+
+            ws.onopen = () => {
+                stopStatusToggle();
+                elConnStatus.innerText = "LIVE";
+                elConnStatus.style.color = "var(--accent-green)";
+                if (reconnectTimer) {
+                    clearTimeout(reconnectTimer);
+                    reconnectTimer = null;
+                }
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                latestPrice = parseFloat(data.p).toFixed(2);
+
+                // Initial load: show immediately
+                if (!displayedPrice) {
+                    elPrice.innerText = "$" + numberWithCommas(latestPrice);
+                    document.title = `$${numberWithCommas(latestPrice)} | BTC Prix`;
+                    displayedPrice = latestPrice;
+                }
+            };
+
+            ws.onerror = (e) => {
+                console.error("WebSocket Error:", e);
+                // On error, we close to trigger onclose logic
+                ws.close();
+            };
+
+            ws.onclose = () => {
+                startStatusToggle();
+
+                // Try to reconnect in 3 seconds if not already pending
+                if (!reconnectTimer) {
+                    reconnectTimer = setTimeout(() => {
+                        reconnectTimer = null;
+                        connect();
+                    }, 3000);
+                }
+            };
+        }
+
+        // Initial launch
+        connect();
+
+        // Listen for network restoration
+        window.addEventListener('online', () => {
+            // connection restoration should be immediate
+            connect();
+        });
+
+        // Optional: specific offline handling
+        window.addEventListener('offline', () => {
+            // Closing the socket will trigger onclose which starts the toggle
+            if (ws) ws.close();
+        });
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    </script>
+
+</body>
+
+</html>
