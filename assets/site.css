@@ -311,13 +311,6 @@ nav {
   object-position: 50% 0;
   display: block;
 }
-/* Fallback stage for a product with no App Store screenshots (BTC Prix) */
-.show-blank {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(150deg, #1c1c21, #0E0E10);
-}
 .show-body {
   padding: 1.25rem 1.35rem 1.35rem;
   display: flex;

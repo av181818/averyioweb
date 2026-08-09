@@ -346,6 +346,9 @@ APPS = [
  ],
 },
 {
+ # No App Store screenshots, so the tile used to fall back to the bare
+ # monogram on ink. This is BTC Prix's own share image, cropped to 5:4.
+ "tile": ("btcprix-tile", "BTC Prix — the live Bitcoin price, free on the web"),
  "slug":"btc-prix", "size":None, "footprint":"There is nothing to install at all. BTC Prix is a single clean page that loads in a blink on a phone or a laptop — no app, no account and no ad scripts sitting between you and the price.", "ios":None, "mono":"\u20bf", "asset":None, "name":"BTC Prix",
  "store_name":"BTC Prix",
  "tagline":"The live Bitcoin price, free on the web.",
@@ -391,8 +394,11 @@ SITE_APPS = [
  "name": "Centre Circle Finder",
  "url": "/centre-circle-finder/",
  "asset": "centre-circle-finder",
- "shot": ("centre-circle-finder-1",
-          "Centre Circle Finder — every UK football ground on one map"),
+ # 5:4 crop of the poster, centred on the wordmark and the stats. The full
+ # poster puts its content in the lower half, so the stage's top-crop showed
+ # nothing but pitch texture — see `tile` in gen_site.py's stage_html().
+ "tile": ("centre-circle-finder-tile",
+          "Centre Circle Finder — 597 UK football grounds across 31 leagues"),
  "desc": ("Every professional and semi-professional football ground in the UK "
           "&mdash; 597 grounds across 31 leagues, on one map."),
  "tags": ["Web", "Football"],

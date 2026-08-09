@@ -18,6 +18,35 @@ CARD_DESC = {
  "btc-prix":       "Real-time Bitcoin price tracking, free on the web.",
 }
 
+# ── the tile's artwork ───────────────────────────────────────────────────
+# The stage is 5:4 and crops with `object-position: 50% 0`, i.e. it shows the
+# TOP of whatever image it is given. App Store screenshots suit that — their
+# headline is at the top. Artwork that centres its content does not: Centre
+# Circle Finder's poster showed nothing but pitch texture, and BTC Prix had no
+# screenshot at all and fell back to a bare monogram. Both now supply a `tile`:
+# a purpose-made 640x512 crop that fills the stage exactly.
+def stage_html(a):
+    t = a.get("tile")
+    if t:
+        n, alt = t
+        return (f'<div class="show-stage"><img src="/assets/apps/{n}.webp" '
+                f'srcset="/assets/apps/{n}-sm.webp 320w, /assets/apps/{n}.webp 640w" '
+                f'sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 31vw" '
+                f'alt="{alt}" width="640" height="512" loading="lazy" decoding="async" /></div>')
+    if a.get("shots"):
+        n, alt = a["shots"][0]
+        return (f'<div class="show-stage"><img src="/assets/apps/{n}.webp" '
+                f'srcset="/assets/apps/{n}-sm.webp 320w, /assets/apps/{n}.webp 638w" '
+                f'sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 31vw" '
+                f'alt="{alt}" width="638" height="1387" loading="lazy" decoding="async" /></div>')
+    # Every product now supplies artwork. The old monogram-on-ink fallback was
+    # removed with its `.show-blank` rule once BTC Prix got a real tile — a
+    # dead CSS rule fails check.py. Fail loudly here rather than shipping a
+    # tile with an empty stage.
+    raise SystemExit(
+        f"{a['name']}: no artwork. Add a 'tile' (a 640x512 crop) or 'shots' "
+        f"entry — see stage_html() in gen_site.py.")
+
 # ── app showcase tile ────────────────────────────────────────────────────
 # The tile leads with the app's real App Store artwork, cropped by the
 # stage to its headline and the top of the device. BTC Prix has no
@@ -30,15 +59,7 @@ def show_card(a):
     else:
         icon = f'<div class="mono-tile" aria-hidden="true">{a["mono"]}</div>'
 
-    if a["shots"]:
-        n, alt = a["shots"][0]
-        stage = (f'<div class="show-stage"><img src="/assets/apps/{n}.webp" '
-                 f'srcset="/assets/apps/{n}-sm.webp 320w, /assets/apps/{n}.webp 638w" '
-                 f'sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 31vw" '
-                 f'alt="{alt}" width="638" height="1387" loading="lazy" decoding="async" /></div>')
-    else:
-        stage = (f'<div class="show-stage show-blank">'
-                 f'<div class="mono-tile mono-tile-lg" aria-hidden="true">{a["mono"]}</div></div>')
+    stage = stage_html(a)
 
     # The real download size rides along on the tile. It used to live in the
     # apps.html spec table, which was removed 2026-08-06 — and "no bloat" is
@@ -63,12 +84,11 @@ def show_card(a):
 # SITE_APPS in gen.py). Identical markup to show_card so the grid stays
 # uniform; it just links straight to the app's own page.
 def site_app_card(s):
-    n, alt = s["shot"]
     tags = "".join(f'<span class="tag">{t}</span>' for t in s["tags"])
     if s.get("note"):
         tags += f'<span class="tag neutral">{s["note"]}</span>'
     return f"""        <a href="{s['url']}" class="show">
-          <div class="show-stage"><img src="/assets/apps/{n}.webp" srcset="/assets/apps/{n}-sm.webp 320w, /assets/apps/{n}.webp 638w" sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 31vw" alt="{alt}" width="638" height="1387" loading="lazy" decoding="async" /></div>
+          {stage_html(s)}
           <div class="show-body">
             <div class="show-head">
               <img class="app-icon" src="/assets/apps/{s['asset']}-icon.webp" srcset="/assets/apps/{s['asset']}-icon.webp 1x, /assets/apps/{s['asset']}-icon@2x.webp 2x" alt="" width="46" height="46" loading="lazy" decoding="async" />
