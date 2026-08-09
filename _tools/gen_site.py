@@ -608,9 +608,19 @@ urls += [(SITE + s["url"], s["priority"], s["url"].strip("/") + "/index.html") f
 urls += [(SITE + a["hosted"], "0.7", a["hosted"].strip("/") + "/index.html")
          for a in APPS if a.get("hosted")]
 urls += [(SITE+p, "0.2", p.lstrip("/")) for _, p in PRIV]
+
+# Centre Circle Finder's static ground pages. They all derive from one data
+# file, so they share its commit date — and asking git for 688 individual
+# lastmods would add a minute to every build for an identical answer.
+from grounds import CLUBS, CITIES, LEAGUE_PAGES
+_gm = _lastmod("centre-circle-finder/data/teams.js")
+urls += [(SITE + "/centre-circle-finder/grounds/", "0.6", None)]
+urls += [(SITE + l["url"], "0.5", None) for l in LEAGUE_PAGES]
+urls += [(SITE + c["url"], "0.5", None) for c in CITIES]
+urls += [(SITE + c["url"], "0.4", None) for c in CLUBS]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 for u, pr, src in urls:
-    sm += (f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{_lastmod(src)}</lastmod>\n"
+    sm += (f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{_lastmod(src) if src else _gm}</lastmod>\n"
            f"    <priority>{pr}</priority>\n  </url>\n")
 sm += "</urlset>\n"
 W("sitemap.xml", sm)

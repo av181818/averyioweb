@@ -1,3 +1,8 @@
 # Local tooling / OS cruft — not part of the published site
 .claude/
 .DS_Store
+__pycache__/
+# Written by gen.py on every run but never referenced by a page and never
+# committed — keeping it untracked preserves that, and stops it showing up
+# as a stray change after every build.
+apps-data.json

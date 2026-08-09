@@ -1425,15 +1425,29 @@
   renderList();
 
 
+  // A static ground page links in as /centre-circle-finder/?club=<slug> to open
+  // the map on one stadium. Resolved before the load handlers so the opening UK
+  // fit can be skipped — left in, it fires after the flyTo and pulls the view
+  // straight back out. The slug rule must match _tools/grounds.py exactly, or
+  // the link silently lands on the default view.
+  const focusClub = (() => {
+    const want = new URLSearchParams(location.search).get("club");
+    if (!want) return null;
+    const slugify = (s) => s.toLowerCase().replace(/&/g, " and ").replace(/'/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    return TEAMS.find((t) => slugify(t.name) === want) || null;
+  })();
+
   map.on("load", () => {
     addClubSource();
     bindLayerInteractions();
-    fitUK(false);
+    if (focusClub) selectTeam(focusClub);
+    else fitUK(false);
   });
 
   // container can be zero-sized or mid-layout in embedded panes
   const mapEl = document.getElementById("map");
-  let needsFit = true;
+  let needsFit = !focusClub;
   function tryFit() {
     if (needsFit && mapEl.clientWidth > 50 && mapEl.clientHeight > 50) {
       map.resize();
@@ -1441,7 +1455,7 @@
       needsFit = false;
     }
   }
-  map.on("load", () => { needsFit = true; tryFit(); });
+  map.on("load", () => { needsFit = !focusClub; tryFit(); });
 
   // Re-frame the UK whenever the container changes size — a phone's toolbars
   // sliding in and out, or a rotation. Debounced because iOS fires a burst of

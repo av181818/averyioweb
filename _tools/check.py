@@ -31,13 +31,27 @@ FROZEN = ["privacy-investfast.html", "privacy-surge.html", "privacy-bigtimeclock
 # audit against them would report every one of their classes as an orphan of
 # assets/site.css. They still get link, markup and live-integrity checks.
 STANDALONE = {"centre-circle-finder/index.html": "/centre-circle-finder/"}
+# Centre Circle Finder's generated ground pages. Unlike the app itself these use
+# the site stylesheet, so they belong in the class audit — without them every
+# .gp-* rule reads as dead CSS. Kept separate from PAGES because they are
+# templated: the hand-written-copy checks below have nothing to say about 688
+# pages built from one loop.
+GROUNDS = sorted(sum((glob.glob(f"centre-circle-finder/{d}/*/index.html")
+                      for d in ("club", "city", "league")), [])) + \
+          ["centre-circle-finder/grounds/index.html"]
 LIVE_MAP = {"index.html": "/", "apps.html": "/apps.html", "finance.html": "/finance.html",
             "privacy.html": "/privacy.html", "contact.html": "/contact.html",
             "404.html": "/404.html", "sitemap.xml": "/sitemap.xml", "robots.txt": "/robots.txt",
             **{f"apps/{s}/index.html": f"/apps/{s}/" for s in
                ["investfast", "surge", "big-time-clock", "lume", "tap-dot-tap", "btc-prix"]},
             **STANDALONE,
-            **{f: "/" + f for f in FROZEN}}
+            **{f: "/" + f for f in FROZEN},
+            # One of each ground-page template. Byte-diffing all 688 against
+            # live would mean 688 requests for what a sample already proves.
+            "centre-circle-finder/grounds/index.html": "/centre-circle-finder/grounds/",
+            "centre-circle-finder/club/liverpool/index.html": "/centre-circle-finder/club/liverpool/",
+            "centre-circle-finder/city/london/index.html": "/centre-circle-finder/city/london/",
+            "centre-circle-finder/league/premier-league/index.html": "/centre-circle-finder/league/premier-league/"}
 
 fails = []
 def check(name, ok, detail=""):
@@ -55,7 +69,7 @@ print("\nSTYLESHEET")
 css = re.sub(r"/\*.*?\*/", "", open("assets/site.css", encoding="utf-8").read(), flags=re.S)
 defined = set(re.findall(r"\.([A-Za-z][\w-]*)", css))
 used = set()
-for p in PAGES:
+for p in PAGES + GROUNDS:
     for m in re.finditer(r'class="([^"]+)"', re.sub(r"<(script|style).*?</\1>", "", open(p, encoding="utf-8").read(), flags=re.S)):
         used.update(m.group(1).split())
 orphans = sorted(used - defined)
@@ -68,7 +82,7 @@ check("no dead CSS rules", not dead, ", ".join(dead))
 
 print("\nLINKS")
 broken, checked = [], 0
-for p in PAGES + FROZEN + list(STANDALONE):
+for p in PAGES + FROZEN + list(STANDALONE) + GROUNDS:
     src = open(p, encoding="utf-8").read()
     refs = re.findall(r'(?:href|src)="([^"]+)"', src)
     refs += [x.strip().split()[0] for s in re.findall(r'srcset="([^"]+)"', src) for x in s.split(",")]
@@ -89,7 +103,7 @@ check(f"all {checked} internal links resolve", not broken, "; ".join(broken[:4])
 
 print("\nSEO / MARKUP")
 long_desc, bad_h1, bad_ld = [], [], []
-for p in PAGES:
+for p in PAGES + GROUNDS:
     s = open(p, encoding="utf-8").read()
     d = re.search(r'<meta name="description" content="(.*?)"', s, re.S)
     if d and len(d.group(1)) > 160:
@@ -104,6 +118,26 @@ for p in PAGES:
 check("meta descriptions within 160 chars", not long_desc, ", ".join(long_desc))
 check("exactly one <h1> per page", not bad_h1, ", ".join(bad_h1))
 check("all JSON-LD parses", not bad_ld, ", ".join(bad_ld))
+
+# Both of these matter most on the generated ground pages: one templating slip
+# would repeat a single canonical across 688 URLs and deindex the lot.
+long_title, bad_canon = [], []
+for p in PAGES + GROUNDS:
+    s = open(p, encoding="utf-8").read()
+    t = re.search(r"<title>(.*?)</title>", s, re.S)
+    if t and len(t.group(1)) > 60:
+        long_title.append(f"{p} ({len(t.group(1))})")
+    c = re.search(r'rel="canonical" href="([^"]+)"', s)
+    want = SITE + "/" + os.path.dirname(p) + "/" if os.path.dirname(p) else SITE + "/"
+    want = want.replace("//", "/").replace("https:/", "https://")
+    if p in ("index.html",):
+        want = SITE + "/"
+    elif not p.endswith("/index.html"):
+        want = f"{SITE}/{p}"
+    if not c or c.group(1) != want:
+        bad_canon.append(f"{p} -> {c.group(1) if c else 'missing'}")
+check("titles within 60 chars", not long_title, ", ".join(long_title[:4]))
+check("every canonical is self-referencing", not bad_canon, "; ".join(bad_canon[:4]))
 
 print("\nCOPY")
 dupes = []
