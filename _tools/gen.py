@@ -82,13 +82,15 @@ def nav(active=""):
       </div>
     </div>
   </nav>
+  <main>
 """
 
 def footer(apps):
     links = "\n".join(
         [f'          <a href="{s["url"]}">{s["name"]}</a>' for s in SITE_APPS] +
         [f'          <a href="/apps/{a["slug"]}/">{a["name"]}</a>' for a in apps])
-    return f"""  <footer>
+    return f"""  </main>
+  <footer>
     <div class="wrap footer-inner">
       <div class="footer-cols">
         <div class="footer-col">
