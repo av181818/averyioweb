@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Centre Circle Finder — Every UK Football Ground</title>
+  <meta name="description" content="Every professional and semi-professional football ground in the UK on one map — 597 grounds across 31 leagues, from the Premier League down to level 8. Find grounds near you, plan a trip, and tick off the ones you've been to.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="css/styles.css?v=63">
+</head>
+<body>
+  <div id="app">
+
+    <aside id="sidebar">
+      <button class="sheet-grip" id="sheet-grip" aria-label="Expand or collapse the search and filters panel"></button>
+
+      <header class="side-head" id="side-head">
+        <div class="mow" aria-hidden="true"></div>
+        <div class="aurora" aria-hidden="true"></div>
+        <div class="head-top">
+          <div class="brand">
+            <span class="ball" aria-hidden="true">⚽</span>
+            <div>
+              <h1>Centre Circle Finder</h1>
+              <p class="sub">Pick a city · find a ground · go to the match</p>
+            </div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <span class="pill"><b id="club-total">—</b> grounds</span>
+          <span class="pill"><b id="league-total">31</b> leagues</span>
+          <span class="pill"><b>4</b> nations</span>
+        </div>
+      </header>
+      <div class="scarf" aria-hidden="true"></div>
+
+      <p class="side-note">Data: Wikipedia, 2026–27 season. Lower-league locations are
+        town-level approximations. <span class="foot-disc">Some outbound links may earn us
+        a commission.</span></p>
+
+      <!-- unified search: clubs, stadiums, towns and places in one field -->
+      <div class="omni-wrap">
+        <div class="omni-field">
+          <span class="omni-icon" aria-hidden="true">⌕</span>
+          <input id="omni" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="Club, ground, town or postcode…"
+                 aria-label="Search by club, ground, town or postcode" role="combobox"
+                 aria-expanded="false" aria-controls="omni-results"
+                 aria-describedby="omni-hint">
+          <kbd class="omni-kbd">/</kbd>
+        </div>
+        <p class="omni-hint" id="omni-hint">
+          Try <b>Anfield</b>, <b>Bury</b>, <b>Cardiff</b> or a postcode like <b>M16&nbsp;0RA</b>
+        </p>
+        <div id="omni-results" class="omni-results hidden" role="listbox"></div>
+      </div>
+
+      <nav class="tabs" role="tablist" aria-label="Sidebar sections">
+        <button class="tab is-active" data-tab="explore" role="tab" aria-selected="true">Explore<span class="tab-dot" id="filter-dot" hidden></span></button>
+        <button class="tab" data-tab="grounds" role="tab" aria-selected="false">Grounds</button>
+        <button id="theme-toggle" class="icon-btn" title="Toggle light / dark" aria-label="Toggle theme">🌙</button>
+      </nav>
+
+      <div class="side-scroll">
+
+        <!-- ============ EXPLORE ============ -->
+        <section class="panel-tab is-active" id="panel-explore" role="tabpanel">
+
+          <div class="block">
+            <div class="block-head">
+              <h2>Start here</h2>
+            </div>
+            <div class="action-grid">
+              <button id="near-me" class="action-btn">
+                <span class="ab-icon" aria-hidden="true">◎</span>
+                <span class="ab-text"><b>Near me</b><small>Grounds around you</small></span>
+              </button>
+              <button id="surprise-me" class="action-btn">
+                <span class="ab-icon" aria-hidden="true">🎲</span>
+                <span class="ab-text"><b>Surprise me</b><small>A random ground</small></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- "Locating…", errors and the distance-ranked board all land here,
+               directly under the buttons that trigger them -->
+          <div id="place-results" class="place-results hidden"></div>
+
+          <div class="block">
+            <div class="block-head">
+              <h2>Popular cities</h2>
+              <span class="hint">grounds within 25 mi</span>
+            </div>
+            <div class="city-chips" id="city-chips"></div>
+          </div>
+
+          <div class="empty-note" id="explore-empty">
+            <span class="en-emoji" aria-hidden="true">⚽</span>
+            <b>Kick off here.</b> Pick a city above, search a town, or hit
+            <b>Near me</b> — you'll get every ground nearby, ranked by distance.
+          </div>
+
+          <div class="block section-break">
+            <div class="block-head">
+              <h2>Filter grounds</h2>
+              <button id="filters-reset" class="link-btn">Reset</button>
+            </div>
+
+            <div class="f-line">
+              <span class="f-line-label">Nation</span>
+              <div class="chip-row" id="nation-chips"></div>
+            </div>
+
+            <div class="f-line">
+              <span class="f-line-label">Tier</span>
+              <div class="chip-row" id="tier-chips"></div>
+            </div>
+
+            <div class="f-line">
+              <span class="f-line-label">Ticked off</span>
+              <div class="chip-row" id="visit-chips"></div>
+            </div>
+
+            <div class="f-summary">
+              <b id="filter-count">597</b> of <span id="filter-total">597</span> grounds shown
+            </div>
+          </div>
+
+          <details class="block f-detail" id="league-detail" open>
+            <summary class="f-detail-head">
+              <span class="fd-title">Pick individual leagues</span>
+              <span class="fd-count" id="league-sum">all 31</span>
+            </summary>
+            <p class="fd-hint">Hover a league to spotlight it on the map.</p>
+            <div id="filter-groups"></div>
+          </details>
+
+        </section>
+
+        <!-- ============ GROUNDS ============ -->
+        <section class="panel-tab" id="panel-grounds" role="tabpanel">
+
+          <div class="block tally-block">
+            <div class="tally-head">
+              <span class="tally-label">Grounds ticked off</span>
+              <span class="tally-tools">
+                <button id="tally-export" class="link-btn" hidden>Export</button>
+                <button id="tally-import" class="link-btn">Import</button>
+                <button id="tally-clear" class="link-btn" hidden>Clear</button>
+              </span>
+            </div>
+            <input id="tally-file" type="file" accept="application/json,.json" hidden>
+            <div class="tally-row">
+              <b id="tally-n">0</b><span class="tally-of" id="tally-of">of 597</span>
+            </div>
+            <div class="tally-bar"><span id="tally-fill"></span></div>
+
+            <label class="tally-toggle">
+              <input type="checkbox" id="show-visited" checked>
+              <span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>
+              <span class="tt-text">Highlight visited on the map</span>
+            </label>
+
+            <p class="tally-note">
+              Open any ground and tap <b>Mark as visited</b> to tick it off.
+              Your list is saved <b>in this browser only</b> — there's no account, so
+              clearing your browsing data, or switching browser or device, starts you
+              from scratch. Use <b>Export</b> to save a backup file, and <b>Import</b> to
+              merge it back in.
+            </p>
+          </div>
+
+          <div class="block sticky-block">
+            <div class="list-controls">
+              <input id="ground-filter" type="search" placeholder="Filter this list…" autocomplete="off" spellcheck="false" aria-label="Filter grounds list">
+              <select id="sort-clubs" class="select" aria-label="Sort grounds list">
+                <option value="name">A–Z</option>
+                <option value="league">By league</option>
+                <option value="capacity">By size</option>
+              </select>
+            </div>
+            <div class="list-meta"><span id="visible-count">0</span> grounds shown</div>
+          </div>
+
+          <ul id="club-list"></ul>
+
+        </section>
+
+      </div>
+
+
+    </aside>
+
+    <main id="map-wrap">
+      <div id="map" role="application" aria-label="Map of UK football grounds"></div>
+
+      <div class="map-bar">
+        <button id="reset-all" class="map-reset" title="Reset filters, search and map view">
+          <span class="mr-icon" aria-hidden="true">⟲</span> Reset
+        </button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="data/teams.js?v=2"></script>
+  <script src="js/config.js?v=63"></script>
+  <script src="js/app.js?v=63"></script>
+</body>
+</html>

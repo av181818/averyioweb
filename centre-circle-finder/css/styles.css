@@ -1,0 +1,1492 @@
+/* ==========================================================================
+   CENTRE CIRCLE FINDER — visual system: "MATCHDAY PROGRAMME"
+
+   The look is drawn from football's own print culture rather than generic app
+   UI: condensed uppercase type (kit numbers, programme covers), hairline rules
+   and sharp geometry (pitch markings), ink on warm paper, and ONE decisive
+   green accent. Large soft gradients and heavy rounding are deliberately
+   avoided — they are what made the old design feel like every other web app.
+   ========================================================================== */
+
+:root {
+  /* ---- type ---------------------------------------------------------- */
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* ---- marker + brand green (FotMob palette) -------------------------- */
+  --club: #00985f;
+  --green: #00985f;
+  --green-dk: #00744a;
+  --green-lo: rgba(0, 152, 95, 0.12);
+
+  /* ---- ink on paper --------------------------------------------------- */
+  --ink: #0e1512;          /* near-black with a green cast */
+  --ink-2: #4b5551;        /* 7.4:1 on --surface */
+  --muted: #68716b;        /* 4.8:1 on --surface, 4.5:1 on --surface-2 */
+  --on-green: #ffffff;     /* text sitting on a green fill — 5.8:1 there */
+  --paper: #edece6;        /* the plane behind everything */
+  --surface: #fbfaf7;      /* panels */
+  --surface-2: #f2f1ec;    /* insets */
+  --masthead: #0e1512;     /* the black programme masthead */
+  --line: rgba(14, 21, 18, 0.13);
+  --line-strong: rgba(14, 21, 18, 0.26);
+  --accent: var(--green-dk);
+  --focus: rgba(0, 152, 95, 0.30);
+  --marker-ring: #fbfaf7;
+  /* The selected ground turns amber. Measured, not eyeballed: yellow-vs-green
+     is the classic confusion pair, so this was checked against --club under
+     simulated protanopia, deuteranopia and tritanopia (worst-case ΔE 45 — well
+     clear of the ~20 needed to read as a different colour). It carries a dark
+     ring because amber on pale paper is only 2:1 and needs the definition. */
+  --sel: #f0a500;
+  --sel-ring: #241a06;
+  /* Grounds already ticked off. ONE red for both themes, at the user's request
+     — earlier dark maroons (#8f0f28 at hue 24°) read as purple on paper once
+     the icon's pentagons darkened them, and this brighter tone doesn't.
+     3.5:1 on the basemap, the same as the green markers, so no worse there.
+     The known trade-off: it is only ΔE 16 from the selected amber under
+     simulated colour blindness (vs 32 from the green, which is fine). That
+     matters for one marker at a time, and the amber's pulse ring carries that
+     distinction without colour. */
+  --visited: #f43f5e;
+  --attr-bg: rgba(251, 250, 247, 0.82);
+  --wash: rgba(14, 21, 18, 0.045);
+  --wash-2: rgba(14, 21, 18, 0.08);
+  --shadow: 0 1px 0 var(--line-strong), 0 10px 30px rgba(14, 21, 18, 0.10);
+  --shadow-sm: 0 1px 0 var(--line-strong);
+
+  /* ---- geometry: sharp, printed ---------------------------------------- */
+  --r1: 2px;
+  --r2: 5px;
+  --r3: 9px;
+
+  /* ---- football texture ------------------------------------------------ */
+  --ball: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23000' fill-opacity='.34'%3E%3Cpolygon points='50,27 71.9,42.9 63.5,68.6 36.5,68.6 28.1,42.9'/%3E%3Cpolygon points='77.6,-2 90.9,7.7 85.8,23.3 69.4,23.3 64.3,7.7'/%3E%3Cpolygon points='94.7,50.5 108,60.2 102.9,75.8 86.5,75.8 81.4,60.2'/%3E%3Cpolygon points='50,83 63.3,92.7 58.2,108.3 41.8,108.3 36.7,92.7'/%3E%3Cpolygon points='5.3,50.5 18.6,60.2 13.5,75.8 -2.9,75.8 -8,60.2'/%3E%3Cpolygon points='22.4,-2 35.7,7.7 30.6,23.3 14.2,23.3 9.1,7.7'/%3E%3C/g%3E%3Cg stroke='%23000' stroke-opacity='.28' stroke-width='5' fill='none' stroke-linecap='round'%3E%3Cpath d='M50 27V-2'/%3E%3Cpath d='M71.9 42.9L99 34'/%3E%3Cpath d='M63.5 68.6L79.9 91'/%3E%3Cpath d='M36.5 68.6L20.1 91'/%3E%3Cpath d='M28.1 42.9L1 34'/%3E%3C/g%3E%3C/svg%3E");
+  --shine: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 48%);
+  --turf-a: #0b6b45;
+  --turf-b: #095c3b;
+  /* newsprint tooth, used at very low opacity on paper surfaces */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+body.dark {
+  --club: #33c771;
+  --green: #33c771;
+  --green-dk: #33c771;
+  --green-lo: rgba(51, 199, 113, 0.16);
+
+  --ink: #eef2f0;
+  --ink-2: #a8b3ae;
+  --muted: #8b968f;        /* 6.0:1 on --surface */
+  /* dark mode's green is bright, so text on a green fill goes dark: white
+     would be 2.2:1 there, near-black is 8.7:1 */
+  --on-green: #08110d;
+  --paper: #080b0a;
+  --surface: #111614;
+  --surface-2: #182020;
+  --masthead: #070a09;
+  --line: rgba(255, 255, 255, 0.11);
+  --line-strong: rgba(255, 255, 255, 0.20);
+  --accent: #61df6e;
+  --focus: rgba(97, 223, 110, 0.32);
+  --marker-ring: #111614;
+  --sel: #ffc61a;          /* 12.1:1 on the night basemap, ΔE 38 vs --club */
+  --sel-ring: #14100a;
+  /* same red as light mode; 5.2:1 on the night basemap, ΔE 33 vs the green.
+     Anything lighter (#ff6b8a, #ff8fa3) collapses toward it at ΔE 10–16. */
+  --visited: #f43f5e;
+  --attr-bg: rgba(8, 11, 10, 0.82);
+  --wash: rgba(255, 255, 255, 0.055);
+  --wash-2: rgba(255, 255, 255, 0.10);
+  --shadow: 0 1px 0 var(--line-strong), 0 14px 40px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 1px 0 var(--line-strong);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.hidden { display: none !important; }
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* The map does its own pinch and double-tap zoom. Without this, a gesture
+     that starts on any chrome *over* the map (the logo, the menu button, the
+     Reset pill) zooms the browser instead — and then pinching to undo it just
+     zooms the map, leaving you stuck at the wrong scale. Panning still works;
+     only the page's own zoom is withheld. */
+  touch-action: pan-x pan-y;
+  overscroll-behavior: none;
+}
+/* MapLibre handles every gesture inside the map itself */
+#map-wrap, #map { touch-action: none; }
+/* …but the sheet still needs to scroll */
+.side-scroll, .omni-results { touch-action: pan-y; }
+/* no 300ms double-tap delay, and no double-tap zoom, on anything tappable */
+button, .tab, .f-chip, .city-chip, .action-btn, .pr-row, .omni-row,
+.f-row, #club-list li, .link-btn, .pp-btn { touch-action: manipulation; }
+
+:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: var(--r1); }
+
+#app { position: relative; height: 100vh; height: 100dvh; }
+
+/* ---- a reusable "programme label": tiny condensed uppercase ------------- */
+.block-head h2,
+.f-line-label,
+.fd-title,
+.pp-stat .k,
+.omni-sec,
+.list-meta,
+.tab,
+.lvl-pill {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   MAP
+   ========================================================================== */
+
+#map-wrap { position: absolute; inset: 0; }
+#map { position: absolute; inset: 0; background: var(--paper); }
+.maplibregl-map { font: inherit; }
+
+#map-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 900;
+  box-shadow: inset 0 0 120px rgba(14, 21, 18, 0.12);
+}
+body.dark #map-wrap::after { box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.6); }
+
+/* ==========================================================================
+   SIDEBAR — the programme
+   ========================================================================== */
+
+#sidebar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  bottom: 16px;
+  width: 378px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r3);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow);
+  z-index: 1250;
+}
+/* paper tooth */
+#sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+body.dark #sidebar::before { opacity: 0.05; mix-blend-mode: screen; }
+/* lift the panels above the grain overlay — but not the sheet grip, which
+   must stay absolutely positioned or it pushes the masthead down */
+#sidebar > *:not(.sheet-grip) { position: relative; z-index: 1; }
+
+/* ---- masthead ---------------------------------------------------------- */
+
+.side-head {
+  position: relative;
+  flex: none;
+  padding: 18px 18px 16px;
+  background: var(--masthead);
+  color: #fff;
+  overflow: hidden;
+}
+/* kit stripes */
+.side-head .mow {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.035) 0 1px,
+    transparent 1px 3px,
+    rgba(255, 255, 255, 0.022) 3px 14px,
+    transparent 14px 28px
+  );
+  pointer-events: none;
+}
+/* floodlight bloom from the top-right */
+.side-head .aurora {
+  position: absolute;
+  inset: -40% -20% auto -20%;
+  height: 200%;
+  background: radial-gradient(46% 60% at 82% 6%, rgba(0, 152, 95, 0.55), transparent 68%);
+  pointer-events: none;
+}
+.side-head > *:not(.aurora):not(.mow) { position: relative; z-index: 2; }
+
+.head-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.brand .ball { font-size: 26px; line-height: 1; flex: none; }
+.brand h1 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+/* sized to hold the whole tagline on one line at 378px */
+.brand .sub {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 5px;
+}
+
+/* stats read like a fixture strip */
+.stat-row {
+  display: flex;
+  margin-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 11px;
+  gap: 0;
+}
+.pill {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  line-height: 1.15;
+}
+.pill:first-child { padding-left: 0; border-left: none; }
+.pill b {
+  display: block;
+  font-size: 21px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* sits on the panel surface (in the tabs row), not on the black masthead */
+.icon-btn {
+  flex: none;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--ink-2);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r2);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+.icon-btn:hover { border-color: var(--green); background: var(--green-lo); }
+
+/* the green touchline under the masthead */
+.scarf {
+  flex: none;
+  height: 4px;
+  background: var(--green);
+}
+
+/* ==========================================================================
+   OMNIBOX
+   ========================================================================== */
+
+.omni-wrap { position: relative; flex: none; padding: 14px 16px 11px; }
+/* The grain-lift rule above stacks every panel at z-index 1, which makes this
+   one a stacking context — capping the results dropdown inside it, so the tabs
+   and the scroll area (later siblings at the same level) painted straight over
+   it. The ID prefix is needed to out-specify that rule. */
+#sidebar > .omni-wrap { z-index: 20; }
+.omni-field {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  padding: 0 11px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+.omni-field:focus-within { border-color: var(--green); box-shadow: 0 0 0 3px var(--focus); }
+.omni-icon { color: var(--muted); font-size: 17px; line-height: 1; flex: none; }
+#omni {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  padding: 11px 0;
+}
+#omni::placeholder { color: var(--muted); }
+.omni-kbd {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  padding: 1px 7px;
+}
+.omni-field:focus-within .omni-kbd { display: none; }
+
+.omni-hint { margin: 7px 2px 0; font-size: 11px; line-height: 1.45; color: var(--muted); }
+.omni-hint b { font-weight: 600; color: var(--ink-2); }
+
+.omni-results {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: calc(100% - 8px);
+  z-index: 40;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  box-shadow: var(--shadow);
+  overflow: hidden auto;
+  max-height: 340px;
+}
+.omni-sec {
+  font-size: 10.5px;
+  color: var(--muted);
+  padding: 10px 13px 5px;
+  border-top: 1px solid var(--line);
+}
+.omni-sec:first-child { border-top: none; }
+.omni-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  padding: 9px 13px;
+  cursor: pointer;
+}
+.omni-row:hover, .omni-row.is-cursor { background: var(--green-lo); }
+.omni-row .or-text { flex: 1; min-width: 0; }
+.omni-row .or-name {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.omni-row .or-meta { display: block; font-size: 11.5px; color: var(--muted); }
+.omni-row .or-go { font-size: 12px; color: var(--muted); flex: none; }
+.omni-empty { padding: 15px 13px; font-size: 12.5px; color: var(--muted); }
+
+/* ==========================================================================
+   TABS
+   ========================================================================== */
+
+.tabs {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 0 16px;
+}
+.tab {
+  flex: 1;
+  position: relative;
+  font-size: 14px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  padding: 11px 4px 12px;
+  cursor: pointer;
+  transition: color 140ms ease;
+}
+.tab:hover { color: var(--ink-2); }
+.tab.is-active { color: var(--ink); }
+.tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: var(--green);
+}
+.tab-dot[hidden] { display: none; }
+.tab-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  vertical-align: 2px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.side-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
+.panel-tab { display: none; }
+.panel-tab.is-active { display: block; animation: fade-in 160ms ease both; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---- numbered sections, like a programme contents page ----------------- */
+
+#panel-explore { counter-reset: sect; }
+.block { padding: 16px; border-bottom: 1px solid var(--line); }
+.block:last-child { border-bottom: none; }
+.section-break { border-top: 1px solid var(--line-strong); }
+
+.block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+}
+.block-head h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--ink);
+}
+#panel-explore .block-head h2::before {
+  counter-increment: sect;
+  content: counter(sect, decimal-leading-zero);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0;
+}
+.hint { font-size: 11px; color: var(--muted); }
+
+.link-btn {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 4px;
+}
+.link-btn:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   EXPLORE
+   ========================================================================== */
+
+.action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: 11px 12px;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+.action-btn:hover { border-color: var(--green); background: var(--green-lo); }
+.ab-icon { font-size: 18px; line-height: 1; flex: none; }
+.ab-text { min-width: 0; }
+.ab-text b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.ab-text small { display: block; font-size: 10.5px; color: var(--muted); }
+
+.city-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.city-chip, .f-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r1);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 130ms ease;
+}
+.city-chip:hover, .f-chip:hover { border-color: var(--green); color: var(--green-dk); }
+.city-chip .cc-n, .f-chip .fc-n {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+.city-chip:hover .cc-n { color: var(--green); }
+
+/* the pitch card */
+.empty-note {
+  position: relative;
+  overflow: hidden;
+  margin: 16px;
+  padding: 16px;
+  border-radius: var(--r2);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  background-color: var(--turf-a);
+  background-image: repeating-linear-gradient(102deg, var(--turf-a) 0 24px, var(--turf-b) 24px 48px);
+}
+.empty-note::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+.empty-note::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  width: 84px;
+  height: 84px;
+  transform: translateY(-50%);
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.empty-note > * { position: relative; }
+.empty-note .en-emoji { font-size: 19px; display: block; margin-bottom: 6px; }
+.empty-note b { color: #fff; font-weight: 700; }
+
+/* ---- nearby-grounds results board --------------------------------------- */
+
+/* No top rule: it sits immediately under the "Start here" block,
+   which already draws one — two would read as a double line. */
+.place-results { padding: 16px; border-bottom: 1px solid var(--line); }
+.pr-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-2);
+}
+.pr-head strong { color: var(--ink); font-weight: 700; }
+.pr-sub { font-size: 11.5px; color: var(--muted); margin: 3px 0 10px; }
+.pr-empty { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--muted); }
+
+.pr-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 6px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.pr-row:hover { background: var(--green-lo); }
+.pr-row .pr-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 550;
+}
+.pr-row .pr-dist {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* league tag */
+.lg-chip {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-2);
+  background: var(--wash-2);
+  padding: 1px 5px;
+  border-radius: var(--r1);
+  vertical-align: 1px;
+}
+
+/* ==========================================================================
+   FILTERS
+   ========================================================================== */
+
+.f-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.f-line-label { flex: none; width: 44px; padding-top: 7px; font-size: 11px; color: var(--muted); }
+.chip-row { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
+
+.f-chip.on {
+  color: var(--on-green);
+  background: var(--green-dk);
+  border-color: var(--green-dk);
+}
+.f-chip.on .fc-n { color: color-mix(in srgb, var(--on-green) 72%, transparent); }
+.f-chip.partial {
+  color: var(--green-dk);
+  border-color: var(--green);
+  background: var(--green-lo);
+}
+.f-chip.partial::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.f-summary {
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+.f-summary b {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  margin-right: 2px;
+}
+
+.f-detail summary { list-style: none; cursor: pointer; }
+.f-detail summary::-webkit-details-marker { display: none; }
+.f-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+}
+.fd-title { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink); }
+.fd-title::before { content: "▸"; color: var(--green); font-size: 10px; }
+details[open] .fd-title::before { content: "▾"; }
+.fd-count { font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.fd-hint { margin: 10px 0 3px; font-size: 10.5px; color: var(--muted); }
+
+.f-group { margin-bottom: 4px; }
+.f-group summary { list-style: none; }
+.f-group summary::-webkit-details-marker { display: none; }
+.f-country {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 12px 0 4px;
+  padding: 5px 6px;
+  border-radius: var(--r1);
+  cursor: pointer;
+  user-select: none;
+  background: var(--surface-2);
+}
+.f-group:first-child .f-country { margin-top: 4px; }
+.fc-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.fc-name::before { content: "▸"; color: var(--muted); font-size: 9px; margin-right: 6px; }
+details[open] .fc-name::before { content: "▾"; }
+.fc-total { color: var(--muted); font-weight: 500; font-size: 12px; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.fc-links { font-size: 11px; color: var(--muted); }
+.fc-links button {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0 3px;
+}
+.fc-links button:hover { text-decoration: underline; }
+
+/* league toggles — a team sheet */
+.f-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 8px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.42;
+  transition: background 120ms ease, opacity 120ms ease;
+}
+.f-row:hover { background: var(--wash); }
+.f-row .dot { filter: grayscale(1); }
+.f-row.is-on { opacity: 1; }
+.f-row.is-on .dot { filter: none; }
+.f-row .f-name { flex: 1; font-size: 13.5px; font-weight: 500; color: var(--ink); }
+.f-row.is-on .f-name { font-weight: 600; }
+.f-row .f-count {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   GROUNDS LIST
+   ========================================================================== */
+
+.sticky-block { position: sticky; top: 0; z-index: 5; background: var(--surface); }
+.list-controls { display: flex; gap: 8px; }
+#ground-filter {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 11px;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  outline: none;
+}
+#ground-filter:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--focus); }
+#ground-filter::placeholder { color: var(--muted); }
+.select {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  padding: 0 8px;
+  cursor: pointer;
+}
+.list-meta { margin-top: 9px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+#club-list { list-style: none; padding: 0 8px 12px; }
+#club-list li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+#club-list li:hover { background: var(--green-lo); }
+#club-list .cl-text { flex: 1; min-width: 0; }
+#club-list .cl-name {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#club-list .cl-meta { display: block; font-size: 11px; color: var(--muted); margin-top: 1px; }
+#club-list .cl-cap {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.list-empty { padding: 18px 12px; font-size: 12.5px; color: var(--muted); }
+
+/* Small print, directly under the masthead rule and above the search. Sized to
+   wrap to two tight lines and no more: no texture behind it, because anything
+   there fights legibility at this size. --muted is 4.8:1 on this surface. */
+.side-note {
+  flex: none;
+  margin: 0;
+  padding: 6px 13px 7px;
+  font-size: 10px;
+  line-height: 1.34;
+  /* the text packs to ~1.9 lines, so without hyphenation the ragged right edge
+     tips it onto a third line and the strip grows by half again */
+  hyphens: auto;
+  color: var(--muted);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   MARKERS
+   ========================================================================== */
+
+.dot {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  flex: none;
+  background-color: var(--club);
+  background-image: var(--shine), var(--ball);
+  background-size: 100% 100%;
+  border: 1.5px solid var(--marker-ring);
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+
+.club-marker { background: none; border: none; cursor: pointer; }
+.maplibregl-marker:hover { z-index: 5; }
+.club-marker .cdot {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--club);
+  background-image: var(--shine), var(--ball);
+  background-size: 100% 100%;
+  border: 2px solid var(--marker-ring);
+  --halo: color-mix(in srgb, var(--club) 26%, transparent);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.32), 0 0 0 4px var(--halo);
+  transition: transform 140ms ease, box-shadow 140ms ease, opacity 160ms ease;
+  animation: dot-pop 240ms ease-out;
+}
+.club-marker .cdot:hover {
+  transform: scale(1.34) rotate(18deg);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.38), 0 0 0 7px var(--halo);
+}
+/* the one selected ground reads amber against 596 green ones */
+.club-marker.sel .cdot {
+  background-color: var(--sel);
+  border-color: var(--sel-ring);
+  --halo: color-mix(in srgb, var(--sel) 30%, transparent);
+  animation: sel-pulse 1.6s ease-out infinite;
+}
+@keyframes sel-pulse {
+  0%   { box-shadow: 0 1px 4px rgba(0,0,0,.32), 0 0 0 4px var(--halo), 0 0 0 0 var(--sel); }
+  100% { box-shadow: 0 1px 4px rgba(0,0,0,.32), 0 0 0 4px var(--halo), 0 0 0 22px transparent; }
+}
+/* transform only — animating opacity here fights the spotlight rules */
+@keyframes dot-pop { from { transform: scale(0.3); } to { transform: scale(1); } }
+
+/* ---- groundhopper ------------------------------------------------------- */
+
+/* the tick control on a club card */
+.pp-visit {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: calc(100% - 28px);
+  margin: 10px 14px 0;
+  padding: 9px 11px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+.pp-visit:hover { border-color: var(--green); color: var(--ink); }
+.pp-visit .pv-box {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  font-size: 12px;
+  line-height: 1;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r1);
+}
+.pp-visit.is-on {
+  color: var(--green-dk);
+  border-color: var(--green-dk);
+  background: var(--green-lo);
+}
+.pp-visit.is-on .pv-box {
+  background: var(--green-dk);
+  border-color: var(--green-dk);
+  color: var(--on-green);
+}
+
+/* progress, above the full ground list */
+.tally-block { padding: 13px 16px 15px; }
+.tally-head { display: flex; align-items: baseline; justify-content: space-between; }
+.tally-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.tally-row { display: flex; align-items: baseline; gap: 7px; margin-top: 4px; }
+.tally-row b {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.tally-of { font-size: 12px; color: var(--muted); }
+.tally-bar {
+  margin-top: 9px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--wash-2);
+  overflow: hidden;
+}
+.tally-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--green-dk);
+  transition: width 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* a ticked-off ground in the list, colour-matched to its map marker */
+#club-list li.is-done .dot {
+  background-color: var(--visited);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--visited) 40%, transparent);
+}
+#club-list li.is-done .cl-name::after {
+  content: " ✓";
+  color: var(--visited);
+  font-weight: 700;
+}
+
+/* the filter chips carry the swatches, so they are also the map's key —
+   no separate legend cluttering the map itself */
+#visit-chips .f-chip[data-visit="todo"]::before,
+#visit-chips .f-chip[data-visit="done"]::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  margin-right: 2px;
+  border-radius: 50%;
+  background: var(--club);
+}
+#visit-chips .f-chip[data-visit="done"]::before { background: var(--visited); }
+
+/* export / import / clear */
+.tally-tools { display: flex; gap: 12px; }
+
+/* show/hide visited — a shortcut for the most common of the three chip states */
+.tally-toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.tally-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.tt-track {
+  position: relative;
+  flex: none;
+  width: 34px;
+  height: 19px;
+  border-radius: 999px;
+  background: var(--wash-2);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+.tt-knob {
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tally-toggle input:checked + .tt-track {
+  background: var(--visited);
+  box-shadow: inset 0 0 0 1px var(--visited);
+}
+.tally-toggle input:checked + .tt-track .tt-knob { transform: translateX(15px); }
+.tally-toggle input:focus-visible + .tt-track { outline: 2px solid var(--green); outline-offset: 2px; }
+.tt-text { font-size: 12.5px; color: var(--ink-2); }
+
+/* Deliberately always visible, not tucked behind a disclosure: it warns about
+   losing data, and a warning nobody opens is no warning at all. */
+.tally-note {
+  margin-top: 11px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.tally-note b { color: var(--ink-2); font-weight: 600; }
+
+/* hover tag */
+.club-tip {
+  position: fixed;
+  z-index: 1400;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  background: var(--masthead);
+  color: #fff;
+  border-radius: var(--r1);
+  padding: 5px 9px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.club-tip .tip-league { font-weight: 500; color: rgba(255, 255, 255, 0.6); }
+
+/* corner flag */
+.place-pin { background: none; border: none; }
+.place-pin .pin {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 30px;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 40'%3E%3Cpath d='M9 38V4' stroke='%23fff' stroke-width='5.5' stroke-linecap='round'/%3E%3Cpath d='M9 38V4' stroke='%230e1512' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M10.6 4.5L27 10.2 10.6 16.4Z' fill='%2300985f' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.35));
+}
+.place-pin .pulse {
+  position: absolute;
+  left: 3px;
+  top: 32px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  opacity: 0;
+  animation: pin-pulse 1.8s ease-out infinite;
+}
+@keyframes pin-pulse {
+  0% { transform: scale(0.4); opacity: 0.8; }
+  70% { transform: scale(2.2); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.spin-ball {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--green);
+  background-image: var(--shine), var(--ball);
+  background-size: 100% 100%;
+  animation: roll 900ms linear infinite;
+}
+@keyframes roll { to { transform: rotate(360deg); } }
+
+body.hl-on .cl-donut { opacity: 0.2; }
+
+/* ==========================================================================
+   CLUB CARD — a team sheet
+   ========================================================================== */
+
+.maplibregl-popup { z-index: 1000; }
+.maplibregl-popup-content {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: var(--r2);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow);
+  padding: 0;
+  font-family: var(--font-ui);
+  line-height: 1.45;
+}
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+.maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+.maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip { border-top-color: var(--surface); }
+.maplibregl-popup-anchor-top .maplibregl-popup-tip,
+.maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+.maplibregl-popup-anchor-top-right .maplibregl-popup-tip { border-bottom-color: var(--masthead); }
+.maplibregl-popup-anchor-left .maplibregl-popup-tip { border-right-color: var(--surface); }
+.maplibregl-popup-anchor-right .maplibregl-popup-tip { border-left-color: var(--surface); }
+.maplibregl-popup-close-button {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  padding: 2px 10px 0 0;
+  background: none;
+  z-index: 3;
+}
+.maplibregl-popup-close-button:hover { color: #fff; background: none; }
+
+.pp { width: 262px; max-width: 100%; }
+/* header band: black, like the masthead */
+.pp-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  background: var(--masthead);
+  color: #fff;
+}
+.pp-mono {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r1);
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: var(--on-green);
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.pp-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.pp-league {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 3px;
+}
+.pp-league .dot { width: 10px; height: 10px; border-color: transparent; box-shadow: none; }
+
+/* Stats as a ruled grid. The rules ARE the 1px gaps showing the container
+   through — which draws lines only between real neighbours, whatever mix of
+   full- and half-width cells the card ends up with. */
+.pp-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+}
+.pp-stat { padding: 9px 14px; background: var(--surface); min-width: 0; }
+.pp-stat.wide { grid-column: span 2; }
+.pp-stat .k { font-size: 10.5px; color: var(--muted); margin-bottom: 1px; }
+.pp-stat .v { font-size: 14px; font-weight: 600; overflow-wrap: break-word; }
+.pp-stat .v.num {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.05;
+}
+.k-approx { color: #b8860b; letter-spacing: 0.04em; }
+body.dark .k-approx { color: #d9a441; }
+
+/* rides alongside the status text rather than taking its own row */
+.lvl-pill {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--green-dk);
+  background: var(--green-lo);
+  padding: 1px 6px;
+  border-radius: var(--r1);
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+
+.pp-actions { display: flex; gap: 6px; padding: 10px 14px 0; }
+.pp-actions:last-child { padding-bottom: 12px; }
+.pp-actions.secondary { padding-top: 6px; padding-bottom: 12px; }
+.pp-btn {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: border-color 130ms ease, background 130ms ease;
+}
+.pp-btn:hover { border-color: var(--green); background: var(--green-lo); }
+.pp-btn.primary { background: var(--green-dk); border-color: var(--green-dk); color: var(--on-green); }
+.pp-btn.primary:hover { filter: brightness(1.1); }
+.pp-btn.mini { font-size: 12.5px; font-weight: 500; }
+
+/* ==========================================================================
+   MAP CHROME
+   ========================================================================== */
+
+.maplibregl-ctrl-group {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm) !important;
+  background: var(--surface);
+}
+.maplibregl-ctrl-group button { background: transparent; border-bottom: 1px solid var(--line); }
+.maplibregl-ctrl-group button:last-child { border-bottom: none; }
+.maplibregl-ctrl-group button:hover { background: var(--wash); }
+body.dark .maplibregl-ctrl-icon { filter: invert(1) brightness(1.3); }
+
+.maplibregl-ctrl-attrib {
+  background: var(--attr-bg) !important;
+  color: var(--muted);
+  font-size: 10px;
+  border-radius: var(--r1) 0 0 0;
+}
+.maplibregl-ctrl-attrib a { color: var(--ink-2); }
+
+
+/* Reset lives top-right on every device, and is always present — .is-live
+   only changes its colour, to signal there is something to undo. */
+.map-bar {
+  position: absolute;
+  top: calc(16px + env(safe-area-inset-top));
+  right: 16px;
+  z-index: 1100;
+  display: flex;
+}
+/* Zoom sits bottom-right, diagonally opposite Reset — kept rather than deleted
+   because +/- is the only zoom control that is keyboard-reachable and needs no
+   gesture, but moved so it can't be mistaken for part of Reset. */
+.maplibregl-ctrl-bottom-right .maplibregl-ctrl { margin-right: 16px; }
+.map-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 20px;
+  border-radius: var(--r2);
+  /* Green at rest, not just when there is something to undo — it is the way
+     back to the opening view, so it should always read as the primary control. */
+  border: 1px solid var(--green-dk);
+  background: var(--green-dk);
+  color: var(--on-green);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: filter 140ms ease, box-shadow 140ms ease;
+}
+.map-reset .mr-icon { font-size: 21px; line-height: 0.8; }
+.map-reset:hover { filter: brightness(1.08); }
+.map-reset:active { filter: brightness(0.92); }
+/* still worth signalling that something is actually filtered or selected —
+   a ring rather than a colour change, so it reads as emphasis not a new state */
+.map-reset.is-live {
+  box-shadow: var(--shadow), 0 0 0 3px color-mix(in srgb, var(--green) 30%, transparent);
+}
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+
+.sheet-grip { display: none; }
+
+@media (max-width: 900px) {
+  /* PEEKING BOTTOM SHEET — no hamburger.
+     At rest it shows the brand bar and the search field; the rest of the
+     map is free. Tap the bar to raise it, tap again to minimise, and any
+     action that moves the camera (a search, a ground, a city) retracts it so
+     the map becomes the focus. --peek must cover grip + masthead + note +
+     search, and is mirrored by PEEK_PX in js/app.js. */
+  :root { --peek: calc(158px + env(safe-area-inset-bottom)); }
+  #sidebar {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 72dvh;
+    border-radius: var(--r3) var(--r3) 0 0;
+    border-bottom: none;
+    transform: translateY(calc(72dvh - var(--peek)));
+    transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  body.side-open #sidebar { transform: translateY(0); }
+  /* while a finger is on the handle the position is driven from JS */
+  body.sheet-dragging #sidebar { transition: none; }
+
+  /* the masthead is the handle: the whole bar toggles the sheet */
+  .side-head { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+
+  /* Lift the map's own controls clear of the sheet. This also keeps the
+     OpenStreetMap attribution visible, which the tile licence requires — the
+     peeking sheet was covering it completely. */
+  .maplibregl-ctrl-bottom-right { bottom: var(--peek); }
+
+  /* full-width so a downward swipe anywhere along the top edge is caught */
+  .sheet-grip {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    width: auto;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: grab;
+    touch-action: none;
+  }
+  .sheet-grip::before {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 4px;
+    margin: 8px auto 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  /* Compact: everything here is inside the always-visible peek strip, so each
+     pixel costs map. The tagline and stat row go; the omni hint goes too,
+     because the field's own placeholder already says the same thing. */
+  .side-head { padding: 13px 16px 12px; }
+  .brand h1 { font-size: 25px; }
+  .brand .ball { font-size: 21px; }
+  .brand .sub, .stat-row, .omni-hint { display: none; }
+  .side-note { padding: 5px 13px 6px; }
+  .omni-wrap { padding: 10px 14px 10px; }
+
+
+  /* Spotlight-on-hover is a pointer-only affordance, so the instruction for it
+     is dead copy on a touch screen — the rows still toggle on tap. */
+  .fd-hint { display: none; }
+
+  /* iOS zooms the page when a focused input is under 16px */
+  #omni, #ground-filter, .select { font-size: 16px; }
+  .omni-kbd { display: none; }
+
+  /* touch targets */
+  .icon-btn { width: 38px; height: 38px; font-size: 15px; }
+  .tab { padding: 15px 4px 16px; font-size: 15px; }
+  .action-btn { padding: 13px 12px; }
+  .city-chip, .f-chip { padding: 9px 13px; font-size: 16px; }
+  .f-row { padding: 11px 8px; }
+  .pr-row { padding: 12px 6px; }
+  #club-list li { padding: 12px 8px; }
+  .link-btn { padding: 12px 8px; }
+  .map-reset { padding: 10px 15px; font-size: 15px; }
+  .f-line-label { padding-top: 11px; }
+  /* the scroll area now runs to the bottom edge, so it owns the safe area */
+  .side-scroll { padding-bottom: env(safe-area-inset-bottom); }
+
+  /* club card fits a phone, and clears the top chrome */
+  .maplibregl-popup { max-width: calc(100vw - 24px) !important; }
+  .pp { width: min(262px, calc(100vw - 56px)); }
+  .pp-head { padding: 11px 12px; gap: 10px; }
+  .pp-mono { width: 38px; height: 38px; font-size: 18px; }
+  .pp-name { font-size: 19px; }
+  .pp-stat { padding: 8px 12px; }
+  .pp-stat .v.num { font-size: 18px; }
+  .pp-actions { padding: 9px 12px 0; }
+  .pp-btn { padding: 10px 4px; }
+}
+
+@media (max-width: 360px) {
+  .pp-stats { grid-template-columns: 1fr; }
+  .pp-stat.wide, .pp-stat { grid-column: span 1; }
+}
+
+/* scrollbars */
+.side-scroll::-webkit-scrollbar, .omni-results::-webkit-scrollbar { width: 9px; }
+.side-scroll::-webkit-scrollbar-thumb, .omni-results::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* entrance */
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-width: 901px) { #sidebar { animation: rise 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both; } }
+.map-bar { animation: rise 360ms 100ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
