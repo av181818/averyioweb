@@ -363,7 +363,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(140deg, #E24657, #C4152B);
+  /* Bitcoin orange, sampled from BTCPRIX's own favicon so the tile icon
+     and the browser-tab icon are the same colour. Only BTCPRIX uses
+     .mono-tile — every other product has an App Store icon. */
+  background: #F7931A;
   color: #fff;
   font-weight: 800;
   font-size: 1.1rem;
@@ -402,7 +405,9 @@ nav {
   box-shadow: 0 6px 18px rgba(0,0,0,0.16), 0 20px 44px rgba(0,0,0,0.10);
 }
 
-/* Monogram tile — for products with no App Store icon (e.g. BTC Prix) */
+/* Monogram tile — for products with no App Store icon. BTCPRIX is the only
+   one, so this colour is its brand: Bitcoin orange #F7931A, sampled straight
+   from its favicon, so the tile icon and the browser-tab icon match exactly. */
 .mono-tile {
   width: 46px; height: 46px;
   border-radius: 11px;
@@ -412,7 +417,7 @@ nav {
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.02em;
-  background: linear-gradient(140deg, #E24657, #C4152B);
+  background: #F7931A;
   box-shadow: 0 3px 10px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.25);
 }
 
