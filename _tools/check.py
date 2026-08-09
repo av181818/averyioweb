@@ -30,7 +30,8 @@ FROZEN = ["privacy-investfast.html", "privacy-surge.html", "privacy-bigtimeclock
 # PAGES because they ship their own stylesheet — running the site-wide class
 # audit against them would report every one of their classes as an orphan of
 # assets/site.css. They still get link, markup and live-integrity checks.
-STANDALONE = {"centre-circle-finder/index.html": "/centre-circle-finder/"}
+STANDALONE = {"centre-circle-finder/index.html": "/centre-circle-finder/",
+              "btc-prix/index.html": "/btc-prix/"}
 # Centre Circle Finder's generated ground pages. Unlike the app itself these use
 # the site stylesheet, so they belong in the class audit — without them every
 # .gp-* rule reads as dead CSS. Kept separate from PAGES because they are
