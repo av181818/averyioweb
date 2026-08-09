@@ -15,14 +15,13 @@ CARD_DESC = {
  "big-time-clock": "Turn an iPhone or iPad into a beautiful full-screen clock.",
  "lume":           "A gamified to-do list that makes getting things done genuinely rewarding.",
  "tap-dot-tap":    "A one-tap reflex game. Tap the dot before it vanishes.",
- "btc-prix":       "Real-time Bitcoin price tracking, free on the web.",
 }
 
 # ── the tile's artwork ───────────────────────────────────────────────────
 # The stage is 5:4 and crops with `object-position: 50% 0`, i.e. it shows the
 # TOP of whatever image it is given. App Store screenshots suit that — their
 # headline is at the top. Artwork that centres its content does not: Centre
-# Circle Finder's poster showed nothing but pitch texture, and BTC Prix had no
+# Circle Finder's poster showed nothing but pitch texture, and BTCPRIX had no
 # screenshot at all and fell back to a bare monogram. Both now supply a `tile`:
 # a purpose-made 640x512 crop that fills the stage exactly.
 def stage_html(a):
@@ -40,7 +39,7 @@ def stage_html(a):
                 f'sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 31vw" '
                 f'alt="{alt}" width="638" height="1387" loading="lazy" decoding="async" /></div>')
     # Every product now supplies artwork. The old monogram-on-ink fallback was
-    # removed with its `.show-blank` rule once BTC Prix got a real tile — a
+    # removed with its `.show-blank` rule once BTCPRIX got a real tile — a
     # dead CSS rule fails check.py. Fail loudly here rather than shipping a
     # tile with an empty stage.
     raise SystemExit(
@@ -48,10 +47,7 @@ def stage_html(a):
         f"entry — see stage_html() in gen_site.py.")
 
 # ── app showcase tile ────────────────────────────────────────────────────
-# The tile leads with the app's real App Store artwork, cropped by the
-# stage to its headline and the top of the device. BTC Prix has no
-# screenshots, so it falls back to the monogram on an ink stage.
-# The tile's icon. Products with no App Store icon (BTC Prix) fall back to
+# The tile's icon. Products with no App Store icon (BTCPRIX) fall back to
 # the monogram, so both card renderers share this.
 def icon_html(a):
     if a.get("asset"):
@@ -117,7 +113,7 @@ _ALL_ICONS = "\n              ".join(
      f'alt="" width="46" height="46" loading="lazy" decoding="async" />')
     if a.get("asset") else
     f'<span class="show-all-mono" aria-hidden="true">{a["mono"]}</span>'
-    # every product, not just APPS — BTC Prix moved to SITE_APPS and would
+    # every product, not just APPS — BTCPRIX moved to SITE_APPS and would
     # otherwise vanish from the cluster, leaving 5 icons in a 3-wide grid
     for a in (SITE_APPS + APPS)[:6])
 
@@ -392,7 +388,7 @@ fin += f"""
             <span class="card-arrow">&rarr;</span>
           </div>
           <div>
-            <p class="card-title">BTC Prix</p>
+            <p class="card-title">BTCPRIX</p>
             <p class="card-desc">The live Bitcoin price, in a page that loads before you have finished blinking. Free, no account.</p>
           </div>
           <div class="card-footer"><span class="tag">Web</span><span class="tag">Crypto</span></div>

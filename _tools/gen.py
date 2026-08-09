@@ -380,11 +380,11 @@ SITE_APPS = [
  # marketing page, so the tile led to a description page and only then to
  # the app — a middle layer the owner asked to remove. The tile now goes
  # straight to the app. The old URL still resolves via REDIRECTS below.
- "name": "BTC Prix",
+ "name": "BTCPRIX",
  "url": "/btc-prix/",
  "asset": None,          # no App Store icon — falls back to the ₿ monogram
  "mono": "₿",
- "tile": ("btcprix-tile", "BTC Prix — the live Bitcoin price, free on the web"),
+ "tile": ("btcprix-tile", "BTCPRIX — the live Bitcoin price, free on the web"),
  "desc": "Real-time Bitcoin price tracking, free on the web.",
  "tags": ["Web", "Crypto"],
  "note": "Free",
@@ -397,7 +397,7 @@ SITE_APPS = [
 # stub behind: the old URL keeps working for anyone who has it, and the
 # canonical consolidates its ranking onto the destination. Deleting the file
 # outright would 404 a URL that is indexed and linked from the sitemap.
-REDIRECTS = [("apps/btc-prix/index.html", "/btc-prix/", "BTC Prix")]
+REDIRECTS = [("apps/btc-prix/index.html", "/btc-prix/", "BTCPRIX")]
 
 ETHOS = [
  ("No bloat","Megabytes, not gigabytes. No frameworks bolted on, no ad libraries, no analytics SDK phoning home — nothing ships that has not earned its place."),
@@ -448,7 +448,7 @@ def app_page(app, apps):
     icon = f"/assets/apps/{app['asset']}-icon.webp" if app["asset"] else "/assets/logo-256.png"
     icon2x = f"/assets/apps/{app['asset']}-icon@2x.webp" if app["asset"] else "/assets/logo-256.png"
     # Every APPS entry has an App Store icon. The monogram fallback went with
-    # BTC Prix when it moved to SITE_APPS, and its `.mono-tile-lg` rule was
+    # BTCPRIX when it moved to SITE_APPS, and its `.mono-tile-lg` rule was
     # deleted as dead CSS — so an assetless app here would render unstyled.
     if not app["asset"]:
         raise SystemExit(f"{app['name']}: /apps/<slug>/ pages need an 'asset' icon.")
