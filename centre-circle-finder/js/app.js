@@ -538,16 +538,15 @@
 
   // ---------- popup / selection ----------
 
-  // Behind the ⓘ next to "Mark as visited". Deliberately the same words as the
-  // .tally-note paragraph in index.html — the warning matters most at the moment
-  // someone starts a collection, which is here, not in a panel they may never
-  // open. **If you edit one, edit the other.**
+  // Behind the ⓘ next to "Mark as visited". Just the part that costs someone
+  // their collection if they do not know it; the mechanics of Export and Import
+  // live in the Grounds tab, next to the buttons that do the work, and the link
+  // goes there rather than restating them on a card this small.
   const VISIT_NOTE =
-    'Open any ground and tap <b>Mark as visited</b> to tick it off. ' +
-    "Your list is saved <b>in this browser only</b> — there's no account, so " +
-    'clearing your browsing data, or switching browser or device, starts you ' +
-    'from scratch. Use <b>Export</b> to save a backup file, and <b>Import</b> ' +
-    'to merge it back in.';
+    'Saved <b>in this browser only</b> — clearing your browsing data, or ' +
+    'switching browser or device, starts you from scratch.' +
+    '<a class="pp-note-link" href="#" onclick="return window._ukfmGrounds()">' +
+    'Back up your list</a>';
 
   function popupHtml(t) {
     const lg = LEAGUES[t.league];
@@ -642,7 +641,13 @@
     currentPopup = new maplibregl.Popup({
       offset: MARKER_PX / 2 + 10,
       maxWidth: "310px",
-      closeButton: true
+      closeButton: true,
+      // Pinned above the pin rather than left to maplibre, which re-picks a side
+      // per ground depending on where it lands on screen. That made the card
+      // appear above or below seemingly at random, and opening the ⓘ could flip
+      // it mid-interaction. Fixed here, the card always grows upwards from the
+      // pin and the buttons stay where the eye left them.
+      anchor: "bottom"
     })
       .setLngLat([t.lng, t.lat])
       .setHTML(popupHtml(t))
@@ -1051,6 +1056,16 @@
     // note's height is already accounted for, and a frame callback is throttled
     // in a background tab — which is exactly where this silently did nothing.
     if (opening) fitPopupIntoView();
+  };
+
+  // "Back up your list" inside the ⓘ note — the Grounds tab is where Export,
+  // Import and Clear are, so send people to the controls rather than describing
+  // them again on the card. Returns false: it is an in-app jump, not a link.
+  window._ukfmGrounds = () => {
+    if (currentPopup) currentPopup.remove();
+    showTab("grounds");
+    if (isMobile()) openSheet();
+    return false;
   };
 
   // "Nearby" button inside popups — re-centre the nearby search on that ground

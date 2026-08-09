@@ -982,6 +982,19 @@ details[open] .fc-name::before { content: "▾"; }
   border-radius: var(--r2);
 }
 .pp-note b { color: var(--ink-2); font-weight: 600; }
+.pp-note-link {
+  display: block;
+  margin-top: 7px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-decoration: none;
+}
+.pp-note-link::after { content: " →"; }
+.pp-note-link:hover { text-decoration: underline; }
 
 .pp-visit {
   display: flex;
