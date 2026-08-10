@@ -120,7 +120,16 @@ nav {
   gap: 0.4rem;
   flex-wrap: wrap;
 }
-.crumb a { color: var(--muted); text-decoration: none; }
+.crumb a {
+  color: var(--muted);
+  text-decoration: none;
+  /* 16px of text is under the 24px WCAG 2.2 AA target size. Padding lifts the
+     hit area clear; the crumb row is the only thing on its line, so it can
+     simply grow rather than needing a negative margin. */
+  display: inline-block;
+  padding: 5px 3px;
+  margin: 0 -3px;
+}
 .crumb a:hover { color: var(--red); }
 .crumb .sep { color: var(--faint); opacity: 0.6; }
 .crumb [aria-current] { color: var(--text); font-weight: 600; }
@@ -871,7 +880,13 @@ footer a:hover { color: var(--text); }
   margin-bottom: 0.3rem;
 }
 .gp-fact-v { display: block; font-weight: 600; font-size: 0.95rem; }
-.gp-fact-v a { color: var(--red); text-decoration: none; }
+.gp-fact-v a {
+  color: var(--red);
+  text-decoration: none;
+  display: inline-block;
+  padding: 4px 0;
+  margin: -4px 0;
+}
 .gp-fact-v a:hover { text-decoration: underline; }
 .gp-note {
   background: var(--red-soft);
@@ -949,7 +964,14 @@ footer a:hover { color: var(--text); }
   margin-top: 0.35rem;
 }
 .gp-more { margin-top: 1.6rem; font-size: 0.88rem; color: var(--muted); }
-.gp-more a { color: var(--red); text-decoration: none; font-weight: 600; }
+.gp-more a {
+  color: var(--red);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  padding: 5px 0;
+  margin: -5px 0;
+}
 .gp-more a:hover { text-decoration: underline; }
 .gp-tw { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; }
 .gp-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--surface); }
@@ -967,7 +989,14 @@ footer a:hover { color: var(--text); }
 }
 .gp-table td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); }
 .gp-table tr:last-child td { border-bottom: 0; }
-.gp-table td a { color: var(--text); text-decoration: none; font-weight: 600; }
+.gp-table td a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  padding: 4px 0;          /* 18px -> 26px, clears the 24px AA target */
+  margin: -4px 0;
+}
 .gp-table td a:hover { color: var(--red); }
 .gp-num { text-align: right; font-variant-numeric: tabular-nums; }
 .gp-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.6rem; }
@@ -1016,7 +1045,7 @@ footer a:hover { color: var(--text); }
   font-size: 0.85rem;
   color: var(--muted);
   text-decoration: none;
-  padding: 2px 0;
+  padding: 4px 0;          /* 21px -> 25px; the 6px row gap keeps them apart */
 }
 .gp-az-links a:hover { color: var(--red); }
 
