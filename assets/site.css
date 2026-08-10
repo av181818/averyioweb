@@ -590,8 +590,19 @@ nav {
   padding: 5px 11px;
 }
 .app-hero .btn-row { margin-top: 1.6rem; }
-.app-note { margin-top: 0.95rem; font-size: 0.8rem; color: var(--faint); }
-.app-note a { color: var(--muted); }
+.app-note { margin-top: 1.15rem; font-size: 0.8rem; color: var(--faint); }
+/* The link is 12.8px text, so its own box is only ~16px tall — a third of the
+   44pt Apple asks for on touch. The padding takes the hit area past 44px and
+   the matching negative margin takes it straight back out of the layout, so
+   nothing moves on screen. .app-note's margin-top was widened to 1.15rem at the
+   same time to keep a gap between this hit area and the store button's, so the
+   two never touch. */
+.app-note a {
+  color: var(--muted);
+  display: inline-block;
+  padding: 15px 2px;
+  margin: -15px -2px;
+}
 
 /* Screenshot strip — scrolls on mobile, no library needed */
 .shots { padding: clamp(8px, 2vw, 16px) 0 clamp(40px, 8vw, 72px); }
