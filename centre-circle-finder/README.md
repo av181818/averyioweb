@@ -332,15 +332,24 @@ nothing to sign up for and no bill to receive:
 | Club data | Wikipedia / FAW / NI Football League | CC BY-SA facts, embedded at build time | Static file — zero runtime cost. |
 | Hosting | any static host | — | GitHub Pages / Cloudflare Pages / Netlify free tiers all work: it's a folder of static files. |
 
-## Monetisation (affiliate-ready)
+## Monetisation
 
-Every club card carries **🏨 Hotels nearby** and **🚆 Get there** buttons whose
-URLs are built from templates in [`js/config.js`](js/config.js) — append your
-affiliate/partner parameters there (e.g. Booking.com `&aid=YOUR_ID`) and every
-card on the site updates. Outbound hotel links already carry
-`rel="sponsored"`, the correct markup for affiliate links. `{q}` is the town,
-`{lat}`/`{lng}` the ground coordinates, so the templates work with most travel
-partners.
+**None, deliberately** (owner decision 2026-08-10: revisit once the app has an
+audience). The club card's **🏨 Hotels nearby** and **🚆 Get there** buttons and
+their `js/config.js` URL templates were removed — they pointed at plain,
+unaffiliated Booking.com and Google Maps URLs, so they earned nothing while
+taking up two thirds of the card's buttons.
+
+The only outbound link left is **Directions**, which goes to Google Maps and
+earns nothing, so the app carries **no commission disclosure**. If a partner
+link is ever added, that disclosure has to come back with it, in the
+`.side-note` strip under the masthead — an affiliate link without one is a
+Google link-scheme violation, and the same pairing already exists on
+`finance.html` for the TradingView card.
+
+To restore the buttons rather than rebuild them, the templates, the `outLink()`
+helper and the `.pp-actions.secondary` styles are all in the commit that
+removed them — `git log --diff-filter=D -- centre-circle-finder/js/config.js`.
 
 ## Attribution
 

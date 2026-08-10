@@ -1288,7 +1288,6 @@ body.dark .k-approx { color: #d9a441; }
 
 .pp-actions { display: flex; gap: 6px; padding: 10px 14px 0; }
 .pp-actions:last-child { padding-bottom: 12px; }
-.pp-actions.secondary { padding-top: 6px; padding-bottom: 12px; }
 .pp-btn {
   flex: 1;
   font-family: var(--font-display);
@@ -1309,7 +1308,6 @@ body.dark .k-approx { color: #d9a441; }
 .pp-btn:hover { border-color: var(--green); background: var(--green-lo); }
 .pp-btn.primary { background: var(--green-dk); border-color: var(--green-dk); color: var(--on-green); }
 .pp-btn.primary:hover { filter: brightness(1.1); }
-.pp-btn.mini { font-size: 12.5px; font-weight: 500; }
 
 /* ==========================================================================
    MAP CHROME

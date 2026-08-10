@@ -160,14 +160,6 @@
   // are reliable, so only flag unverified non-league pins as approximate.
   const approxPin = (t, lg) => !t.exact && lg.tier >= 5;
 
-  const townOnly = (town) => town.replace(/\s*\(.*\)$/, "");
-  function outLink(tpl, t) {
-    return tpl
-      .replace("{q}", encodeURIComponent(townOnly(t.town)))
-      .replace("{lat}", t.lat)
-      .replace("{lng}", t.lng);
-  }
-  const links = window.CCF_LINKS || {};
 
   // ---------- theme ----------
 
@@ -581,10 +573,6 @@
           <a class="pp-btn primary" href="${gmaps}" target="_blank" rel="noopener">Directions</a>
           <button class="pp-btn" onclick="window._ukfmNearby(${t.id})">Nearby</button>
         </div>
-        ${links.hotels || links.transit ? `<div class="pp-actions secondary">
-          ${links.hotels ? `<a class="pp-btn mini" href="${outLink(links.hotels, t)}" target="_blank" rel="noopener sponsored">🏨 Hotels nearby</a>` : ""}
-          ${links.transit ? `<a class="pp-btn mini" href="${outLink(links.transit, t)}" target="_blank" rel="noopener">🚆 Get there</a>` : ""}
-        </div>` : ""}
       </div>`;
   }
 
