@@ -127,7 +127,7 @@ SHOW_MORE = f"""        <a href="/apps.html" class="show show-more">
             <div class="show-head">
               <p class="show-name">See all apps</p>
             </div>
-            <p class="show-tag">What each one does, how it works and what it costs.</p>
+            <p class="show-tag">What each one does and how it works.</p>
             <span class="show-more-cta">The full line-up <span class="a">&rarr;</span></span>
           </div>
         </a>"""
@@ -199,7 +199,7 @@ home += f"""
       <div class="sec-head">
         <p class="eyebrow">For iPhone, iPad &amp; the web</p>
         <h2>averyio<span class="accent">Apps</span></h2>
-        <p>Every one built to do a single job properly and then get out of the way. Most are free to try, and none of them will ever ask you for a monthly fee.</p>
+        <p>Every one built to do a single job properly and then get out of the way, and none of them will ever ask you for a monthly fee.</p>
       </div>
       <div class="show-grid quad">
 {chr(10).join(show_card(a) for a in APPS[:3])}
@@ -229,7 +229,7 @@ home += f"""
     <div class="wrap">
       <div class="cta-inner">
         <h2>Have a proper look around</h2>
-        <p>Every app has a page of its own: real screenshots, what it does, what it costs and the honest download size. No signup wall to get past first.</p>
+        <p>Every app has a page of its own: real screenshots, what it does and the honest download size. No signup wall to get past first.</p>
         <div class="btn-row">
           <a class="btn btn-light" href="/apps.html">Browse averyioApps <span class="a">&rarr;</span></a>
           <a class="btn btn-ghost" href="/contact.html">Contact <span class="a">&rarr;</span></a>
@@ -389,7 +389,7 @@ fin += f"""
           </div>
           <div>
             <p class="card-title">BTCPRIX</p>
-            <p class="card-desc">The live Bitcoin price, in a page that loads before you have finished blinking. Free, no account.</p>
+            <p class="card-desc">The live Bitcoin price, in a page that loads before you have finished blinking. No account.</p>
           </div>
           <div class="card-footer"><span class="tag">Web</span><span class="tag">Crypto</span></div>
         </a>
@@ -401,7 +401,7 @@ fin += f"""
           </div>
           <div>
             <p class="card-title">InvestFast</p>
-            <p class="card-desc">Everything above, taught properly and without the jargon. 144 lessons, module 1 free.</p>
+            <p class="card-desc">Everything above, taught properly and without the jargon. 144 lessons.</p>
           </div>
           <div class="card-footer"><span class="tag">iOS</span><span class="tag">Finance</span></div>
         </a>

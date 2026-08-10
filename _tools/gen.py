@@ -159,14 +159,13 @@ APPS = [
  "store_name":"Invest Fast: Stocks & Money",
  "tagline":"Learn to invest in 24 hours.",
  "title":"InvestFast — Learn to Invest in 24 Hours, for Beginners",
- "desc":"Learn to invest in 24 hours. 144 plain-English lessons on stocks, ETFs, index funds and tax. Module 1 free — one-time unlock, no subscription, no ads.",
+ "desc":"Learn to invest in 24 hours. 144 plain-English lessons on stocks, ETFs, index funds and tax. No subscription, no ads.",
  "lead":"InvestFast is a beginner investing course built into an iPhone and iPad app. Twenty-four modules and 144 bite-sized lessons take you from zero to confident — mindset, money, investing, tax and alternatives, ending in an investing plan of your own. No fluff, no jargon, no tickers to chase.",
  "appid":"6762561241",
  "store_url":"https://apps.apple.com/gb/app/invest-fast-stocks-money/id6762561241",
  "privacy":"/privacy-investfast.html",
  "category":"EducationalApplication", "genre":"Education",
- "price":"0", "price_label":"Free · Module 1 free, one-time unlock",
- "meta":["Free to start","iPhone &amp; iPad","iOS 18.6+","~1.8 MB download","Education &amp; Finance","No subscription"],
+ "meta":["iPhone &amp; iPad","iOS 18.6+","~1.8 MB download","Education &amp; Finance","No subscription"],
  "tags":["iOS","Finance"],
  "shots":[
    ("investfast-1","InvestFast lesson screen — go from beginner to confident investor"),
@@ -174,23 +173,21 @@ APPS = [
    ("investfast-3","An InvestFast lesson explaining investing in plain English"),
    ("investfast-4","InvestFast progress streaks keeping you on track"),
    ("investfast-5","The InvestFast learning path from zero to your own plan"),
-   ("investfast-6","InvestFast lifetime access — one-time purchase, no subscription"),
+   ("investfast-6","InvestFast lifetime access, no subscription"),
  ],
  "features":[
    ("book","24 modules, 144 lessons","A clear path from zero to confident, hour by hour — each lesson bite-sized enough to finish in one sitting."),
-   ("clock","About 24 hours, end to end","Spread it over a week, a weekend, or one determined day. Every lesson ends in an action, not a cliffhanger for the next paid tier."),
+   ("clock","About 24 hours, end to end","Spread it over a week, a weekend, or one determined day. Every lesson ends in an action, not a cliffhanger for the next one."),
    ("chart","Stocks, ETFs and index funds","How stocks, bonds and index funds actually work — plus ETFs, diversification and the maths of compounding."),
    ("eye","Fundamental and technical analysis","How to read a company before you buy it, what charts genuinely tell you, and where they mislead."),
    ("coin","Money first, investing second","Debt, emergency fund and budgeting that sticks, before a penny goes into the market."),
-   ("check","Module 1 free, forever","Try the whole first module before you pay anything. If it isn’t for you, you’ve lost nothing."),
  ],
  "faq":[
-   ("Is InvestFast free?","Module 1 is free forever, so you can try the app properly before paying. Unlocking the remaining modules is a single one-time purchase of £1.99 that gives you lifetime access. No subscription, no upsell."),
    ("Do I need any investing experience?","None. InvestFast is built for complete beginners — nurses, engineers, freelancers, anyone who found finance intimidating or condescending. It starts at zero and explains every term in plain English."),
    ("How long does it really take?","Roughly 24 hours of focused reading from the first lesson to the last. Most people spread that across a week or two. Your progress is saved, so you can dip in and out."),
    ("Does InvestFast tell me what to buy?","No. It teaches you the mechanics so you can make your own decisions. There are no stock tips, no signals and no “secrets” — and nothing in the app is financial advice."),
    ("Does it track me or sell my data?","No. Apple's privacy label for InvestFast reads Data Not Collected. See the <a href=\"/privacy-investfast.html\">InvestFast privacy policy</a> for the full detail."),
-   ("What devices does it run on?","iPhone and iPad running iOS 18.6 or later. One purchase covers both."),
+   ("What devices does it run on?","iPhone and iPad running iOS 18.6 or later."),
  ],
 },
 {
@@ -204,8 +201,7 @@ APPS = [
  "store_url":"https://apps.apple.com/gb/app/surge-interval-timer-hiit/id6762224044",
  "privacy":"/privacy-surge.html",
  "category":"HealthApplication", "genre":"Health &amp; Fitness",
- "price":"0", "price_label":"Free · optional one-time Pro unlock",
- "meta":["Free","iPhone &amp; iPad","iOS 18.6+","~0.8 MB download","Health &amp; Fitness","No subscription"],
+ "meta":["iPhone &amp; iPad","iOS 18.6+","~0.8 MB download","Health &amp; Fitness","No subscription"],
  "tags":["iOS","Fitness"],
  "shots":[
    ("surge-1","Surge interval timer running a timed round with a progress ring"),
@@ -224,11 +220,10 @@ APPS = [
    ("shield","Nothing to sign up for","No account, no ads, no data collection. Your presets stay on your device."),
  ],
  "faq":[
-   ("Is Surge free?","Yes. The timer, every built-in preset and full customisation are free. Surge Pro is an optional one-time purchase of £0.99 that adds up to 20 saved presets of your own, editable built-ins, all 20 preset icons and mid-workout phase skipping. It is a one-time unlock, never a subscription."),
    ("What workouts does it suit?","Anything on a clock — HIIT, Tabata, CrossFit-style WODs, boxing and MMA rounds, EMOM, circuit training, jump rope intervals, strength work with timed rest, and yoga or stretching flows."),
      ("Does the screen stay on?","Yes. The screen stays awake during workouts, so you never lose the count mid-round."),
    ("Does Surge collect my data?","No. There is no account, no tracking and no ads, and your presets never leave your device. The full detail is in the <a href=\"/privacy-surge.html\">Surge privacy policy</a>."),
-   ("Does it work on iPad?","Yes — Surge is universal. One app, one purchase, iPhone and iPad."),
+   ("Does it work on iPad?","Yes — Surge is universal. One app, iPhone and iPad."),
  ],
 },
 {
@@ -242,8 +237,7 @@ APPS = [
  "store_url":"https://apps.apple.com/gb/app/big-time-clock-full-screen/id6763140176",
  "privacy":"/privacy-bigtimeclock.html",
  "category":"UtilitiesApplication", "genre":"Utilities",
- "price":"0.99", "price_label":"£0.99 · one-time purchase",
- "meta":["£0.99 one-time","iPhone &amp; iPad","iOS 18.6+","~0.4 MB download","Utilities","No subscription"],
+ "meta":["iPhone &amp; iPad","iOS 18.6+","~0.4 MB download","Utilities","No subscription"],
  "tags":["iOS","Utilities"],
  "shots":[
    ("bigtimeclock-1","Big Time Clock showing the time full screen in large white numerals"),
@@ -262,11 +256,10 @@ APPS = [
    ("shield","No tracking, ever","No ads, no analytics, no data collection — just a clock that does its job."),
  ],
  "faq":[
-   ("How much does Big Time Clock cost?","£0.99 as a one-time purchase. There is no subscription, no in-app purchase and no advertising."),
    ("Will the screen turn off while I am using it?","No. Big Time Clock keeps the display awake for as long as the clock is on screen, so it works as a proper bedside or desk clock."),
    ("Can I use an old iPhone or iPad as a dedicated clock?","That is one of the best uses for it. Plug an older device into a charger, put it in a stand, and it becomes a permanent nightstand, kitchen or studio clock."),
    ("Does it support 24-hour time?","Yes — switch between 12-hour and 24-hour format, and toggle the day and date display on or off."),
-   ("Is there an analog clock as well?","Yes, both faces are built in and neither costs extra. Like the digital clock, the analog face works in portrait and landscape."),
+   ("Is there an analog clock as well?","Yes, both faces are built in. Like the digital clock, the analog face works in portrait and landscape."),
    ("Does it collect any data?","No tracking, no ads, no data collection. Read the <a href=\"/privacy-bigtimeclock.html\">Big Time Clock privacy policy</a> for the full statement."),
  ],
 },
@@ -275,14 +268,13 @@ APPS = [
  "store_name":"Lume: Simple Task & To Do List",
  "tagline":"A to-do list you actually want to open.",
  "title":"Lume — Gamified To-Do List & Task Manager for iPhone",
- "desc":"A gamified to-do list for iPhone and iPad. Finish tasks to earn points, climb 12 ranks and keep a streak alive. Free iCloud sync, no ads, no account.",
+ "desc":"A gamified to-do list for iPhone and iPad. Finish tasks to earn points, climb 12 ranks and keep a streak alive. iCloud sync, no ads, no account.",
  "lead":"Every task you finish earns points, beating a due date earns a bonus, and a daily streak keeps the momentum going. It is a real task manager first and a game second — fast to capture, sorted by what is actually due next.",
  "appid":"6770331131",
  "store_url":"https://apps.apple.com/gb/app/lume-simple-task-to-do-list/id6770331131",
  "privacy":"/privacy-lume.html",
  "category":"BusinessApplication", "genre":"Productivity",
- "price":"0", "price_label":"Free · optional one-time Pro unlock",
- "meta":["Free","iPhone &amp; iPad","iOS 17+","~1.8 MB download","Productivity","iCloud sync included"],
+ "meta":["iPhone &amp; iPad","iOS 17+","~1.8 MB download","Productivity","iCloud sync included"],
  "tags":["iOS","Productivity"],
  "shots":[
    ("lume-1","Lume task list showing points earned for every completed task"),
@@ -298,10 +290,9 @@ APPS = [
    ("flame","Streaks that respect you","Keep a daily streak alive with a built-in grace day for the one you miss — and no guilt-trip notifications, ever."),
    ("check","A proper task manager","A title and a due date is all you need. Low and high priority, optional categories, and an Overdue / Today / Coming up view sorted by due date."),
    ("chart","A real stats dashboard","Completion quality, personal records and a 180-day activity heatmap that shows the shape of your habits. The full dashboard comes with Pro."),
-   ("cloud","Free iCloud sync, always on","Your tasks stay in step across iPhone and iPad with no setup and no account to create. It is your iCloud, not our server — we cannot see any of it."),
+   ("cloud","iCloud sync, always on","Your tasks stay in step across iPhone and iPad with no setup and no account to create. It is your iCloud, not our server — we cannot see any of it."),
  ],
  "faq":[
-   ("Is Lume free?","Lume is free to download and use, and iCloud sync is included at no cost. Lume Pro is an optional one-time £1.49 unlock that lifts the free limits and adds JSON backup, the morning brief and the full Stats dashboard. One payment, yours forever — never a subscription, and no ads either way."),
    ("What makes Lume different from other to-do apps?","The scoring. Your score reflects work you actually finished on time, so it is progress you can trust rather than a number you can inflate. Finish early and you are rewarded; finish late and you still score, just for less."),
    ("Do I need an account?","No. There is no sign-up. iCloud sync uses your own iCloud account automatically, so your tasks follow you across devices with nothing to configure."),
    ("What happens if I miss a day?","One missed day is forgiven by the built-in grace day, so a single bad day does not wipe out a long streak. Lume also never sends guilt-inducing notifications."),
@@ -320,8 +311,7 @@ APPS = [
  "store_url":"https://apps.apple.com/gb/app/tap-dot-tap-neon-speed-test/id6778353191",
  "privacy":"/privacy-tapdottap.html",
  "category":"GameApplication", "genre":"Games",
- "price":"0", "price_label":"Free · optional one-time unlock",
- "meta":["Free","iPhone &amp; iPad","iOS 17+","~1.2 MB download","Games · Casual","Plays offline"],
+ "meta":["iPhone &amp; iPad","iOS 17+","~1.2 MB download","Games · Casual","Plays offline"],
  "tags":["iOS","Game"],
  "shots":[
    ("tapdottap-1","Tap Dot Tap gameplay — tap the neon dot before it vanishes"),
@@ -340,11 +330,10 @@ APPS = [
    ("shield","No ads, no sign-up","No advertising, no account and no tracking — just slick neon visuals, sharp haptics and smooth animation."),
  ],
  "faq":[
-   ("Is Tap Dot Tap free?","Yes, it is free to play with no ads. One optional purchase of £0.49 unlocks all five neon skins and two extra lives per run, forever. It is a single one-time unlock, not a subscription."),
    ("How does the game work?","One target at a time, and under a second to reach it. Survive and the difficulty climbs in waves; miss once and that is the run over."),
    ("Are there leaderboards?","Yes, powered by Game Center, and entirely opt-in — you can play forever without ever appearing on one."),
    ("Can I play without an internet connection?","Yes. Tap Dot Tap plays fully offline; only the optional leaderboard needs a connection."),
-   ("Is it suitable for children?","Yes, it is rated 4+. There are no ads, no chat and no sign-up, and the only purchase is a single optional cosmetic and extra-lives unlock."),
+   ("Is it suitable for children?","Yes, it is rated 4+. There are no ads, no chat and no sign-up."),
    ("Does it collect any data?","No account, no sign-up and no tracking. Nothing is shared unless you opt into the leaderboard. See the <a href=\"/privacy-tapdottap.html\">Tap Dot Tap privacy policy</a>."),
  ],
 },
@@ -374,8 +363,7 @@ SITE_APPS = [
  "desc": ("Every professional and semi-professional football ground in the UK "
           "&mdash; 597 grounds across 31 leagues, on one map."),
  "tags": ["Web", "Football"],
- "note": "Free",
- "priority": "0.8",
+  "priority": "0.8",
 },
 {
  # Moved out of APPS on 2026-08-09. It had a generated /apps/btc-prix/
@@ -386,11 +374,10 @@ SITE_APPS = [
  "url": "/btc-prix/",
  "asset": None,          # no App Store icon — falls back to the ₿ monogram
  "mono": "₿",
- "tile": ("btcprix-tile", "BTCPRIX — the live Bitcoin price, free on the web"),
- "desc": "Real-time Bitcoin price tracking, free on the web.",
+ "tile": ("btcprix-tile", "BTCPRIX — the live Bitcoin price on the web"),
+ "desc": "Real-time Bitcoin price tracking on the web.",
  "tags": ["Web", "Crypto"],
- "note": "Free",
- "priority": "0.7",
+  "priority": "0.7",
 },
 ]
 
@@ -403,7 +390,7 @@ REDIRECTS = [("apps/btc-prix/index.html", "/btc-prix/", "BTCPRIX")]
 
 ETHOS = [
  ("No bloat","Megabytes, not gigabytes. No frameworks bolted on, no ad libraries, no analytics SDK phoning home — nothing ships that has not earned its place."),
- ("No subscriptions","Where an app charges, it is a single one-time unlock that stays unlocked. No monthly fee waiting to catch you out."),
+ ("No subscriptions","No monthly fee waiting to catch you out, and nothing that quietly renews. What you get is yours to keep."),
  ("No ads, ever","Not a banner, not an interstitial, not a “watch this to continue”. You are the customer, never the product."),
  ("Private by design","No tracking, no analytics, nothing sold. Your data lives on your device — and where an app syncs or backs up, it goes through your own private iCloud account, never a server of ours or anyone else's."),
 ]
@@ -466,7 +453,6 @@ def app_page(app, apps):
       "url": url,
       "installUrl": (SITE + app["hosted"]) if app.get("hosted") else app["store_url"],
       "image": f"{SITE}{icon2x}",
-      "offers": {"@type":"Offer","price":app["price"],"priceCurrency":"GBP"},
       "publisher": {"@type":"Organization","name":"averyio","url":SITE+"/"},
     }
     bc = {
@@ -503,7 +489,7 @@ def app_page(app, apps):
       <div class="btn-row">
         {store_btn(app)}
       </div>
-      <p class="app-note">{app['price_label']}{f' &middot; <a href="{app["privacy"]}">Privacy policy</a>' if app['privacy'] else ''}</p>
+      {f'<p class="app-note"><a href="{app["privacy"]}">Privacy policy</a></p>' if app['privacy'] else ''}
     </div>
   </header>
 """
@@ -590,7 +576,7 @@ def app_page(app, apps):
     <div class="wrap">
       <div class="cta-inner">
         <h2>Get {app['name']}</h2>
-        <p>{app['price_label']}. No ads, no tracking, no subscription — the same promise behind every averyio app.</p>
+        <p>No ads, no tracking, no subscription — the same promise behind every averyio app.</p>
         <div class="btn-row">
           {store_btn(app, dark=False)}
           <a class="btn btn-ghost" href="/apps.html">All averyio apps <span class="a">&rarr;</span></a>
@@ -615,5 +601,5 @@ for path, size in written:
     print(f"  {path:34s} {size//1024}KB")
 print(f"\n{len(written)} app pages written")
 json.dump([{k: v for k, v in a.items() if k in
-            ("slug","name","store_name","tagline","desc","asset","tags","price_label","store_url","genre")}
+            ("slug","name","store_name","tagline","desc","asset","tags","store_url","genre")}
            for a in APPS], open("apps-data.json","w"), indent=1)

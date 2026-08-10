@@ -165,6 +165,22 @@ for p in PAGES:
             banned.append(f"{p}: '{phrase}'")
 check("no banned claims (counts, size promises, brand-architecture jargon)", not banned, "; ".join(banned))
 
+# Prices belong on the App Store, not here (owner directive 2026-08-10). A price
+# written into the site goes stale the moment one changes on the store, and
+# nothing would flag it — the App Store listing is the single source of truth.
+# The frozen privacy policies are exempt by construction: they are not in PAGES,
+# and they describe how purchase data is handled rather than advertising a price.
+priced = []
+for p in PAGES:
+    # £ only, not $: averyio prices in GBP, and the one dollar figure on the site
+    # is TradingView's own "$15 off" promo on finance.html — a third party's
+    # offer, not ours to keep in step with the App Store.
+    for m in re.finditer(r"£\s?\d|\bone[- ]time (?:purchase|unlock)\b"
+                         r"|\bin-app purchase\b|\bfree to (?:download|play|try)\b"
+                         r"|\bfree forever\b|\bpaid tier\b", text_of(p), re.I):
+        priced.append(f"{p}: '{m.group(0).strip()}'")
+check("no app prices or purchase terms on the site", not priced, "; ".join(priced[:5]))
+
 print("\nFROZEN FILES")
 dirty = subprocess.run(["git", "status", "--porcelain"] + FROZEN,
                        capture_output=True, text=True).stdout.strip()
