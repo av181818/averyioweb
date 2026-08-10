@@ -181,6 +181,11 @@ APPS = [
    ("chart","Stocks, ETFs and index funds","How stocks, bonds and index funds actually work — plus ETFs, diversification and the maths of compounding."),
    ("eye","Fundamental and technical analysis","How to read a company before you buy it, what charts genuinely tell you, and where they mislead."),
    ("coin","Money first, investing second","Debt, emergency fund and budgeting that sticks, before a penny goes into the market."),
+   # Replaces the pricing card removed 2026-08-10. Wording mirrors the App Store
+   # listing ("Track your streak, your lessons mastered, and your milestones",
+   # "including the 24-Hour Club") per the claim-only-what-the-listing-says rule,
+   # and restores the six-card grid every other app page has.
+   ("trophy","Streaks and milestones","Track your streak, the lessons you have mastered and the milestones you pass — including the 24-Hour Club."),
  ],
  "faq":[
    ("Do I need any investing experience?","None. InvestFast is built for complete beginners — nurses, engineers, freelancers, anyone who found finance intimidating or condescending. It starts at zero and explains every term in plain English."),
