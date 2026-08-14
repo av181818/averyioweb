@@ -48,8 +48,15 @@ The one line that must differ per app, because the truth differs:
 |---|---|
 | Default (Surge, Big Time Clock) | `No account, no sign-up, no tracking, no data collection` |
 | InvestFast | `No account, no tracking — Apple's privacy label reads Data Not Collected` |
-| Lume | `No tracking, no account — sync runs through your own private iCloud, never our servers` |
+| Lume | `No tracking, no account — Apple's privacy label reads Data Not Collected. Sync runs through your own private iCloud, never our servers` |
 | Tap Dot Tap | `No account, no tracking — the leaderboard is opt-in, and nothing is shared until you say so` |
+
+**Why Lume's "Data Not Collected" is honest despite iCloud sync** (verified on the live store
+2026-08-14 — all five apps carry that label): Apple defines "collect" as transmitting data off
+the device *in a way the developer can access*. Lume's sync uses the user's private iCloud
+database, which averyio cannot read, so nothing is collected. The label breaks the moment sync
+moves to any developer-accessible backend, or any analytics/crash SDK ships — redeclare it and
+rewrite this line before either of those ever happens.
 
 ## The rules
 
