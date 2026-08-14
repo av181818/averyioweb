@@ -159,13 +159,13 @@ APPS = [
  "store_name":"Invest Fast: Stocks & Money",
  "tagline":"Learn to invest in 24 hours.",
  "title":"InvestFast — Learn to Invest in 24 Hours, for Beginners",
- "desc":"Learn to invest in 24 hours. 144 plain-English lessons on stocks, ETFs, index funds and tax. No subscription, no ads.",
+ "desc":"Learn to invest in 24 hours. 144 plain-English lessons on stocks, ETFs, index funds and tax. Pay once — no subscription, no ads, no in-app purchases.",
  "lead":"InvestFast is a beginner investing course built into an iPhone and iPad app. Twenty-four modules and 144 bite-sized lessons take you from zero to confident — mindset, money, investing, tax and alternatives, ending in an investing plan of your own. No fluff, no jargon, no tickers to chase.",
  "appid":"6762561241",
  "store_url":"https://apps.apple.com/gb/app/invest-fast-stocks-money/id6762561241",
  "privacy":"/privacy-investfast.html",
  "category":"EducationalApplication", "genre":"Education",
- "meta":["iPhone &amp; iPad","iOS 18.6+","~1.8 MB download","Education &amp; Finance","No subscription"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 18.6+","~1.8 MB download","Education &amp; Finance","No subscription"],
  "tags":["iOS","Finance"],
  "shots":[
    ("investfast-1","InvestFast lesson screen — go from beginner to confident investor"),
@@ -191,8 +191,9 @@ APPS = [
    ("Do I need any investing experience?","None. InvestFast is built for complete beginners — nurses, engineers, freelancers, anyone who found finance intimidating or condescending. It starts at zero and explains every term in plain English."),
    ("How long does it really take?","Roughly 24 hours of focused reading from the first lesson to the last. Most people spread that across a week or two. Your progress is saved, so you can dip in and out."),
    ("Does InvestFast tell me what to buy?","No. It teaches you the mechanics so you can make your own decisions. There are no stock tips, no signals and no “secrets” — and nothing in the app is financial advice."),
+   ("Is there a subscription or in-app purchases?","No. InvestFast is a one-time purchase — pay once and all 24 modules, all 144 lessons and every future update are included, forever. No subscriptions, no in-app purchases, no ads."),
    ("Does it track me or sell my data?","No. Apple's privacy label for InvestFast reads Data Not Collected. See the <a href=\"/privacy-investfast.html\">InvestFast privacy policy</a> for the full detail."),
-   ("What devices does it run on?","iPhone and iPad running iOS 18.6 or later."),
+   ("What devices does it run on?","iPhone and iPad running iOS 18.6 or later. One purchase covers both."),
  ],
 },
 {
@@ -200,13 +201,13 @@ APPS = [
  "store_name":"Surge: Interval Timer & HIIT",
  "tagline":"An interval timer built for the way you actually train.",
  "title":"Surge — Interval Timer & HIIT App for iPhone & iPad",
- "desc":"A HIIT and interval timer for iPhone and iPad with Tabata, Boxing and EMOM presets built in. Audio cues, haptics, no ads and no subscription.",
+ "desc":"A HIIT and interval timer for iPhone and iPad with Tabata, Boxing and EMOM presets built in. Audio cues, haptics, no ads — pay once, yours for life.",
  "lead":"Surge is an interval timer for HIIT, Tabata, boxing rounds, EMOM and any circuit-style workout — at home, in the gym or ringside. Set your work and rest periods, pick your rounds, and press play. No sign-up, no setup screens, no ads standing between you and the first round.",
  "appid":"6762224044",
  "store_url":"https://apps.apple.com/gb/app/surge-interval-timer-hiit/id6762224044",
  "privacy":"/privacy-surge.html",
  "category":"HealthApplication", "genre":"Health &amp; Fitness",
- "meta":["iPhone &amp; iPad","iOS 18.6+","~0.8 MB download","Health &amp; Fitness","No subscription"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 18.6+","~0.8 MB download","Health &amp; Fitness","No subscription"],
  "tags":["iOS","Fitness"],
  "shots":[
    ("surge-1","Surge interval timer running a timed round with a progress ring"),
@@ -227,8 +228,9 @@ APPS = [
  "faq":[
    ("What workouts does it suit?","Anything on a clock — HIIT, Tabata, CrossFit-style WODs, boxing and MMA rounds, EMOM, circuit training, jump rope intervals, strength work with timed rest, and yoga or stretching flows."),
      ("Does the screen stay on?","Yes. The screen stays awake during workouts, so you never lose the count mid-round."),
+   ("Is there a subscription or in-app purchases?","No. Surge is a one-time purchase — pay once and every preset and feature is included, forever. No subscriptions, no in-app purchases, no ads."),
    ("Does Surge collect my data?","No. There is no account, no tracking and no ads, and your presets never leave your device. The full detail is in the <a href=\"/privacy-surge.html\">Surge privacy policy</a>."),
-   ("Does it work on iPad?","Yes — Surge is universal. One app, iPhone and iPad."),
+   ("Does it work on iPad?","Yes — Surge is universal. One app, one purchase, iPhone and iPad."),
  ],
 },
 {
@@ -236,13 +238,13 @@ APPS = [
  "store_name":"Big Time Clock: Full Screen",
  "tagline":"Turn any iPhone or iPad into a full-screen clock.",
  "title":"Big Time Clock — Full Screen Clock for iPhone & iPad",
- "desc":"Turn an iPhone or iPad into a full-screen digital or analog clock for a bedside, desk or kitchen. 12/24-hour, screen stays awake, no ads.",
+ "desc":"Turn an iPhone or iPad into a full-screen digital or analog clock. 12/24-hour, the screen stays awake, no ads — pay once, yours for life.",
  "lead":"A clean black canvas, crisp numerals, and nothing else competing for your attention — ideal for a bedside table, a desk, the kitchen counter or a studio wall. It is the perfect second life for an older iPhone or iPad.",
  "appid":"6763140176",
  "store_url":"https://apps.apple.com/gb/app/big-time-clock-full-screen/id6763140176",
  "privacy":"/privacy-bigtimeclock.html",
  "category":"UtilitiesApplication", "genre":"Utilities",
- "meta":["iPhone &amp; iPad","iOS 18.6+","~0.4 MB download","Utilities","No subscription"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 18.6+","~0.4 MB download","Utilities","No subscription"],
  "tags":["iOS","Utilities"],
  "shots":[
    ("bigtimeclock-1","Big Time Clock showing the time full screen in large white numerals"),
@@ -265,6 +267,7 @@ APPS = [
    ("Can I use an old iPhone or iPad as a dedicated clock?","That is one of the best uses for it. Plug an older device into a charger, put it in a stand, and it becomes a permanent nightstand, kitchen or studio clock."),
    ("Does it support 24-hour time?","Yes — switch between 12-hour and 24-hour format, and toggle the day and date display on or off."),
    ("Is there an analog clock as well?","Yes, both faces are built in. Like the digital clock, the analog face works in portrait and landscape."),
+   ("Is there a subscription or in-app purchases?","No. Big Time Clock is a one-time purchase — pay once and both clock faces and every feature are included, forever. No subscriptions, no in-app purchases, no advertising."),
    ("Does it collect any data?","No tracking, no ads, no data collection. Read the <a href=\"/privacy-bigtimeclock.html\">Big Time Clock privacy policy</a> for the full statement."),
  ],
 },
@@ -273,13 +276,13 @@ APPS = [
  "store_name":"Lume: Simple Task & To Do List",
  "tagline":"A to-do list you actually want to open.",
  "title":"Lume — Gamified To-Do List & Task Manager for iPhone",
- "desc":"A gamified to-do list for iPhone and iPad. Finish tasks to earn points, climb 12 ranks and keep a streak alive. iCloud sync, no ads, no account.",
+ "desc":"A gamified to-do list for iPhone and iPad. Earn points, climb 12 ranks, keep a streak alive. iCloud sync, no ads, no account — pay once, yours for life.",
  "lead":"Every task you finish earns points, beating a due date earns a bonus, and a daily streak keeps the momentum going. It is a real task manager first and a game second — fast to capture, sorted by what is actually due next.",
  "appid":"6770331131",
  "store_url":"https://apps.apple.com/gb/app/lume-simple-task-to-do-list/id6770331131",
  "privacy":"/privacy-lume.html",
  "category":"BusinessApplication", "genre":"Productivity",
- "meta":["iPhone &amp; iPad","iOS 17+","~1.8 MB download","Productivity","iCloud sync included"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 17+","~1.8 MB download","Productivity","iCloud sync included"],
  "tags":["iOS","Productivity"],
  "shots":[
    ("lume-1","Lume task list showing points earned for every completed task"),
@@ -301,6 +304,7 @@ APPS = [
    ("What makes Lume different from other to-do apps?","The scoring. Your score reflects work you actually finished on time, so it is progress you can trust rather than a number you can inflate. Finish early and you are rewarded; finish late and you still score, just for less."),
    ("Do I need an account?","No. There is no sign-up. iCloud sync uses your own iCloud account automatically, so your tasks follow you across devices with nothing to configure."),
    ("What happens if I miss a day?","One missed day is forgiven by the built-in grace day, so a single bad day does not wipe out a long streak. Lume also never sends guilt-inducing notifications."),
+   ("Is there a subscription or in-app purchases?","No. Lume is a one-time purchase — pay once and everything is included, forever: unlimited tasks and categories, iCloud sync and every future update. No subscriptions, no in-app purchases, no ads."),
    ("Does Lume collect my data?","No. Lume collects nothing — no analytics, no tracking, no ads and no account. Syncing happens inside your own iCloud, which we have no ability to read. See the <a href=\"/privacy-lume.html\">Lume privacy policy</a>."),
    ("Does it work on iPad?","Yes. Lume is designed for iPhone and iPad and stays in step across both through iCloud."),
  ],
@@ -310,27 +314,27 @@ APPS = [
  "store_name":"Tap Dot Tap: Neon Speed Test",
  "tagline":"A dot appears. Tap it before it vanishes.",
  "title":"Tap Dot Tap — Reaction Time & Reflex Game for iPhone",
- "desc":"A one-tap reflex and reaction time game for iPhone. Tap the dot before it vanishes — one miss ends the run. Game Center leaderboards, offline, no ads.",
+ "desc":"A one-tap reflex and reaction time game for iPhone. Tap the dot before it vanishes — one miss ends the run. Pay once — every skin included, offline, no ads.",
  "lead":"A one-tap reflex game that puts your reaction time on trial. Miss a single one and the run is over. Simple to learn and ruthless to master, because the targets keep shrinking and speeding up the longer you last.",
  "appid":"6778353191",
  "store_url":"https://apps.apple.com/gb/app/tap-dot-tap-neon-speed-test/id6778353191",
  "privacy":"/privacy-tapdottap.html",
  "category":"GameApplication", "genre":"Games",
- "meta":["iPhone &amp; iPad","iOS 17+","~1.2 MB download","Games · Casual","Plays offline"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 17+","~1.2 MB download","Games · Casual","Plays offline"],
  "tags":["iOS","Game"],
  "shots":[
    ("tapdottap-1","Tap Dot Tap gameplay — tap the neon dot before it vanishes"),
    ("tapdottap-2","Dots speeding up as a Tap Dot Tap run continues"),
    ("tapdottap-3","One miss ends the run in Tap Dot Tap"),
    ("tapdottap-4","The Tap Dot Tap Game Center global leaderboard"),
-   ("tapdottap-5","Unlockable neon dot skins in Tap Dot Tap"),
+   ("tapdottap-5","The five neon dot skins in Tap Dot Tap, all included"),
    ("tapdottap-6","Chasing a personal best in Tap Dot Tap"),
  ],
  "features":[
    ("target","One tap to learn","Controls anyone can pick up in seconds, and a difficulty curve that climbs in waves — relentless, but always fair."),
    ("bolt","Under a second to react","Dots shrink, accelerate and land further apart the longer you last, until every single tap counts."),
    ("trophy","Global Game Center leaderboards","Today, this week and all-time boards. See your world rank, take on friends, and chase down your personal best."),
-   ("star","Five neon skins","Start on Aqua, then unlock Magma, Emerald, Sunset and Gold — plus two extra lives on every run."),
+   ("star","Five neon skins","Aqua, Magma, Emerald, Sunset and Gold — all included from your first run. Nothing to unlock, nothing extra to buy."),
    ("phone","Plays offline","No connection needed. The leaderboard is opt-in, and nothing is shared until you say so."),
    ("shield","No ads, no sign-up","No advertising, no account and no tracking — just slick neon visuals, sharp haptics and smooth animation."),
  ],
@@ -339,6 +343,7 @@ APPS = [
    ("Are there leaderboards?","Yes, powered by Game Center, and entirely opt-in — you can play forever without ever appearing on one."),
    ("Can I play without an internet connection?","Yes. Tap Dot Tap plays fully offline; only the optional leaderboard needs a connection."),
    ("Is it suitable for children?","Yes, it is rated 4+. There are no ads, no chat and no sign-up."),
+   ("Is there a subscription or in-app purchases?","No. Tap Dot Tap is a one-time purchase — pay once and every feature and every skin is included, forever. No subscriptions, no in-app purchases, no ads."),
    ("Does it collect any data?","No account, no sign-up and no tracking. Nothing is shared unless you opt into the leaderboard. See the <a href=\"/privacy-tapdottap.html\">Tap Dot Tap privacy policy</a>."),
  ],
 },
@@ -395,7 +400,7 @@ REDIRECTS = [("apps/btc-prix/index.html", "/btc-prix/", "BTCPRIX")]
 
 ETHOS = [
  ("No bloat","Megabytes, not gigabytes. No frameworks bolted on, no ad libraries, no analytics SDK phoning home — nothing ships that has not earned its place."),
- ("No subscriptions","No monthly fee waiting to catch you out, and nothing that quietly renews. What you get is yours to keep."),
+ ("No subscriptions","One upfront price where an app charges at all — no monthly fee, no in-app purchases, nothing that quietly renews. What you buy is yours to keep."),
  ("No ads, ever","Not a banner, not an interstitial, not a “watch this to continue”. You are the customer, never the product."),
  ("Private by design","No tracking, no analytics, nothing sold. Your data lives on your device — and where an app syncs or backs up, it goes through your own private iCloud account, never a server of ours or anyone else's."),
 ]
@@ -581,7 +586,7 @@ def app_page(app, apps):
     <div class="wrap">
       <div class="cta-inner">
         <h2>Get {app['name']}</h2>
-        <p>No ads, no tracking, no subscription — the same promise behind every averyio app.</p>
+        <p>Pay once and it&rsquo;s yours — no ads, no tracking, no subscriptions. The same promise behind every averyio app.</p>
         <div class="btn-row">
           {store_btn(app, dark=False)}
           <a class="btn btn-ghost" href="/apps.html">All averyio apps <span class="a">&rarr;</span></a>

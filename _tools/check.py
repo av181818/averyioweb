@@ -159,7 +159,9 @@ check("no accidental repeated phrasing", not dupes, "; ".join(dupes))
 banned = []
 for p in PAGES:
     t = text_of(p).lower()
-    for phrase in ["six apps", "five iphone apps", "pay once", "buy once and own",
+    # "pay once" left this list on 2026-08-14: the apps moved to paid-upfront,
+    # so it is now the true model and the messaging the owner wants pushed.
+    for phrase in ["six apps", "five iphone apps",
                    "under 2 mb", "parent brand", "sub-brand"]:
         if phrase in t:
             banned.append(f"{p}: '{phrase}'")
@@ -168,18 +170,25 @@ check("no banned claims (counts, size promises, brand-architecture jargon)", not
 # Prices belong on the App Store, not here (owner directive 2026-08-10). A price
 # written into the site goes stale the moment one changes on the store, and
 # nothing would flag it — the App Store listing is the single source of truth.
+# Since the 2026-08-13 move to paid-upfront, MODEL claims ("one-time purchase",
+# "pay once", "no in-app purchases") are required copy and pass; this catches
+# amounts, and freemium-era phrases that stopped being true with that move.
 # The frozen privacy policies are exempt by construction: they are not in PAGES,
 # and they describe how purchase data is handled rather than advertising a price.
 priced = []
 for p in PAGES:
     # £ only, not $: averyio prices in GBP, and the one dollar figure on the site
     # is TradingView's own "$15 off" promo on finance.html — a third party's
-    # offer, not ours to keep in step with the App Store.
-    for m in re.finditer(r"£\s?\d|\bone[- ]time (?:purchase|unlock)\b"
-                         r"|\bin-app purchase\b|\bfree to (?:download|play|try)\b"
-                         r"|\bfree forever\b|\bpaid tier\b", text_of(p), re.I):
+    # offer, not ours to keep in step with the App Store. The lookbehinds let
+    # negations and questions through — "no in-app purchases", "a subscription
+    # or in-app purchases?" — while a bare "offers in-app purchases" fails.
+    for m in re.finditer(r"£\s?\d|\bone[- ]time unlock\b"
+                         r"|(?<!no )(?<!or )\bin-app purchases?\b"
+                         r"|\bfree to (?:download|play|try)\b"
+                         r"|\bfree forever\b|\bpaid tier\b|\boptional unlock\b"
+                         r"|\bfree limits?\b|\bpro unlock\b", text_of(p), re.I):
         priced.append(f"{p}: '{m.group(0).strip()}'")
-check("no app prices or purchase terms on the site", not priced, "; ".join(priced[:5]))
+check("no price amounts or stale freemium claims on the site", not priced, "; ".join(priced[:5]))
 
 print("\nFROZEN FILES")
 dirty = subprocess.run(["git", "status", "--porcelain"] + FROZEN,
