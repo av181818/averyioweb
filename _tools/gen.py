@@ -155,7 +155,7 @@ def ico(k):
 # ── app data ─────────────────────────────────────────────────────────────
 APPS = [
 {
- "slug":"investfast", "size":"1.8", "footprint":"Every one of the 144 lessons, the whole course, your progress and your stats — in about 1.8 MB. No ad library, no tracking SDK, nothing taking up room that is not the course itself.", "ios":"18.6", "asset":"investfast", "name":"InvestFast",
+ "slug":"investfast", "size":"1.7", "footprint":"Every one of the 144 lessons, the whole course, your progress and your stats — in about 1.7 MB. No ad library, no tracking SDK, nothing taking up room that is not the course itself.", "ios":"18.6", "asset":"investfast", "name":"InvestFast",
  "store_name":"Invest Fast: Stocks & Money",
  "tagline":"Learn to invest in 24 hours.",
  "title":"InvestFast — Learn to Invest in 24 Hours, for Beginners",
@@ -165,7 +165,7 @@ APPS = [
  "store_url":"https://apps.apple.com/gb/app/invest-fast-stocks-money/id6762561241",
  "privacy":"/privacy-investfast.html",
  "category":"EducationalApplication", "genre":"Education",
- "meta":["One-time purchase","iPhone &amp; iPad","iOS 18.6+","~1.8 MB download","Education &amp; Finance","No subscription"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 18.6+","~1.7 MB download","Education &amp; Finance","No subscription"],
  "tags":["iOS","Finance"],
  "shots":[
    ("investfast-1","InvestFast lesson screen — go from beginner to confident investor"),
@@ -197,7 +197,7 @@ APPS = [
  ],
 },
 {
- "slug":"surge", "size":"0.8", "footprint":"The entire timer is under a megabyte — smaller than one photo on your phone. No ads, no account and no data collection, so nothing ships that is not the timer.", "ios":"18.6", "asset":"surge", "name":"Surge",
+ "slug":"surge", "size":"0.7", "footprint":"The entire timer is under a megabyte — smaller than one photo on your phone. No ads, no account and no data collection, so nothing ships that is not the timer.", "ios":"18.6", "asset":"surge", "name":"Surge",
  "store_name":"Surge: Interval Timer & HIIT",
  "tagline":"An interval timer built for the way you actually train.",
  "title":"Surge — Interval Timer & HIIT App for iPhone & iPad",
@@ -207,7 +207,7 @@ APPS = [
  "store_url":"https://apps.apple.com/gb/app/surge-interval-timer-hiit/id6762224044",
  "privacy":"/privacy-surge.html",
  "category":"HealthApplication", "genre":"Health &amp; Fitness",
- "meta":["One-time purchase","iPhone &amp; iPad","iOS 18.6+","~0.8 MB download","Health &amp; Fitness","No subscription"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 18.6+","~0.7 MB download","Health &amp; Fitness","No subscription"],
  "tags":["iOS","Fitness"],
  "shots":[
    ("surge-1","Surge interval timer running a timed round with a progress ring"),
@@ -215,7 +215,7 @@ APPS = [
    ("surge-3","Customising work time, rest time and rounds in Surge"),
    ("surge-4","Surge running hands-free with a large glanceable countdown"),
    ("surge-5","Surge audio cues and haptic feedback settings"),
-   ("surge-6","A finished workout summary in Surge"),
+   ("surge-6","A completed workout in Surge — pay once, every feature included"),
  ],
  "features":[
    ("bolt","Presets that cover most sessions","Tabata 20/10 × 8, HIIT 40/20 × 10, Boxing 3:00/1:00 × 6, EMOM 60s × 10 and Stretch 30/10 × 12 — all built in, timings already set."),
@@ -272,7 +272,7 @@ APPS = [
  ],
 },
 {
- "slug":"lume", "size":"1.8", "footprint":"A full task manager, 12 ranks of progression, a stats dashboard and a 180-day heatmap, all inside about 1.8 MB. No analytics SDK, no ad library and no account system — so none of that weight ever ships to your phone.", "ios":"17.0", "asset":"lume", "name":"Lume",
+ "slug":"lume", "size":"1.6", "footprint":"A full task manager, 12 ranks of progression, a stats dashboard and a 180-day heatmap, all inside about 1.6 MB. No analytics SDK, no ad library and no account system — so none of that weight ever ships to your phone.", "ios":"17.0", "asset":"lume", "name":"Lume",
  "store_name":"Lume: Simple Task & To Do List",
  "tagline":"A to-do list you actually want to open.",
  "title":"Lume — Gamified To-Do List & Task Manager for iPhone",
@@ -282,15 +282,15 @@ APPS = [
  "store_url":"https://apps.apple.com/gb/app/lume-simple-task-to-do-list/id6770331131",
  "privacy":"/privacy-lume.html",
  "category":"BusinessApplication", "genre":"Productivity",
- "meta":["One-time purchase","iPhone &amp; iPad","iOS 17+","~1.8 MB download","Productivity","iCloud sync included"],
+ "meta":["One-time purchase","iPhone &amp; iPad","iOS 17+","~1.6 MB download","Productivity","iCloud sync included"],
  "tags":["iOS","Productivity"],
  "shots":[
    ("lume-1","Lume task list showing points earned for every completed task"),
    ("lume-2","Lume rank progression from Spark to Cosmos"),
    ("lume-3","Earning bonus points in Lume for beating a due date"),
    ("lume-4","The Lume stats dashboard with a 180-day activity heatmap"),
-   ("lume-5","Lume streaks with a built-in grace day"),
-   ("lume-6","Lume’s clean, simple task capture screen"),
+   ("lume-5","How points work in Lume — early, on-time and late finishes all scored"),
+   ("lume-6","Lume categories — pay once, no subscriptions, no ads"),
  ],
  "features":[
    ("star","Points for finishing real work","Points come only from completing genuine tasks on time. Nothing you can set yourself changes your score, so it cannot be gamed."),
@@ -324,11 +324,11 @@ APPS = [
  "tags":["iOS","Game"],
  "shots":[
    ("tapdottap-1","Tap Dot Tap gameplay — tap the neon dot before it vanishes"),
-   ("tapdottap-2","Dots speeding up as a Tap Dot Tap run continues"),
-   ("tapdottap-3","One miss ends the run in Tap Dot Tap"),
-   ("tapdottap-4","The Tap Dot Tap Game Center global leaderboard"),
-   ("tapdottap-5","The five neon dot skins in Tap Dot Tap, all included"),
-   ("tapdottap-6","Chasing a personal best in Tap Dot Tap"),
+   ("tapdottap-2","The Tap Dot Tap menu — pay once, play forever, no ads"),
+   ("tapdottap-3","Dots getting smaller and faster as a Tap Dot Tap run climbs"),
+   ("tapdottap-4","Game over in Tap Dot Tap — one miss ends the run"),
+   ("tapdottap-5","The Tap Dot Tap global leaderboard powered by Game Center"),
+   ("tapdottap-6","The five neon dot skins in Tap Dot Tap, every one included"),
  ],
  "features":[
    ("target","One tap to learn","Controls anyone can pick up in seconds, and a difficulty curve that climbs in waves — relentless, but always fair."),
