@@ -58,6 +58,24 @@ database, which averyio cannot read, so nothing is collected. The label breaks t
 moves to any developer-accessible backend, or any analytics/crash SDK ships — redeclare it and
 rewrite this line before either of those ever happens.
 
+**Why Tap Dot Tap's "Data Not Collected" is honest despite Game Center** (same live-store
+verification, but the reasoning differs from Lume's): two legs. First, Apple's definition of
+"collect" excludes data that is only accessible for as long as it takes to service a request in
+real time — and that is all GameKit does here: submit a best score, fetch rows to draw the
+leaderboard. averyio runs no server and retains, caches and exports nothing. Second, Game Center
+is Apple's own service under the user's Apple ID: Apple is the data controller, shows its own
+"Game Center & Privacy" disclosure, and the frozen policy says exactly that. The app is also
+hardened beyond the norm — the leaderboard is off by default and Game Center is not contacted at
+all until the user opts in.
+
+Note the honest difference in strength: Lume's label is airtight *by construction* (averyio
+cannot read a private iCloud database); Tap Dot Tap's rests on *behaviour* (no retention, no
+export), because GameKit does hand the app other players' nicknames and scores to display. The
+label breaks if scores or Game Center identifiers ever touch an averyio-accessible backend, get
+cached or exported beyond the leaderboard screen, or are used for anything but drawing it — and
+the description's "nothing is shared until you say so" additionally depends on the leaderboard
+staying opt-in, so auto-enabling Game Center at launch would break the copy even before the label.
+
 ## The rules
 
 1. **Lines that are verbatim across every app, never reworded:** the pay-once
