@@ -20,12 +20,14 @@
   <meta property="og:title" content="Centre Circle Finder — Every UK Football Ground on One Map | averyio">
   <meta property="og:description" content="Find every professional and semi-professional football ground in the UK — 597 grounds across 31 leagues, from the Premier League down to level 8. Search by club, ground, town or postcode, see what's near you, and tick off the ones you've been to. No ads.">
   <meta property="og:image" content="https://averyio.net/assets/apps/centre-circle-finder-og.png">
+  <meta property="og:image:alt" content="Centre Circle Finder — every professional and semi-professional football ground in the UK on one map">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://averyio.net/centre-circle-finder/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@averyio18">
   <meta name="twitter:image" content="https://averyio.net/assets/apps/centre-circle-finder-og.png">
+  <meta name="twitter:image:alt" content="Centre Circle Finder — every professional and semi-professional football ground in the UK on one map">
 
   <!-- Its own mark, not the site's averyio avatar. Drawn per size rather than
        downscaled from the 360px app icon, whose strokes fell below a pixel at
@@ -39,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-  <link rel="stylesheet" href="css/styles.css?v=82">
+  <link rel="stylesheet" href="css/styles.css?v=86">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -94,10 +96,19 @@
               <p class="sub">Pick a city · find a ground · go to the match</p>
             </div>
           </div>
-          <!-- The way back to the rest of the site. In .head-top rather than the
-               strip below it, because .brand .sub and .stat-row are both hidden
-               under 900px and a link nobody can see on a phone is no link. -->
-          <a class="head-home" href="/">averyio<span>.net</span></a>
+          <!-- Share + the way back to the rest of the site. Both live in
+               .head-top rather than the strip below it, because .brand .sub and
+               .stat-row are both hidden under 900px — and this row still shows
+               when the sheet is collapsed on a phone, so neither is ever lost. -->
+          <div class="head-links">
+            <a class="head-share"
+               href="https://twitter.com/intent/tweet?text=Every%20professional%20and%20semi-professional%20football%20ground%20in%20the%20UK%2C%20on%20one%20map.%20597%20grounds%2C%2031%20leagues%2C%204%20nations.%20%E2%9A%BD%20%23Groundhopping%20%23Football&url=https%3A%2F%2Faveryio.net%2Fcentre-circle-finder%2F"
+               target="_blank" rel="noopener" title="Share Centre Circle Finder on X"
+               aria-label="Share Centre Circle Finder on X">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a class="head-home" href="/">averyio<span>.net</span></a>
+          </div>
         </div>
         <div class="stat-row">
           <span class="pill"><b id="club-total">—</b> grounds</span>
@@ -289,6 +300,6 @@
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="data/teams.js?v=2"></script>
-  <script src="js/app.js?v=82"></script>
+  <script src="js/app.js?v=86"></script>
 </body>
 </html>

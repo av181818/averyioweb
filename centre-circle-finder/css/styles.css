@@ -129,7 +129,7 @@ body {
 .side-scroll, .omni-results { touch-action: pan-y; }
 /* no 300ms double-tap delay, and no double-tap zoom, on anything tappable */
 button, .tab, .f-chip, .city-chip, .action-btn, .pr-row, .omni-row,
-.f-row, #club-list li, .link-btn, .pp-btn, .map-home { touch-action: manipulation; }
+.f-row, #club-list li, .link-btn, .pp-btn, .map-home, .head-share { touch-action: manipulation; }
 
 :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: var(--r1); }
 
@@ -239,9 +239,28 @@ body.dark #sidebar::before { opacity: 0.05; mix-blend-mode: screen; }
 .head-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
 /* Sits on the black masthead, so it is dimmed white rather than the app green —
    quiet enough not to compete with the title, bright enough to find. */
+/* Share + home, paired at the right of the masthead. */
+.head-links { display: flex; align-items: center; gap: 4px; flex: none; margin-top: 3px; }
+.head-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 30x30 clears the 24px WCAG 2.2 AA target comfortably. Not pushed to
+     Apple's 44 because the hit area would then overlap the averyio.net
+     link 4px away — overlapping targets are worse than merely small ones,
+     and the same 24px bar was applied across the rest of the site. */
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: var(--r2);
+  color: rgba(255, 255, 255, 0.62);
+  transition: color 140ms ease, background 140ms ease;
+}
+.head-share svg { width: 14px; height: 14px; display: block; }
+.head-share:hover { color: #fff; background: rgba(255, 255, 255, 0.10); }
+
 .head-home {
   flex: none;
-  margin-top: 3px;
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 600;
@@ -1469,6 +1488,10 @@ body.dark .maplibregl-ctrl-icon { filter: invert(1) brightness(1.3); }
   .brand h1 { font-size: 25px; }
   .brand .ball { font-size: 21px; }
   .brand .sub, .stat-row, .omni-hint { display: none; }
+  /* Drop the ".net" so the share icon does not push the title onto a second
+     line — the same trick the main site nav uses at its narrowest widths.
+     "averyio" is still the wordmark and still links home. */
+  .head-home span { display: none; }
   .side-note { padding: 5px 13px 6px; }
   .omni-wrap { padding: 10px 14px 10px; }
 
