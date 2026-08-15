@@ -609,12 +609,15 @@ urls += [(SITE + a["hosted"], "0.7", a["hosted"].strip("/") + "/index.html")
          for a in APPS if a.get("hosted")]
 urls += [(SITE+p, "0.2", p.lstrip("/")) for _, p in PRIV]
 
-# Centre Circle Finder's static ground pages. They all derive from one data
-# file, so they share its commit date — and asking git for 688 individual
-# lastmods would add a minute to every build for an identical answer.
+# Centre Circle Finder's static ground pages. The 688 club/city/league pages
+# all derive from one data file, so they share its commit date — asking git for
+# 688 individual lastmods would add a minute to every build for an identical
+# answer. The hub is different: it is one templated page whose markup can move
+# for reasons the data never sees (it did on 2026-08-10 for a CSS change while
+# teams.js sat at 08-09), so it gets its own date like every other page.
 from grounds import CLUBS, CITIES, LEAGUE_PAGES
 _gm = _lastmod("centre-circle-finder/data/teams.js")
-urls += [(SITE + "/centre-circle-finder/grounds/", "0.6", None)]
+urls += [(SITE + "/centre-circle-finder/grounds/", "0.6", "centre-circle-finder/grounds/index.html")]
 urls += [(SITE + l["url"], "0.5", None) for l in LEAGUE_PAGES]
 urls += [(SITE + c["url"], "0.5", None) for c in CITIES]
 urls += [(SITE + c["url"], "0.4", None) for c in CLUBS]

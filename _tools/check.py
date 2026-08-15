@@ -190,6 +190,41 @@ for p in PAGES:
         priced.append(f"{p}: '{m.group(0).strip()}'")
 check("no price amounts or stale freemium claims on the site", not priced, "; ".join(priced[:5]))
 
+print("\nSITEMAP")
+# lastmod is each page's last git commit date (gen_site.py's _lastmod), so it
+# can only be right once the page change is committed — which means the sitemap
+# structurally lands one commit late unless the generators are re-run AFTER the
+# page commit. Twice now the final --live check caught exactly that by hand.
+# This makes it a hard failure instead: no page may have been committed more
+# recently than the sitemap says. The 688 club/city/league pages are skipped on
+# purpose — they are pinned to teams.js's date by design, and 688 git calls
+# would add a minute to every run for a known answer.
+_sm = open("sitemap.xml", encoding="utf-8").read()
+_entries = re.findall(r"<loc>(.*?)</loc>\s*<lastmod>(.*?)</lastmod>", _sm)
+def _sm_path(u):
+    p = u.replace(SITE, "")
+    if p == "/":
+        return "index.html"
+    return (p.strip("/") + "/index.html") if p.endswith("/") else p.lstrip("/")
+def _committed(path):
+    return subprocess.run(["git", "log", "-1", "--format=%cs", "--", path],
+                          capture_output=True, text=True).stdout.strip()
+_pinned = ("/centre-circle-finder/club/", "/centre-circle-finder/city/", "/centre-circle-finder/league/")
+stale = []
+for u, lm in _entries:
+    if any(k in u for k in _pinned):
+        continue
+    path = _sm_path(u)
+    c = _committed(path)
+    if c and c > lm:
+        stale.append(f"{path} committed {c}, sitemap says {lm}")
+check("sitemap lastmod is not older than any page's last commit "
+      "(re-run gen_site.py after committing page changes)", not stale, "; ".join(stale[:4]))
+# and the sitemap must be exactly what the generator would produce right now —
+# a hand-edited sitemap.xml drifted from gen_site.py once already (2026-08-06)
+missing = [ _sm_path(u) for u, _ in _entries if not os.path.exists(_sm_path(u)) ]
+check("every sitemap URL resolves to a file on disk", not missing, ", ".join(missing[:4]))
+
 print("\nFROZEN FILES")
 dirty = subprocess.run(["git", "status", "--porcelain"] + FROZEN,
                        capture_output=True, text=True).stdout.strip()
