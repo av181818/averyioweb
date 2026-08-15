@@ -35,7 +35,7 @@ BUILT RIGHT
 • No ads, ever
 • Megabytes, not gigabytes — no ad libraries, no analytics SDKs, nothing that isn't the app itself
 • [PRIVACY LINE — pick the matching variant below]
-• Designed for iPhone and iPad
+• Designed for iPhone and iPad   ← "Designed for iPhone" for Tap Dot Tap, which is iPhone-only
 
 [CLOSE — one line: Download {App} and {the payoff}.]
 ```
@@ -146,6 +146,7 @@ Download Big Time Clock and give the time the screen it deserves.
 - [ ] Hook + pay-once line inside the first three lines
 - [ ] BUILT RIGHT block present and verbatim, correct privacy variant
 - [ ] No currency amounts anywhere
-- [ ] "iPad" mentioned (InvestFast and Tap Dot Tap were missing it)
+- [ ] Device line correct: "iPhone and iPad" for the four universal apps, "iPhone" for
+      Tap Dot Tap (iPhone-only — owner confirmed 2026-08-15; do not add iPad to it)
 - [ ] Subtitle checked against the ethos while in App Store Connect
 - [ ] After the listing is live: re-run the site mirror check
