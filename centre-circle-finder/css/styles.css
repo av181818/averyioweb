@@ -129,7 +129,7 @@ body {
 .side-scroll, .omni-results { touch-action: pan-y; }
 /* no 300ms double-tap delay, and no double-tap zoom, on anything tappable */
 button, .tab, .f-chip, .city-chip, .action-btn, .pr-row, .omni-row,
-.f-row, #club-list li, .link-btn, .pp-btn { touch-action: manipulation; }
+.f-row, #club-list li, .link-btn, .pp-btn, .map-home { touch-action: manipulation; }
 
 :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: var(--r1); }
 
@@ -1342,7 +1342,29 @@ body.dark .maplibregl-ctrl-icon { filter: invert(1) brightness(1.3); }
   right: 16px;
   z-index: 1100;
   display: flex;
+  gap: 8px;
+  /* stretch, so the logo button inherits whatever height Reset happens to be —
+     Reset shrinks under 900px and the pair stays level without a second rule.
+     min-height lifts BOTH to the 44px touch target: Reset's own padding left it
+     at 41px, and stretching means fixing it here fixes the pair. */
+  align-items: stretch;
+  min-height: 44px;
 }
+.map-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  flex: none;
+  border-radius: var(--r2);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow);
+  transition: border-color 140ms ease, filter 140ms ease;
+}
+.map-home img { width: 26px; height: 26px; border-radius: 50%; display: block; }
+.map-home:hover { border-color: var(--green-dk); filter: brightness(1.04); }
+.map-home:active { filter: brightness(0.94); }
 /* Zoom sits bottom-right, diagonally opposite Reset — kept rather than deleted
    because +/- is the only zoom control that is keyboard-reachable and needs no
    gesture, but moved so it can't be mistaken for part of Reset. */
