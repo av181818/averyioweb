@@ -46,7 +46,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-  <link rel="stylesheet" href="css/styles.css?v=86">
+  <link rel="stylesheet" href="css/styles.css?v=87">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -154,6 +154,27 @@
       </nav>
 
       <div class="side-scroll">
+
+        <!-- Bridge to the rest of the line-up. Deliberately inside .side-scroll
+             rather than the fixed chrome above it: on a phone the collapsed
+             sheet's peek strip is a hard 158px budget mirrored in js/app.js
+             (every pixel there costs map), so this shows the moment the sheet
+             is raised and never eats the collapsed view. On desktop it is the
+             first thing under the tabs. Root-relative /assets/ like the og:image,
+             and the same 46px icon set the site's own tiles use. -->
+        <a class="apps-bridge" href="/apps.html">
+          <span class="ab-icons" aria-hidden="true">
+            <img src="/assets/apps/investfast-icon.webp" alt="" width="46" height="46" loading="lazy" decoding="async">
+            <img src="/assets/apps/surge-icon.webp" alt="" width="46" height="46" loading="lazy" decoding="async">
+            <img src="/assets/apps/lume-icon.webp" alt="" width="46" height="46" loading="lazy" decoding="async">
+            <img src="/assets/apps/tapdottap-icon.webp" alt="" width="46" height="46" loading="lazy" decoding="async">
+          </span>
+          <span class="ab-copy">
+            <b>More from averyio</b>
+            <small>Small, fast apps for iPhone and iPad. Pay once, no subscriptions, no ads.</small>
+          </span>
+          <span class="ab-arrow" aria-hidden="true">&rarr;</span>
+        </a>
 
         <!-- ============ EXPLORE ============ -->
         <section class="panel-tab is-active" id="panel-explore" role="tabpanel">
@@ -288,13 +309,6 @@
       <div id="map" role="application" aria-label="Map of UK football grounds"></div>
 
       <div class="map-bar">
-        <!-- Second way back to the site, on the map itself. The sidebar's
-             "averyio.net" link is easy to miss on a phone, where the sheet sits
-             collapsed — this one is always on screen next to Reset. -->
-        <a class="map-home" href="/" title="averyio.net — small, fast apps for iPhone, iPad and the web"
-           aria-label="averyio home">
-          <img src="/assets/logo-64.png" alt="" width="26" height="26" decoding="async">
-        </a>
         <button id="reset-all" class="map-reset" title="Reset filters, search and map view">
           <span class="mr-icon" aria-hidden="true">⟲</span> Reset
         </button>
@@ -305,6 +319,6 @@
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="data/teams.js?v=2"></script>
-  <script src="js/app.js?v=86"></script>
+  <script src="js/app.js?v=87"></script>
 </body>
 </html>

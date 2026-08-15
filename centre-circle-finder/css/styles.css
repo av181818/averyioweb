@@ -129,7 +129,7 @@ body {
 .side-scroll, .omni-results { touch-action: pan-y; }
 /* no 300ms double-tap delay, and no double-tap zoom, on anything tappable */
 button, .tab, .f-chip, .city-chip, .action-btn, .pr-row, .omni-row,
-.f-row, #club-list li, .link-btn, .pp-btn, .map-home, .head-share { touch-action: manipulation; }
+.f-row, #club-list li, .link-btn, .pp-btn, .head-share, .apps-bridge { touch-action: manipulation; }
 
 :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: var(--r1); }
 
@@ -492,6 +492,58 @@ body.dark #sidebar::before { opacity: 0.05; mix-blend-mode: screen; }
 }
 
 .side-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
+
+/* ---- "More from averyio": the bridge to the rest of the line-up ---------- */
+.apps-bridge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 14px 4px;
+  padding: 11px 13px;
+  border-radius: var(--r3);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-sm);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+.apps-bridge:hover {
+  border-color: var(--green-dk);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.apps-bridge:active { transform: translateY(0); }
+/* Four icons fanned into a tight overlapping stack, so the row reads as
+   "a set of apps" at a glance without costing a full row per icon. */
+.ab-icons { display: flex; flex: none; }
+.ab-icons img {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 2px solid var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  margin-left: -9px;
+  display: block;
+}
+.ab-icons img:first-child { margin-left: 0; }
+.ab-copy { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.ab-copy b {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+}
+.ab-copy small { font-size: 11.5px; line-height: 1.35; color: var(--muted); margin-top: 2px; }
+.ab-arrow {
+  flex: none;
+  font-size: 18px;
+  color: var(--accent);
+  transition: transform 140ms ease;
+}
+.apps-bridge:hover .ab-arrow { transform: translateX(3px); }
 .panel-tab { display: none; }
 .panel-tab.is-active { display: block; animation: fade-in 160ms ease both; }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
@@ -1361,29 +1413,13 @@ body.dark .maplibregl-ctrl-icon { filter: invert(1) brightness(1.3); }
   right: 16px;
   z-index: 1100;
   display: flex;
-  gap: 8px;
-  /* stretch, so the logo button inherits whatever height Reset happens to be —
-     Reset shrinks under 900px and the pair stays level without a second rule.
-     min-height lifts BOTH to the 44px touch target: Reset's own padding left it
-     at 41px, and stretching means fixing it here fixes the pair. */
+  /* min-height lifts Reset to the 44px touch target — its own padding left it
+     at 41px. (A logo button used to sit beside it; the "More from averyio"
+     banner in the sidebar replaced it on 2026-08-16.) */
   align-items: stretch;
   min-height: 44px;
 }
-.map-home {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  flex: none;
-  border-radius: var(--r2);
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  box-shadow: var(--shadow);
-  transition: border-color 140ms ease, filter 140ms ease;
-}
-.map-home img { width: 26px; height: 26px; border-radius: 50%; display: block; }
-.map-home:hover { border-color: var(--green-dk); filter: brightness(1.04); }
-.map-home:active { filter: brightness(0.94); }
+
 /* Zoom sits bottom-right, diagonally opposite Reset — kept rather than deleted
    because +/- is the only zoom control that is keyboard-reachable and needs no
    gesture, but moved so it can't be mistaken for part of Reset. */
