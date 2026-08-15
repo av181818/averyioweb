@@ -19,14 +19,19 @@
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Centre Circle Finder — Every UK Football Ground on One Map | averyio">
   <meta property="og:description" content="Find every professional and semi-professional football ground in the UK — 597 grounds across 31 leagues, from the Premier League down to level 8. Search by club, ground, town or postcode, see what's near you, and tick off the ones you've been to. No ads.">
-  <meta property="og:image" content="https://averyio.net/assets/apps/centre-circle-finder-og.png">
+  <!-- -v2 is a deliberate cache-bust, not a second image. This page went live
+       in ccbf1fd before its og:image existed (added later the same day in
+       82cb329), so X cached a card with no image for this URL. X keys its
+       image cache on the URL, so a filename it has never seen guarantees a
+       fresh fetch on the next scrape. Do not rename it back. -->
+  <meta property="og:image" content="https://averyio.net/assets/apps/centre-circle-finder-og-v2.png">
   <meta property="og:image:alt" content="Centre Circle Finder — every professional and semi-professional football ground in the UK on one map">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://averyio.net/centre-circle-finder/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@averyio18">
-  <meta name="twitter:image" content="https://averyio.net/assets/apps/centre-circle-finder-og.png">
+  <meta name="twitter:image" content="https://averyio.net/assets/apps/centre-circle-finder-og-v2.png">
   <meta name="twitter:image:alt" content="Centre Circle Finder — every professional and semi-professional football ground in the UK on one map">
 
   <!-- Its own mark, not the site's averyio avatar. Drawn per size rather than
