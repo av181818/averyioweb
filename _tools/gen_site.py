@@ -143,7 +143,7 @@ W = lambda rel, s: (os.makedirs(os.path.dirname(os.path.join(ROOT, rel)) or ROOT
 org = {
   "@context":"https://schema.org","@type":"Organization","name":"averyio",
   "url":SITE+"/","logo":f"{SITE}/assets/logo-512.png",
-  "description":"averyio builds small, fast apps for iPhone, iPad and the web — one-time purchases, never subscriptions. No ads, no tracking, no bloat.",
+  "description":"averyio builds small, fast apps for iPhone, iPad and the web — one-time purchases, never subscriptions. No ads, no bloat.",
   "sameAs":["https://x.com/averyio18"],
   # sub-brands: the apps plus the two divisions
   "brand":[{"@type":"Brand","name":a["name"],"url":f"{SITE}/apps/{a['slug']}/"} for a in APPS]
@@ -172,7 +172,7 @@ hero_fan = "\n".join(
     for n, alt in HERO_SHOTS)
 
 home = head("averyio — Small, Fast Apps for iPhone, iPad & the Web",
-  "Small, fast apps for iPhone, iPad and the web — megabytes, not gigabytes. Pay once, own it forever. No subscriptions, no ads, no tracking, no bloat.",
+  "Small, fast apps for iPhone, iPad and the web — megabytes, not gigabytes. Pay once, own it forever. No subscriptions, no ads, no bloat.",
   SITE+"/", extra=ld(org)+ld(website)+ld(itemlist))
 home += nav("home")
 home += f"""
@@ -182,7 +182,7 @@ home += f"""
         <div>
           <img class="hero-avatar" src="/assets/logo-256.png" alt="averyio" width="128" height="128" />
           <h1>averyio<span class="accent">.</span></h1>
-          <p class="hero-lead">Small, fast apps for iPhone, iPad and the web. Pay once or not at all — no subscriptions, no ads, no tracking, and nothing bolted on that you never asked for.</p>
+          <p class="hero-lead">Small, fast apps for iPhone, iPad and the web. Pay once or not at all — no subscriptions, no ads, and nothing bolted on that you never asked for.</p>
           <div class="btn-row">
             <a class="btn btn-dark" href="/apps.html">See the apps <span class="a">&rarr;</span></a>
           </div>
@@ -248,7 +248,7 @@ apps_bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListEle
 apps_list = dict(itemlist); apps_list["name"] = "All apps by averyio"
 
 ap = head("averyioApps — iPhone & iPad Apps, No Ads, No Subscriptions",
-  "Every app by averyio for iPhone, iPad and the web. Tiny, fast and focused on a single job — one-time purchases with no subscriptions, no ads and no tracking.",
+  "Every app by averyio for iPhone, iPad and the web. Tiny, fast and focused on a single job — one-time purchases with no subscriptions and no ads.",
   SITE+"/apps.html", extra=ld(apps_list)+ld(apps_bc))
 ap += nav("apps")
 ap += crumb([("Home","/"),("averyioApps",None)])
@@ -258,7 +258,7 @@ ap += f"""
       <p class="eyebrow">For iPhone, iPad &amp; the web</p>
       <h1 class="long">averyio<span class="accent">Apps.</span></h1>
       <p class="app-tagline">One job each. Done properly.</p>
-      <p class="hero-lead">Small, focused apps with nothing bolted on. Pay once and it&rsquo;s yours — no ads, no tracking, and never a subscription.</p>
+      <p class="hero-lead">Small, focused apps with nothing bolted on. Pay once and it&rsquo;s yours — no ads, and never a subscription.</p>
     </div>
   </header>
 
@@ -515,8 +515,8 @@ PRIV = [("InvestFast","/privacy-investfast.html"),("Surge","/privacy-surge.html"
 priv_bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
   {"@type":"ListItem","position":1,"name":"Home","item":SITE+"/"},
   {"@type":"ListItem","position":2,"name":"Privacy","item":SITE+"/privacy.html"}]}
-pv = head("Privacy — No Tracking, No Ads, No Data Sold | averyio",
-  "Privacy policies for every averyio app. No tracking, no ads and no data sold — read the full policy for each app in plain English.",
+pv = head("Privacy — No Ads, No Data Sold | averyio",
+  "Privacy policies for every averyio app. No ads, no data sold and nothing hidden — read the full policy for each app in plain English.",
   SITE+"/privacy.html", extra=ld(priv_bc))
 pv += nav("privacy")
 pv += crumb([("Home","/"),("Privacy",None)])
@@ -526,7 +526,7 @@ pv += f"""
       <p class="eyebrow">Across averyio</p>
       <h1>Privacy<span class="accent">.</span></h1>
       <p class="app-tagline">Your data is yours.</p>
-      <p class="hero-lead">One rule across everything we do: no tracking, no data sold, no surprises. Every policy we have lives on this page, starting with the apps.</p>
+      <p class="hero-lead">One rule across everything we do: no data sold, no surprises. Every policy we have lives on this page, starting with the apps.</p>
     </div>
   </header>
 

@@ -402,7 +402,7 @@ ETHOS = [
  ("No bloat","Megabytes, not gigabytes. No frameworks bolted on, no ad libraries, no analytics SDK phoning home — nothing ships that has not earned its place."),
  ("No subscriptions","One upfront price where an app charges at all — no monthly fee, no in-app purchases, nothing that quietly renews. What you buy is yours to keep."),
  ("No ads, ever","Not a banner, not an interstitial, not a “watch this to continue”. You are the customer, never the product."),
- ("Private by design","No tracking, no analytics, nothing sold. Your data lives on your device — and where an app syncs or backs up, it goes through your own private iCloud account, never a server of ours or anyone else's."),
+ ("Private by design","No analytics, nothing sold. Your data lives on your device — and where an app syncs or backs up, it goes through your own private iCloud account, never a server of ours or anyone else's."),
 ]
 
 def ethos_section(heading):
@@ -586,7 +586,7 @@ def app_page(app, apps):
     <div class="wrap">
       <div class="cta-inner">
         <h2>Get {app['name']}</h2>
-        <p>Pay once and it&rsquo;s yours — no ads, no tracking, no subscriptions. The same promise behind every averyio app.</p>
+        <p>Pay once and it&rsquo;s yours — no ads, no subscriptions. The same promise behind every averyio app.</p>
         <div class="btn-row">
           {store_btn(app, dark=False)}
           <a class="btn btn-ghost" href="/apps.html">All averyio apps <span class="a">&rarr;</span></a>
