@@ -283,8 +283,14 @@
 
             <div class="relative p-2 flex flex-row items-center justify-between gap-3 sm:gap-4">
                 <div class="flex-1 min-w-0 flex justify-start">
-                    <img src="https://s3.tradingview.com/pub/referrals/creatives/DT/EN/468x60Banner.jpg"
-                        srcset="https://s3.tradingview.com/pub/referrals/creatives/DT/EN/936x120Banner.jpg 2x"
+                    <!-- Self-hosted on purpose (2026-08-16). Served from TradingView's
+                         CDN this was the ONE request the page made to an affiliate
+                         host on load, before any click — the only thing on the site
+                         a literal reader could hold against "no tracking". Hosting it
+                         here makes the affiliate relationship purely click-triggered.
+                         Do not point it back at s3.tradingview.com. -->
+                    <img src="tv-banner.jpg"
+                        srcset="tv-banner@2x.jpg 2x"
                         alt="TradingView Banner" width="468" height="60"
                         class="rounded-lg opacity-90 group-hover:opacity-100 transition-opacity w-full h-auto object-contain object-left grayscale group-hover:grayscale-0 transition-all duration-500" />
                 </div>
