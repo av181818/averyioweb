@@ -505,6 +505,10 @@ W("contact.html", con)
 # those URLs from the live App Store listings. This page is the cover-all
 # for the whole business, so app policies sit in their own section and
 # future business areas get sections of their own.
+# The two web apps get their own section on privacy.html: the App Store copy
+# above talks about iCloud and the App Store, neither of which applies here.
+PRIV_WEB = [("Centre Circle Finder","/privacy-centre-circle-finder.html"),
+            ("BTCPRIX","/privacy-btcprix.html")]
 PRIV = [("InvestFast","/privacy-investfast.html"),("Surge","/privacy-surge.html"),
         ("Big Time Clock","/privacy-bigtimeclock.html"),("Lume","/privacy-lume.html"),
         ("Tap Dot Tap","/privacy-tapdottap.html"),("Zenith","/privacy-zenith.html")]
@@ -540,6 +544,24 @@ pv += f"""
             <span class="card-arrow">&rarr;</span>
           </div>
         </a>''' for name, href in PRIV)}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">On the web</p>
+        <h2>Web app privacy policies</h2>
+        <p>Both run entirely in your browser. There is no account and no server of ours behind either: what they remember stays on your device, and the only servers your browser contacts are the ones that supply the map, the price feed and the fonts. Each policy names them.</p>
+      </div>
+      <div class="grid">
+{chr(10).join(f'''        <a href="{href}" class="card">
+          <div class="card-top">
+            <p class="card-title" style="margin:0;">{name}</p>
+            <span class="card-arrow">&rarr;</span>
+          </div>
+        </a>''' for name, href in PRIV_WEB)}
       </div>
     </div>
   </section>
@@ -607,7 +629,7 @@ urls += [(SITE + s["url"], s["priority"], s["url"].strip("/") + "/index.html") f
 # They already have a tile via APPS, so they need only a sitemap entry.
 urls += [(SITE + a["hosted"], "0.7", a["hosted"].strip("/") + "/index.html")
          for a in APPS if a.get("hosted")]
-urls += [(SITE+p, "0.2", p.lstrip("/")) for _, p in PRIV]
+urls += [(SITE+p, "0.2", p.lstrip("/")) for _, p in PRIV + PRIV_WEB]
 
 # Centre Circle Finder's static ground pages. The 688 club/city/league pages
 # all derive from one data file, so they share its commit date — asking git for

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centre Circle Finder Privacy — averyio.net</title>
+  <meta name="description" content="Privacy Policy for the Centre Circle Finder app by AveryIO." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="averyio" />
+  <meta property="og:title" content="Centre Circle Finder Privacy — averyio.net" />
+  <meta property="og:description" content="Privacy Policy for the Centre Circle Finder app by AveryIO." />
+  <meta property="og:image" content="https://averyio.net/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://averyio.net/privacy-bigtimeclock.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@averyio18" />
+  <meta name="twitter:image" content="https://averyio.net/assets/og-image.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #C4152B;
+      --red-light:  rgba(196,21,43,0.07);
+      --red-border: rgba(196,21,43,0.22);
+      --bg:         #F6F5F2;
+      --surface:    #FFFFFF;
+      --border:     #E6E4DF;
+      --text:       #111113;
+      --muted:      #6B6B70;
+      --ink:        #0E0E10;
+      --faint:      #9A9A9E;
+      --body-text:  #3A3A40;
+      --mono:       ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 48% at 78% -6%, rgba(196,21,43,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 12% 4%, rgba(196,21,43,0.035) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(0,0,0,0.045) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      padding: 0 clamp(20px, 5%, 64px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(247,247,245,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-logo img { width: 1.75em; height: 1.75em; border-radius: 50%; display: block; flex-shrink: 0; margin-right: 0.5rem; }
+
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+
+    /* ── Header ── */
+    .header {
+      position: relative;
+      z-index: 1;
+      padding: clamp(48px, 9vw, 88px) clamp(20px, 5%, 64px) clamp(32px, 6vw, 56px);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .header h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.05;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: clamp(0.8rem, 2.5vw, 0.875rem);
+      font-weight: 400;
+    }
+
+    /* ── Content ── */
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      padding: clamp(40px, 7vw, 64px) clamp(20px, 5%, 40px) clamp(64px, 12vw, 104px);
+    }
+
+    h2 {
+      font-size: clamp(0.9rem, 2.8vw, 1rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 80px;
+      letter-spacing: -0.01em;
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+    p {
+      font-size: clamp(0.875rem, 2.5vw, 0.925rem);
+      color: var(--body-text);
+      margin-bottom: 0.85rem;
+    }
+
+    ul {
+      padding-left: 1.4rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    li {
+      font-size: clamp(0.875rem, 2.5vw, 0.925rem);
+      color: var(--body-text);
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--red); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+      padding: 1.5rem clamp(20px, 5%, 64px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+      padding: 4px 8px;
+      border-radius: 6px;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+    }
+    footer a:hover { color: var(--text); text-decoration: none; }
+
+    .footer-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) {
+      .nav-links a { padding: 8px 8px; font-size: 0.82rem; }
+      footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html"><img src="assets/logo-64.png" alt="" width="26" height="26" decoding="async" />averyio<span>.net</span></a>
+    <div class="nav-links">
+      <a href="privacy.html">← Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <h1>Centre Circle Finder</h1>
+    <p>Privacy Policy &mdash; Effective August 16, 2026</p>
+  </div>
+
+  <div class="content">
+    <h2>1. Introduction</h2>
+    <p>
+      Centre Circle Finder is a free web app by averyio, at
+      <a href="/centre-circle-finder/">averyio.net/centre-circle-finder</a>, that maps every
+      professional and semi-professional football ground in the UK. This policy explains what the
+      app stores, what it sends, and to whom &mdash; which, in short, is: nothing about you to us.
+      averyio runs no server behind this app and holds no data about its users.
+    </p>
+    <h2>2. What Is Stored in Your Browser</h2>
+    <p>
+      Two things, and only on your device, in your browser's local storage:
+    </p>
+    <ul>
+      <li><strong>Your ticked-off grounds</strong> &mdash; the list of grounds you have marked as visited,
+        stored as a list of club names. It never leaves your browser unless you use <strong>Export</strong>,
+        which saves a file to your own device.</li>
+      <li><strong>Your theme choice</strong> (light or dark).</li>
+    </ul>
+    <p>
+      Neither is transmitted anywhere. There is no account, no sign-up and no identifier of any kind.
+      Clearing your browser's site data removes both, which is why the app offers Export.
+      averyio never sets a cookie.
+    </p>
+    <h2>3. Your Location</h2>
+    <p>
+      If you tap <strong>Near me</strong>, the app asks your browser for your position, once, to
+      centre the map and rank nearby grounds. That position is used entirely on your device
+      and is <strong>never sent to averyio or to any third party</strong>. Your browser asks your
+      permission before sharing it, and the app works fully without it. Nothing about your
+      location is stored between visits.
+    </p>
+    <h2>4. Third-Party Services</h2>
+    <p>
+      The app runs in your browser, so your browser contacts a small number of third-party
+      servers to make it work. Each sees the standard information any web request carries
+      (your IP address, browser type and the resource asked for), and each is governed by its
+      own privacy policy:
+    </p>
+    <ul>
+      <li><strong>OpenFreeMap</strong> (<code>tiles.openfreemap.org</code>) serves the map tiles.</li>
+      <li><strong>OpenStreetMap Nominatim</strong> (<code>nominatim.openstreetmap.org</code>) is contacted
+        <em>only</em> when you search for a place by name or postcode; the text you typed is sent
+        so it can be turned into a map position. Searching for a club by name uses data built into
+        the app and contacts no one.</li>
+      <li><strong>Google Fonts</strong> serves the typefaces, and <strong>unpkg</strong> serves the
+        MapLibre map library.</li>
+      <li><strong>Google Maps</strong> and <strong>X</strong> are reached only if you choose to tap
+        <strong>Directions</strong> or <strong>Share</strong>, which open those services in a new tab.</li>
+    </ul>
+    <p>
+      averyio does not use analytics, tracking pixels, advertising networks or any service that
+      profiles visitors. Nothing on this page identifies you to averyio.
+    </p>
+    <h2>5. Children's Privacy</h2>
+    <p>
+      The app is suitable for all ages. It collects no personal information from anyone, of any age.
+    </p>
+    <h2>6. Changes to This Privacy Policy</h2>
+    <p>
+      If the app ever changes what it stores or whom it contacts, this policy will be updated
+      first, with a new effective date at the top of the page. The current version is always
+      at this address.
+    </p>
+    <h2>7. Contact Us</h2>
+    <p>
+      Questions about this policy or the app: <a href="/contact.html">averyio.net/contact</a>.
+    </p>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 averyio</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </footer>
+
+</body>
+</html>

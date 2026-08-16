@@ -941,6 +941,10 @@ details[open] .fc-name::before { content: "▾"; }
   background: var(--surface-2);
   border-bottom: 1px solid var(--line);
 }
+/* the Privacy link at the end of the strip — same muted tone, a hairline
+   underline so it reads as a link without shouting */
+.side-note a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.side-note a:hover { color: var(--ink); }
 
 /* ==========================================================================
    MARKERS

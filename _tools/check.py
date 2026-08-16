@@ -26,6 +26,10 @@ PAGES = ["index.html", "apps.html", "finance.html", "contact.html",
         [p for p in sorted(glob.glob("apps/*/index.html")) if not _is_redirect_stub(p)]
 FROZEN = ["privacy-investfast.html", "privacy-surge.html", "privacy-bigtimeclock.html",
           "privacy-lume.html", "privacy-tapdottap.html", "privacy-zenith.html"]
+# The two web apps' policies. NOT frozen: nothing external links to them the way
+# Apple links to the six above, so they may be edited freely. They still get the
+# link check and the live byte-diff.
+WEB_POLICIES = ["privacy-centre-circle-finder.html", "privacy-btcprix.html"]
 # Self-contained apps hosted on the site (SITE_APPS in gen.py). They are NOT in
 # PAGES because they ship their own stylesheet — running the site-wide class
 # audit against them would report every one of their classes as an orphan of
@@ -46,7 +50,7 @@ LIVE_MAP = {"index.html": "/", "apps.html": "/apps.html", "finance.html": "/fina
             **{f"apps/{s}/index.html": f"/apps/{s}/" for s in
                ["investfast", "surge", "big-time-clock", "lume", "tap-dot-tap", "btc-prix"]},
             **STANDALONE,
-            **{f: "/" + f for f in FROZEN},
+            **{f: "/" + f for f in FROZEN + WEB_POLICIES},
             # One of each ground-page template. Byte-diffing all 688 against
             # live would mean 688 requests for what a sample already proves.
             "centre-circle-finder/grounds/index.html": "/centre-circle-finder/grounds/",
@@ -83,7 +87,7 @@ check("no dead CSS rules", not dead, ", ".join(dead))
 
 print("\nLINKS")
 broken, checked = [], 0
-for p in PAGES + FROZEN + list(STANDALONE) + GROUNDS:
+for p in PAGES + FROZEN + WEB_POLICIES + list(STANDALONE) + GROUNDS:
     src = open(p, encoding="utf-8").read()
     refs = re.findall(r'(?:href|src)="([^"]+)"', src)
     refs += [x.strip().split()[0] for s in re.findall(r'srcset="([^"]+)"', src) for x in s.split(",")]
